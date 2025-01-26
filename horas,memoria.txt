@@ -1,0 +1,27 @@
+19/01
+2 horas //creada DB en mysql workbench
+
+20/01
+4 horas 
+creando modelo usuario y tareay conexion mysql con npm install
+de mysql sacamos promesas que son basicamente una forma de manejar operaciones complejas de forma asincrona con async await (que hace mas legible el codigo)
+cambiar controller,cambiar rutas de movie por usuario
+implementar el resto de usuario modelo
+completar tarea de modelo y hacer lo mismo que el resto,que tenga su controller y demas
+
+21/01
+1h y 30min
+DB mas completo añadiendo examenes y proyectos,manejado tambien la relacion de proyecto y al menos un usuario,y tambien el trigger para eliminar de la tabla tareas las tareas que habria en un proyecto y que todos los usuarios se eliminasen
+pruebas de DB
+
+23/01
+1h y 30min
+para crear una tarea en un proyecto antes un usuario de los que esta en el debe crear la tarea antes
+2h
+cambiado examen y tarea la cardinalidad con usuario
+controllers casi hechos
+
+26/01
+2h y 20min
+corrigiendo errores de controllers y modelos ,implantado la encriptacion de contraseñas usnado bcrypt en login y updatepassword de el modelo usuario , corregidas las rutas e implantado el jwt con la ruta de perfil para proteger el inicio de sesiones.
+
