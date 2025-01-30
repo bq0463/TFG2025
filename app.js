@@ -15,7 +15,7 @@ app.use(json());
 app.use(corsMiddleware());
 
 // cargar rutas con router
-app.use("/usuario", usuarioRouter);
+app.use("/", usuarioRouter);
 
 const PORT = process.env.PORT ?? 1234;
 app.listen(PORT, () => {

@@ -1,7 +1,5 @@
-import mysql from 'mysql2/promise';
-import { config } from '../config/mysqlConnection.js';
 
-const connection = await mysql.createConnection(config);
+import { connection } from '../config/mysqlConnection.js';
 
 export class TareaModel {
   

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UsuarioController } from "../controllers/usuarioController.js";
-const usuarioRouter = Router();
+export const usuarioRouter = Router();
 
 //----------------Como leer JSON con node.js en ES modules----------------
 // Primera forma
@@ -23,14 +23,8 @@ const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 
 //se coge del controller funciones de modelo y maneja errores CRUD para no saber su implementación
 usuarioRouter.post('/login',UsuarioController.login);
-usuarioRouter.get('/perfil', verifyToken, (req, res) => {
-    res.json({ message: 'Acceso concedido', user: req.user });
-});
-
 usuarioRouter.get('/usuarios/:id', UsuarioController.getById);
 usuarioRouter.delete('/usuarios/:id', UsuarioController.delete);
 usuarioRouter.patch('/usuarios/:id', UsuarioController.update);
 usuarioRouter.post('/register',UsuarioController.register);
 usuarioRouter.patch('/usuarios/:id/password', UsuarioController.updatePassword);
-
-export default usuarioRouter;

@@ -1,9 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import mysql from 'mysql2/promise';
-import { config } from '../config/mysqlConnection.js';
-
-const connection = await mysql.createConnection(config);
+import { connection } from '../config/mysqlConnection.js';
 
 export class UsuarioModel {
   static async getById({ id }) {
@@ -24,14 +21,14 @@ export class UsuarioModel {
     return result;
   }
 
-  static async updatePassword({ id, newPassword }) {
+  static async updatecontrasena({ id, newcontrasena }) {
     try {
       const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+      const hashedcontrasena = await bcrypt.hash(newcontrasena, saltRounds);
   
       await connection.execute(
-        'UPDATE usuario SET password = ? WHERE id = ?',
-        [hashedPassword, id]
+        'UPDATE usuario SET contrasena = ? WHERE id = ?',
+        [hashedcontrasena, id]
       );
   
       return true;
@@ -41,7 +38,7 @@ export class UsuarioModel {
     }
   }
   
-  static async login({ nombre_usuario, password }) {
+  static async login({ nombre_usuario, contrasena }) {
     try {
       const [rows] = await connection.execute(
         'SELECT * FROM usuario WHERE nombre_usuario = ?',
@@ -55,9 +52,9 @@ export class UsuarioModel {
       const usuario = rows[0];
 
       // Verificar la contraseña
-      const passwordMatch = await bcrypt.compare(password, usuario.password);
+      const contrasenaMatch = await bcrypt.compare(contrasena, usuario.contrasena);
 
-      if (!passwordMatch) {
+      if (!contrasenaMatch) {
         return null; // Contraseña incorrecta
       }
 
@@ -76,15 +73,15 @@ export class UsuarioModel {
   }
   
 
-  static async register({ nombre_usuario, email, password }) {
+  static async register({ nombre_usuario, email, contrasena }) {
     try {
       // Generar un hash de la contraseña con un "salt" de 10 rondas
       const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const hashedcontrasena = await bcrypt.hash(contrasena, saltRounds);
 
       const [result] = await connection.execute(
-        'INSERT INTO usuario (nombre_usuario, email, password) VALUES (?, ?, ?)',
-        [nombre_usuario, email, hashedPassword]
+        'INSERT INTO usuario (nombre_usuario, email, contrasena) VALUES (?, ?, ?)',
+        [nombre_usuario, email, hashedcontrasena]
       );
 
       return result;

@@ -1,7 +1,6 @@
-import mysql from 'mysql2/promise';
-import { config } from '../config/mysqlConnection.js';
+
 import { TareaModel } from './tarea.js';
-const connection = mysql.createConnection(config);
+import { connection } from '../config/mysqlConnection.js';
 
 export class ProyectoModel {
 

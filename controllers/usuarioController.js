@@ -72,8 +72,8 @@ export class UsuarioController {
 
   static async register(req, res) {
     try {
-      const { nombre_usuario, email, password } = req.body;
-      const result = await UsuarioModel.register({ nombre_usuario, email, password });
+      const { nombre_usuario, email, contrasena } = req.body;
+      const result = await UsuarioModel.register({ nombre_usuario, email, contrasena });
       if (result.affectedRows > 0) {
         return res.status(201).json({ message: 'Usuario creado correctamente' });
       }
