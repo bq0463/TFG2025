@@ -1,15 +1,29 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { connection } from '../config/mysqlConnection.js';
-
+import { validarCredencialesUsuario } from '../middlewares/validacionesCreaciones.js';
 export class UsuarioModel {
   static async getById({ id }) {
     return connection.execute('SELECT * FROM usuario WHERE id = ?', [id]);
   }
 
+  static async getByUsername({ nombre_usuario }) {
+    return connection.execute('SELECT * FROM usuario WHERE nombre_usuario = ?', [nombre_usuario]);
+  }
+
+  static async getByEmail({ email }) {
+    return connection.execute('SELECT * FROM usuario WHERE email = ?', [email]);
+  }
+
+
   static async delete({ id }) {
-    const [result] = await connection.execute('DELETE FROM usuario WHERE id = ?', [id]);
-    return result;
+    try {
+      const [result] = await connection.execute('DELETE FROM usuario WHERE id = ?', [id]);
+      return result;
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error);
+      throw error;
+    }
   }
 
   static async update({ id, input }) {
@@ -76,6 +90,7 @@ export class UsuarioModel {
   static async register({ nombre_usuario, email, contrasena }) {
     try {
       // Generar un hash de la contraseña con un "salt" de 10 rondas
+
       const saltRounds = 10;
       const hashedcontrasena = await bcrypt.hash(contrasena, saltRounds);
 
@@ -84,7 +99,7 @@ export class UsuarioModel {
         [nombre_usuario, email, hashedcontrasena]
       );
 
-      return result;
+      return 'Usuario registrado : ${nombre_usuario}, ${email}';
     } catch (error) {
       console.error('Error al registrar usuario:', error);
       throw error;

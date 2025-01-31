@@ -1,6 +1,3 @@
-import { Router } from "express";
-import { UsuarioController } from "../controllers/usuarioController.js";
-export const usuarioRouter = Router();
 
 //----------------Como leer JSON con node.js en ES modules----------------
 // Primera forma
@@ -22,9 +19,27 @@ const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 // CORS => Cross Origin Resource Sharing
 
 //se coge del controller funciones de modelo y maneja errores CRUD para no saber su implementación
-usuarioRouter.post('/login',UsuarioController.login);
+import { Router } from "express";
+import { UsuarioController } from "../controllers/usuarioController.js";
+import { validarCredencialesUsuario } from "../middlewares/validacionesCreaciones.js"; // Middleware de validación
+export const usuarioRouter = Router();
+
+// Métodos relacionados con la entidad usuario
+
+// Registro de usuarios con validación previa
+usuarioRouter.post('/register', validarCredencialesUsuario, UsuarioController.register);
+
+// Inicio de sesión
+usuarioRouter.post('/login', UsuarioController.login);
+
+// Obtener un usuario por ID
 usuarioRouter.get('/usuarios/:id', UsuarioController.getById);
-usuarioRouter.delete('/usuarios/:id', UsuarioController.delete);
-usuarioRouter.patch('/usuarios/:id', UsuarioController.update);
-usuarioRouter.post('/register',UsuarioController.register);
+
+// Actualizar un usuario (parcial)
+usuarioRouter.patch('/usuarios/:id',UsuarioController.update);
+
+// Actualizar contraseña de un usuario
 usuarioRouter.patch('/usuarios/:id/password', UsuarioController.updatePassword);
+
+// Eliminar un usuario
+usuarioRouter.delete('/usuarios/:id', UsuarioController.delete);

@@ -25,3 +25,16 @@ controllers casi hechos
 2h y 20min
 corrigiendo errores de controllers y modelos ,implantado la encriptacion de contraseñas usnado bcrypt en login y updatepassword de el modelo usuario , corregidas las rutas e implantado el jwt con la ruta de perfil para proteger el inicio de sesiones.
 
+30/01
+1h y 30min
+corregida la conexion de la base de datos y testeada la creacion de usuarios con ocnraseña encriptada
+enrutamiento corregido:
+el enrutamiento sirve para aparte de testear,tambien es esencialç
+dado que podemos equivocar peticiones GET,POST,PUT/PTACH,DELETE 
+de diferentes entidades y da errores de codigo o equivoca a que recursos
+se refiere con dicha request
+
+31/01
+1h y 45min
+creada las validaciones de creacion de cada objeto
+y usados en las rutas

@@ -73,6 +73,90 @@ END $$
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE TRIGGER usuario_update BEFORE UPDATE ON usuario
+FOR EACH ROW
+BEGIN
+    IF NEW.email IS NULL OR NEW.email = '' THEN
+        SET NEW.email = OLD.email;
+    END IF;
+    IF NEW.contrasena IS NULL OR NEW.contrasena = '' THEN
+        SET NEW.contrasena = OLD.contrasena;
+    END IF;
+    IF NEW.nombre_usuario IS NULL OR NEW.nombre_usuario = '' THEN
+        SET NEW.nombre_usuario = OLD.nombre_usuario;
+    END IF;
+    IF NEW.rol IS NULL OR NEW.rol = '' THEN
+        SET NEW.rol = OLD.rol;
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER proyecto_update BEFORE UPDATE ON proyecto
+FOR EACH ROW
+BEGIN
+    IF NEW.fecha_entrega IS NULL THEN
+        SET NEW.fecha_entrega = OLD.fecha_entrega;
+    END IF;
+    IF NEW.titulo IS NULL OR NEW.titulo = '' THEN
+        SET NEW.titulo = OLD.titulo;
+    END IF;
+    IF NEW.descripcion IS NULL OR NEW.descripcion = '' THEN
+        SET NEW.descripcion = OLD.descripcion;
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER tarea_update BEFORE UPDATE ON tarea
+FOR EACH ROW
+BEGIN
+    IF NEW.descripcion IS NULL OR NEW.descripcion = '' THEN
+        SET NEW.descripcion = OLD.descripcion;
+    END IF;
+    IF NEW.valor IS NULL THEN
+        SET NEW.valor = OLD.valor;
+    END IF;
+    IF NEW.id_usuario IS NULL THEN
+        SET NEW.id_usuario = OLD.id_usuario;
+    END IF;
+    IF NEW.fecha_inicio IS NULL THEN
+        SET NEW.fecha_inicio = OLD.fecha_inicio;
+    END IF;
+    IF NEW.fecha_fin IS NULL THEN
+        SET NEW.fecha_fin = OLD.fecha_fin;
+    END IF;
+    IF NEW.estado IS NULL OR NEW.estado = '' THEN
+        SET NEW.estado = OLD.estado;
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER examen_update BEFORE UPDATE ON examen
+FOR EACH ROW
+BEGIN
+    IF NEW.nota IS NULL THEN
+        SET NEW.nota = OLD.nota;
+    END IF;
+    IF NEW.id_usuario IS NULL THEN
+        SET NEW.id_usuario = OLD.id_usuario;
+    END IF;
+    IF NEW.fecha IS NULL THEN
+        SET NEW.fecha = OLD.fecha;
+    END IF;
+END $$
+
+DELIMITER ;
+
 -- Insertar usuarios de prueba
 INSERT INTO usuario (email, contrasena, nombre_usuario) VALUES
 ('usuario1@example.com', 'pass123', 'usuario1'),
