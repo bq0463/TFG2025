@@ -27,7 +27,7 @@ export const usuarioRouter = Router();
 // Métodos relacionados con la entidad usuario
 
 // Registro de usuarios con validación previa
-usuarioRouter.post('/register', validarCredencialesUsuario, UsuarioController.register);
+usuarioRouter.post('/register', UsuarioController.register);
 
 // Inicio de sesión
 usuarioRouter.post('/login', UsuarioController.login);

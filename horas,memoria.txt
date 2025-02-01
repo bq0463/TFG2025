@@ -38,3 +38,8 @@ se refiere con dicha request
 1h y 45min
 creada las validaciones de creacion de cada objeto
 y usados en las rutas
+
+01/02
+2h
+test unitarios de usuario,proyecto,examen,tarea con create con api.http
+el flujo se quedaba pillado porque estaba mal organizado entre controlador y modelo y validar

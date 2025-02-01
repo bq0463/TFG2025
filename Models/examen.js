@@ -13,11 +13,16 @@ export class ExamenModel {
   }
 
   static async create({ input }) {
-    const [result] = await connection.execute(
-      'INSERT INTO examen (asignatura, fecha, nota) VALUES (?, ?, ?)',
-      [input.asignatura, input.fecha, input.nota]
-    );
-    return { id: result.insertId };
+    try{
+      const [result] = await connection.execute(
+        'INSERT INTO examen (asignatura, fecha, nota) VALUES (?, ?, ?)',
+        [input.asignatura, input.fecha, input.nota]
+      );
+      return result;
+    } catch (error) {
+      console.error('Error al crear examen:', error);
+      throw error;
+    }
   }
 
   static async update({ id, input }) {

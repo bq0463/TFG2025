@@ -1,5 +1,5 @@
 import { UsuarioModel } from '../Models/usuario.js';
-
+import { validarCredencialesUsuario } from '../middlewares/validacionesCreaciones.js';
 export class UsuarioController {
   static async getById(req, res) {
     try {
@@ -27,13 +27,12 @@ export class UsuarioController {
 
   static async update(req, res) {
     try {
-      const { id } = req.params;
-      const { nombre_usuario, email, password } = req.body;
+      const { id,nombre_usuario, email } = req.body;
       const result = await UsuarioModel.update({ id, input: { nombre_usuario, email} });
       if (result.affectedRows === 0) {
         return res.status(404).json({ message: 'Usuario no encontrado' });
       }
-      res.json({ message: 'Usuario actualizado' });
+      res.status(201).json({ message: 'Usuario actualizado' });
     } catch (error) {
       res.status(500).json({ message: 'Error al actualizar usuario', error });
     }
@@ -73,13 +72,29 @@ export class UsuarioController {
   static async register(req, res) {
     try {
       const { nombre_usuario, email, contrasena } = req.body;
-      const result = await UsuarioModel.register({ nombre_usuario, email, contrasena });
-      if (result.affectedRows > 0) {
-        return res.status(201).json({ message: 'Usuario creado correctamente' });
+  
+      // Validar credenciales
+      const validacion = await validarCredencialesUsuario(req);
+  
+      // Si la validación falla, envía el error al cliente
+      if (!validacion.success) {
+        return res.status(validacion.status).json({ message: validacion.message });
       }
-      res.status(400).json({ message: 'Error al crear usuario' });
+  
+      // Crear usuario
+      const result = await UsuarioModel.register({ nombre_usuario, email, contrasena });
+  
+      // Verificar si el registro fue exitoso
+      if (result.affectedRows > 0) {
+        return res.status(201).json({ message: "Usuario creado correctamente" });
+      }
+  
+      // Si no se afectó ninguna fila, devolver un error inesperado
+      return res.status(500).json({ message: "Error desconocido al registrar el usuario" });
     } catch (error) {
-      res.status(500).json({ message: 'Error al registrar usuario', error });
+      console.error("Error en el controlador de registro:", error);
+      res.status(500).json({ message: "Error al registrar usuario", error });
     }
   }
+  
 }

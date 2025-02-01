@@ -1,3 +1,5 @@
+import { ProyectoModel } from '../models/proyectoModel.js';
+import { validarCredencialesProyecto } from '../middlewares/validacionesCreaciones.js';
 export class ProyectoController {
   
   static async getById(req, res) {
@@ -31,25 +33,28 @@ export class ProyectoController {
   }
 
   static async create(req, res) {
-    const { titulo, descripcion, fecha_entrega, id_usuario } = req.body;
     try {
-      const idProyecto = await ProyectoModel.create({ 
+      const { titulo, descripcion, fecha_entrega, id_usuario } = req.body;
+      const validacion = await validarCredencialesProyecto(req);
+
+      if (!validacion.success) {
+        return res.status(validacion.status).json({ message: validacion.message });
+      }
+
+      const proyecto = await ProyectoModel.create({ 
         id_usuario, 
         input: { titulo, descripcion, fecha_entrega } 
       });
-      return res.status(201).json({ message: 'Proyecto creado', idProyecto });
+
+      if (proyecto.affectedRows > 0) {
+        return res.status(201).json({ message: 'Proyecto creado' });
+      } 
+
+      return res.status(500).json({ message: 'Error desconocido al crear el proyecto' });
     } catch (error) {
-      return res.status(400).json({ message: 'Error al crear el proyecto' });
+      return res.status(500).json({ message: 'Error al crear el proyecto' });
     }
   }
 
-  static async createTarea(req, res) {
-    const { idProyecto, idTarea } = req.body;
-    try {
-      await ProyectoModel.createTarea({ idProyecto, idTarea });
-      return res.json({ message: 'Tarea añadida al proyecto' });
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-  }
+  
 }

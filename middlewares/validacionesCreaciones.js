@@ -1,65 +1,113 @@
-import { connection } from "../config/mysqlConnection";
+import { connection } from '../config/mysqlConnection.js';
 
 
-export async function validarCredencialesUsuario(req, res) {
-    const { nombre_usuario, password, email } = req.body;
-  
-    // Verificar que todos los campos estén presentes
-    if (!nombre_usuario || !password || !email) {
-      return res.status(400).json({ message: "Faltan credenciales" });
-    }
-  
-    // Validar longitud de los campos y formato del email
-    if (nombre_usuario.length < 5 || password.length < 5 || !email.includes("@")) {
-      return res.status(400).json({ message: "Credenciales inválidas: caracteres menores a 5 o email incorrecto" });
-    }
-  
-    try {
-      // Consulta asíncrona a la base de datos
-      const [rows] = await connection.execute(
-        'SELECT * FROM usuario WHERE nombre_usuario = ? OR email = ?',
-        [nombre_usuario, email]
-      );
-  
-      // Comprobar si ya existe el usuario
-      if (rows.length > 0) {
-        return res.status(400).json({ message: "El usuario ya existe" });
-      }
-  
-    } catch (error) {
-      console.error("Error al validar credenciales:", error);
-      res.status(500).json({ message: "Error interno del servidor" });
-    }
+export async function validarCredencialesUsuario(req) {
+  const { nombre_usuario, contrasena, email } = req.body;
+
+  // Verificar que todos los campos estén presentes
+  if (!nombre_usuario || !contrasena || !email) {
+    return { success: false, status: 400, message: "Faltan credenciales" };
   }
 
-  export async function validarCredencialesTarea(req, res) {
-    const { descripcion, fecha_fin } = req.body;
-  
-    // Verificar que todos los campos estén presentes
-    if (!descripcion || !fecha_fin) {
-      return res.status(400).json({ message: "Faltan credenciales" });
-    }
-  
-    // Validar longitud de los campos y formato del email
-    if ( descripcion.length < 5 || !fecha_fin) {
-      return res.status(400).json({ message: "Credenciales inválidas: caracteres menores a 5 o no hay fecha fin" });
+  // Validar longitud de los campos y formato del email
+  if (nombre_usuario.length < 5 || contrasena.length < 5 || !email.includes("@")) {
+    return { 
+      success: false, 
+      status: 411, 
+      message: "Credenciales inválidas: caracteres menores a 5 o email incorrecto sin @" 
+    };
+  }
+
+  if (nombre_usuario.length > 50 || contrasena.length > 50 || email.length > 100) {
+    return { 
+      success: false, 
+      status: 411, 
+      message: "Credenciales inválidas: demasiados caracteres, MAX: 50 en usuario, 50 en contraseña y 100 en email" 
+    };
+  }
+
+  try {
+    // Consultas asíncronas a la base de datos para verificar nombre de usuario y email
+    const [rowsUsuario] = await connection.execute(
+      "SELECT * FROM usuario WHERE nombre_usuario = ?",
+      [nombre_usuario]
+    );
+
+    const [rowsEmail] = await connection.execute(
+      "SELECT * FROM usuario WHERE email = ?",
+      [email]
+    );
+
+    // Verificar si ya existe el nombre de usuario
+    if (rowsUsuario.length > 0) {
+      return { success: false, status: 409, message: "El nombre de usuario ya está en uso, elige otro." };
     }
 
+    // Verificar si ya existe el email
+    if (rowsEmail.length > 0) {
+      return { success: false, status: 409, message: "El correo electrónico ya está registrado, usa otro." };
+    }
+
+    // Si pasa todas las validaciones
+    return { success: true };
+  } catch (error) {
+    console.error("Error al validar credenciales:", error);
+    return { success: false, status: 500, message: "Error interno del servidor" };
   }
+}
+
+
+
+export async function validarCredencialesTarea(req) {
+
+  const { descripcion, fecha_fin } = req.body;
+
+  // Verificar que todos los campos estén presentes
+  if (!descripcion || !fecha_fin) {
+    return { success: false, status: 400, message: "Faltan credenciales" };
+  }
+
+  // Validar longitud de la descripcion
+  if (descripcion.length < 5) {
+    return { success: false, status: 411, message: "Credenciales inválidas: descripcion demasiado corta (mínimo 5 caracteres)" };
+  }
+
+  if (descripcion.length > 255) {
+    return { success: false, status: 411, message: "Credenciales inválidas: demasiados caracteres, MAX: 255 caracteres en descripcion" };
+  }
+
+  // Validar la fecha de fin
+  if (!fecha_fin || isNaN(new Date(fecha_fin))) {
+    return { success: false, status: 411, message: "Credenciales inválidas: fecha de fin incorrecta o vacía" };
+  }
+
+  // Si todo está correcto
+  return { success: true , message: "Tarea creada correctamente" };
+}
+
 
   export async function validarCredencialesProyecto(req, res) {
     const { titulo, descripcion, fecha_entrega } = req.body;
   
     // Verificar que todos los campos estén presentes
     if (!titulo || !descripcion || !fecha_entrega) {
-      return res.status(400).json({ message: "Faltan credenciales" });
+      return { success: false, status: 400, message: "Faltan credenciales" };
     }
   
     // Validar longitud de los campos y formato del email
-    if (titulo.length < 5 || descripcion.length < 5 || !fecha_entrega) {
-      return res.status(400).json({ message: "Credenciales inválidas: caracteres menores a 5 o no hay fecha de entrega" }); 
+    if (titulo.length < 5 ) {
+      return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado corto (5 caracteres minimo)" };
     }
 
+    if (titulo.length > 100 || descripcion.length > 255 ) {
+      return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado largo (100 caracteres) o descripcion demasiado larga (255 caracteres)" };
+    }
+
+    if ( isNaN(new Date(fecha_fin))) {
+      return { success: false, status: 411, message: "Credenciales inválidas: fecha de entrega incorrecta o vacía" };
+    }
+
+    return { success: true , message: "Proyecto creado correctamente" };
   }
 
   export async function validarCredencialesExamen(req, res) {
@@ -67,12 +115,13 @@ export async function validarCredencialesUsuario(req, res) {
   
     // Verificar que todos los campos estén presentes
     if (!fecha) {
-      return res.status(400).json({ message: "Falta fecha" });
+      return { success: false, status: 400, message: "Falta fecha" };
     }
     
     if(typeof nota !== 'number'){
-      return res.status(400).json({ message: "La nota debe ser un número" });
+      return { success: false, status: 400, message: "La nota debe ser un número" };
     }
     
+    return { success: true , message: "Examen creado correctamente" };
   }
   

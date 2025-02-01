@@ -19,9 +19,18 @@ export class ProyectoModel {
     }
 
     static async create({id_usuario,input}) {
-        await connection.execute('INSERT INTO proyecto (titulo, descripcion, fecha_entrega) VALUES (?,?,?)', [input.titulo, input.descripcion, input.fecha_entrega]);
-        await connection.execute('INSERT INTO usuario_proyecto (id_usuario, id_proyecto) VALUES (?,?)', [ id_usuario, input.id_proyecto]);
+        try{
+            const [result1] = await connection.execute('INSERT INTO proyecto (titulo, descripcion, fecha_entrega) VALUES (?,?,?)', [input.titulo, input.descripcion, input.fecha_entrega]);
+
+            const result2 = await connection.execute('INSERT INTO usuario_proyecto (id_usuario, id_proyecto) VALUES (?,?)', [ id_usuario, input.id_proyecto]);
+            
+            return result2;
+        }catch(error) {
+            console.error('Error al crear proyecto:', error);
+            throw error;
+        }
     }
+    
 
     static async createTarea({idProyecto, idTarea}) {
         const tarea = TareaModel.getTareaById({id: idTarea});

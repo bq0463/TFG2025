@@ -4,7 +4,7 @@ import { connection } from '../config/mysqlConnection.js';
 import { validarCredencialesUsuario } from '../middlewares/validacionesCreaciones.js';
 export class UsuarioModel {
   static async getById({ id }) {
-    return connection.execute('SELECT * FROM usuario WHERE id = ?', [id]);
+    return connection.execute('SELECT nombre_usuario,email,rol FROM usuario WHERE id = ?', [id]);
   }
 
   static async getByUsername({ nombre_usuario }) {
@@ -99,7 +99,8 @@ export class UsuarioModel {
         [nombre_usuario, email, hashedcontrasena]
       );
 
-      return 'Usuario registrado : ${nombre_usuario}, ${email}';
+      return result;
+
     } catch (error) {
       console.error('Error al registrar usuario:', error);
       throw error;
