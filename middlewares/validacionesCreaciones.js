@@ -103,7 +103,7 @@ export async function validarCredencialesTarea(req) {
       return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado largo (100 caracteres) o descripcion demasiado larga (255 caracteres)" };
     }
 
-    if ( isNaN(new Date(fecha_fin))) {
+    if ( isNaN(new Date(fecha_entrega))) {
       return { success: false, status: 411, message: "Credenciales inválidas: fecha de entrega incorrecta o vacía" };
     }
 
@@ -111,17 +111,17 @@ export async function validarCredencialesTarea(req) {
   }
 
   export async function validarCredencialesExamen(req, res) {
-    const { nota,fecha } = req.body;
+    const { nota,fecha,asignatura } = req.body;
   
     // Verificar que todos los campos estén presentes
-    if (!fecha) {
-      return { success: false, status: 400, message: "Falta fecha" };
+    if (!fecha || !asignatura) {
+      return { success: false, status: 400, message: "Falta fecha o asignatura" };
     }
     
     if(typeof nota !== 'number'){
       return { success: false, status: 400, message: "La nota debe ser un número" };
     }
-    
+
     return { success: true , message: "Examen creado correctamente" };
   }
   

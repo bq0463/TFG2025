@@ -18,11 +18,13 @@ export class ProyectoModel {
         await connection.execute('UPDATE proyecto SET titulo = ?, descripcion = ?, fecha_entrega = ? WHERE id = ?', [input.titulo, input.descripcion, input.fecha_entrega, id]);
     }
 
-    static async create({id_usuario,input}) {
+    static async create({input}) {
         try{
             const [result1] = await connection.execute('INSERT INTO proyecto (titulo, descripcion, fecha_entrega) VALUES (?,?,?)', [input.titulo, input.descripcion, input.fecha_entrega]);
 
-            const result2 = await connection.execute('INSERT INTO usuario_proyecto (id_usuario, id_proyecto) VALUES (?,?)', [ id_usuario, input.id_proyecto]);
+            const id_proyecto = result1.insertId;
+
+            const [result2] = await connection.execute('INSERT INTO usuario_proyecto (id_usuario, id_proyecto) VALUES (?,?)', [ input.id_usuario,id_proyecto ]);
             
             return result2;
         }catch(error) {
@@ -36,6 +38,8 @@ export class ProyectoModel {
         const tarea = TareaModel.getTareaById({id: idTarea});
         if (!tarea) {
             throw new Error('Tarea no encontrada');}
-        await connection.execute('INSERT INTO proyecto_tarea (id_proyecto, id_tarea) VALUES (?,?)', [idProyecto, idTarea]);
+        const tareaproyecto = await connection.execute('INSERT INTO proyecto_tarea (id_proyecto, id_tarea) VALUES (?,?)', [idProyecto, idTarea]);
+        
+        return tareaproyecto;
     }
 }    

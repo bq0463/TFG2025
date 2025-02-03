@@ -15,8 +15,8 @@ export class ExamenModel {
   static async create({ input }) {
     try{
       const [result] = await connection.execute(
-        'INSERT INTO examen (asignatura, fecha, nota) VALUES (?, ?, ?)',
-        [input.asignatura, input.fecha, input.nota]
+        'INSERT INTO examen (asignatura, fecha, nota,id_usuario) VALUES (?, ?, ?, ?)',
+        [input.asignatura, input.fecha, input.nota,input.id_usuario]
       );
       return result;
     } catch (error) {

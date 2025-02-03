@@ -1,5 +1,6 @@
-import { ProyectoModel } from '../models/proyectoModel.js';
+
 import { validarCredencialesProyecto } from '../middlewares/validacionesCreaciones.js';
+import {ProyectoModel} from '../Models/proyecto.js';
 export class ProyectoController {
   
   static async getById(req, res) {
@@ -41,9 +42,8 @@ export class ProyectoController {
         return res.status(validacion.status).json({ message: validacion.message });
       }
 
-      const proyecto = await ProyectoModel.create({ 
-        id_usuario, 
-        input: { titulo, descripcion, fecha_entrega } 
+      const proyecto = await ProyectoModel.create({  
+        input: { titulo, descripcion, fecha_entrega,id_usuario } 
       });
 
       if (proyecto.affectedRows > 0) {
@@ -56,5 +56,26 @@ export class ProyectoController {
     }
   }
 
-  
+  static async createTarea(req, res) {
+    try {
+      const {  idProyecto,idTarea } = req.body;
+      const validacion = await validarCredencialesProyecto(req);
+
+      if (!validacion.success) {
+        return res.status(validacion.status).json({ message: validacion.message });
+      }
+
+      const proyecto = await ProyectoModel.createTarea({ 
+        idProyecto,idTarea
+      });
+
+      if (proyecto.affectedRows > 0) {
+        return res.status(201).json({ message: 'Tarea creado' });
+      } 
+
+      return res.status(500).json({ message: 'Error desconocido al poner la tarea en el proyecto' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Error al poner la tarea en proyecto' });
+    }
+  }
 }

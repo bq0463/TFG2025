@@ -29,8 +29,8 @@ export class TareaModel {
   static async create({ input }) {
     try{
       const [result] = await connection.execute(
-      'INSERT INTO tarea (nombre, descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
-      [input.nombre, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
+      'INSERT INTO tarea (id_usuario,descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
+      [input.id_usuario, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
       );
       return result;
     } catch (error) {

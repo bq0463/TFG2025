@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { TareaController } from "../controllers/tareaController.js";
-import { validarCredencialesTarea } from "../middlewares/validacionesCreaciones.js";
 export const tareaRouter = Router();
 
 tareaRouter.get('/tareas/:id', TareaController.getById);

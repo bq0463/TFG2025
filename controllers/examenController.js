@@ -27,12 +27,12 @@ export class ExamenController {
 
   static async create(req, res) {
     try {
-      const { asignatura, fecha, nota } = req.body;
+      const { asignatura, fecha, nota,id_usuario } = req.body;
       const validacion = await validarCredencialesExamen(req);
       if (!validacion.success) {
         return res.status(validacion.status).json({ message: validacion.message });
       }
-      const examen = await ExamenModel.create({ input: { asignatura, fecha, nota } });
+      const examen = await ExamenModel.create({ input: { asignatura, fecha, nota,id_usuario } });
       if (examen.affectedRows > 0) {
         return res.status(201).json({ message: "Examen creado correctamente" });
       }

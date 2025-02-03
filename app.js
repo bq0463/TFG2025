@@ -5,7 +5,9 @@ import { usuarioRouter } from "./routes/rutasUsuario.js";
 // comprobar tipos de datos
 import { corsMiddleware } from "./middlewares/cors.js";
 import dotenv from 'dotenv';
-
+import { tareaRouter } from "./routes/rutasTarea.js";
+import { examenRouter } from "./routes/rutasExamen.js";
+import {proyectoRouter} from "./routes/rutasProyecto.js";
 dotenv.config();
 
 const app = express();
@@ -16,6 +18,9 @@ app.use(corsMiddleware());
 
 // cargar rutas con router
 app.use("/", usuarioRouter);
+app.use("/",tareaRouter);
+app.use("/",examenRouter);
+app.use("/",proyectoRouter);
 
 const PORT = process.env.PORT ?? 1234;
 app.listen(PORT, () => {

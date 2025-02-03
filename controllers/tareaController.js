@@ -1,5 +1,5 @@
-import { validarCredencialesTarea } from "../middlewares/validacionesCreaciones";
-
+import { validarCredencialesTarea } from "../middlewares/validacionesCreaciones.js";
+import { TareaModel } from "../Models/tarea.js";
 export class TareaController {
   
   static async getById(req, res) {
@@ -25,7 +25,7 @@ export class TareaController {
   
   static async create(req, res) {
     try {
-      const { nombre, descripcion, fecha_inicio, fecha_fin, estado, valor } = req.body;
+      const { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor, } = req.body;
       // Validar credenciales
       const validacion = await validarCredencialesTarea(req);
         
@@ -34,7 +34,7 @@ export class TareaController {
         return res.status(validacion.status).json({ message: validacion.message });
       }
 
-      const tarea = await TareaModel.create({ input: { nombre, descripcion, fecha_inicio, fecha_fin, estado, valor } });
+      const tarea = await TareaModel.create({ input: { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor } });
 
       if (tarea.affectedRows > 0) {
         return res.status(201).json({ message: "Tarea creada correctamente" });
