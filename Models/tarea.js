@@ -4,13 +4,41 @@ import { connection } from '../config/mysqlConnection.js';
 export class TareaModel {
   
   static async getById({ id }) {
-    const [result] = await connection.execute('SELECT * FROM tarea WHERE id = ?', [id]);
-    return result.length ? result[0] : null;
-  }
+    const [rows] = await connection.execute('SELECT descripcion, valor, fecha_inicio, fecha_fin, estado FROM tarea WHERE id = ?', [id]);
+
+    if (rows.length > 0) {
+        const row = rows[0]; 
+        const fecha_inicio = new Date(row.fecha_inicio);
+        const fecha_fin = new Date(row.fecha_fin);
+
+        return {
+            ...row,
+            fecha_inicio: fecha_inicio.toISOString().split('T')[0],
+            fecha_fin: fecha_fin.toISOString().split('T')[0],
+        };
+    } else {
+        return null; 
+    }
+}
 
   static async getAll({ id_usuario }) {
-    const [result] = await connection.execute('SELECT * FROM tarea WHERE id_usuario = ?', [id_usuario]);
-    return result;
+    const [rows] = await connection.execute('SELECT descripcion,valor,fecha_inicio,fecha_fin,estado FROM tarea WHERE id_usuario = ?', [id_usuario]);
+
+    if (rows.length > 0) {
+      return rows.map(row => {
+          const fecha_inicio = new Date(row.fecha_inicio);
+          const fecha_fin = new Date(row.fecha_fin);
+
+          return {
+              ...row,
+              fecha_inicio: fecha_inicio.toISOString().split('T')[0], // Formatea la fecha de inicio
+              fecha_fin: fecha_fin.toISOString().split('T')[0], // Formatea la fecha de fin
+          };
+      });
+    } else {
+      return null; 
+    }
+    
   }
 
   static async delete({ id }) {

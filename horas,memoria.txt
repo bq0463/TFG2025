@@ -47,3 +47,10 @@ el flujo se quedaba pillado porque estaba mal organizado entre controlador y mod
 03/02
 2h
 Corregido el error del segundo insert en create de proyecto y los demas create,mirar createTarea
+
+06/02
+3h
+resuelto los GETbyId y los GET agrupados por id de usuario
+tambien resuelto el tema de iterar con los map por si es mas de una fila
+y tambien modificar campos existentes del resultado para que devuelva bien las fechas,uso de left join en proyecto debido a los CONCAT y que significa que la tabla de la izquierda no hace falta que cumpla la condicion con la tabla de la derecha debido a la cardinalidad abierta que hay entre proyecto y tareas y tambien usuarios.
+

@@ -17,6 +17,8 @@ export class TareaController {
     try {
       const { id_usuario } = req.params;
       const tareas = await TareaModel.getAll({ id_usuario });
+      if(!tareas)
+        return res.status(404).json({message: 'No hay tareas'});
       return res.json(tareas);
     } catch (error) {
       return res.status(500).json({ message: 'Error interno del servidor', error: error.message });

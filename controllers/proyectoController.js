@@ -4,17 +4,31 @@ import {ProyectoModel} from '../Models/proyecto.js';
 export class ProyectoController {
   
   static async getById(req, res) {
-    const { id } = req.params;
-    const proyecto = await ProyectoModel.getProyectoById({ id });
-    if (proyecto) return res.json(proyecto);
-    return res.status(404).json({ message: 'Proyecto no encontrado' });
+    try{
+      const { id } = req.params;
+      const proyecto = await ProyectoModel.getProyectoById({ id });
+
+      if (proyecto) 
+        return res.json(proyecto);
+      
+      return res.status(404).json({ message: 'Proyecto no encontrado' });
+    }catch(error){
+      return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
+    }
   }
 
   static async getAll(req, res) {
-    const { id } = req.params;
-    const proyectos = await ProyectoModel.getAll({ id_usuario: id });
-    if (proyectos.length > 0) return res.json(proyectos);
-    return res.status(404).json({ message: 'Proyectos no encontrados' });
+    try{
+      const { id_usuario } = req.params;
+      const proyectos = await ProyectoModel.getAll({ id_usuario });
+
+      if (proyectos.length > 0) 
+        return res.json(proyectos);
+
+      return res.status(404).json({ message: 'Proyectos no encontrados' });
+    }catch(error){
+      return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
+    }
   }
 
   static async update(req, res) {

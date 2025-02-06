@@ -55,6 +55,25 @@ Content-Type: application/json
 ### Obtener usuario por ID
 GET http://localhost:1234/usuarios/6
 
+### Obtener tarea por ID 
+GET http://localhost:1234/tareas/6
+
+### Obtener proyecto por ID
+GET http://localhost:1234/proyectos/1
+
+### Obtener examen por ID
+GET http://localhost:1234/examenes/1
+
+
+### Obtener todas las tareas por ID de usuario
+GET http://localhost:1234/usuarios/1/tareas
+
+### Obtener proyectos por ID de usuario
+GET http://localhost:1234/usuarios/1/proyectos
+
+### Obtener examenes por ID de usuario
+GET http://localhost:1234/usuarios/1/examenes
+
 ### Actualizar usuario
 PATCH http://localhost:1234/usuarios/1
 Content-Type: application/json

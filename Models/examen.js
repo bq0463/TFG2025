@@ -3,13 +3,19 @@ import { connection } from '../config/mysqlConnection.js';
 export class ExamenModel {
 
   static async getById({ id }) {
-    const [result] = await connection.execute('SELECT * FROM examen WHERE id = ?', [id]);
-    return result.length ? result[0] : null;
+    const [rows] = await connection.execute('SELECT asignatura,nota,fecha FROM examen WHERE id = ?', [id]);
+    return rows.map(row => ({
+      ...row,
+      fecha: row.fecha.toISOString().split('T')[0],
+  }));
   }
 
   static async getAll({ id_usuario }) {
-    const [result] = await connection.execute('SELECT * FROM examen WHERE id_usuario = ?', [id_usuario]);
-    return result;
+    const [rows] = await connection.execute('SELECT asignatura,nota,fecha FROM examen WHERE id_usuario = ?', [id_usuario]);
+    return rows.map(row => ({
+      ...row,
+      fecha: row.fecha.toISOString().split('T')[0],
+  }));
   }
 
   static async create({ input }) {
