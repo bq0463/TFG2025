@@ -92,5 +92,21 @@ Content-Type: application/json
   "newPassword": "nuevoPassword456"
 }
 
+### Actualizar examen
+PATCH http://localhost:1234/examenes/5
+Content-Type: application/json
+
+{
+  "asignatura": "mates",
+  "nota": 3.00,
+  "fecha": "2025-02-08"
+}
+
 ### Eliminar usuario
-DELETE http://localhost:1234/usuarios/1
+DELETE http://localhost:1234/usuarios/4
+
+### Eliminar tarea
+DELETE http://localhost:1234/tareas/3
+
+### Eliminar examen
+DELETE http://localhost:1234/examenes/4

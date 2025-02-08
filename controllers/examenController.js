@@ -42,16 +42,16 @@ export class ExamenController {
     }
   }
 
-  static async update(req, res) {
+  static async updateById(req, res) {
     try {
       const { id } = req.params;
-      const examenActualizado = await ExamenModel.update({ id, input: req.body });
+      const examenActualizado = await ExamenModel.updateById({ id, input: req.body });
 
       if (!examenActualizado) {
         return res.status(404).json({ message: 'Examen no encontrado' });
       }
 
-      return res.json({ message: 'Examen actualizado' });
+      return res.status(200).json({ message: 'Examen actualizado' });
     } catch (error) {
       return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }

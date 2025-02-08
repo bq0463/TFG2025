@@ -86,7 +86,7 @@ export async function validarCredencialesTarea(req) {
 }
 
 
-  export async function validarCredencialesProyecto(req, res) {
+  export async function validarCredencialesProyecto(req) {
     const { titulo, descripcion, fecha_entrega } = req.body;
   
     // Verificar que todos los campos estén presentes
@@ -110,7 +110,7 @@ export async function validarCredencialesTarea(req) {
     return { success: true , message: "Proyecto creado correctamente" };
   }
 
-  export async function validarCredencialesExamen(req, res) {
+  export async function validarCredencialesExamen(req) {
     const { nota,fecha,asignatura } = req.body;
   
     // Verificar que todos los campos estén presentes
