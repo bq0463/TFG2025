@@ -46,7 +46,7 @@ POST http://localhost:1234/proyectos
 Content-Type: application/json
 
 {
-  "titulo": "trabajo de bien 2333",
+  "titulo": "trabajo de bien 23334",
   "id_usuario": 6,
   "descripcion": "uno dos tres",
   "fecha_entrega": "2025-02-18"
@@ -75,12 +75,12 @@ GET http://localhost:1234/usuarios/1/proyectos
 GET http://localhost:1234/usuarios/1/examenes
 
 ### Actualizar usuario
-PATCH http://localhost:1234/usuarios/1
+PATCH http://localhost:1234/usuarios/6
 Content-Type: application/json
 
 {
-  "username": "usuarioActualizado1",
-  "email": "actualizado1@example.com"
+  "nombre_usuario": "usuarioActualizado2",
+  "email": "actualizado2@example.com"
 }
 
 ### Actualizar contraseña
@@ -100,6 +100,26 @@ Content-Type: application/json
   "asignatura": "mates",
   "nota": 3.00,
   "fecha": "2025-02-08"
+}
+
+### Actualizar tarea
+PATCH http://localhost:1234/tareas/1
+Content-Type: application/json
+
+{
+  "descripcion": "Tarea actualizada",
+  "valor": 30.00,
+  "fecha_fin": "2025-02-11",
+  "estado" : "Finalizado"
+}
+
+### Actualizar proyecto
+PATCH http://localhost:1234/proyectos/1
+Content-Type: application/json
+
+{
+  "titulo": "proyecto de biologia",
+  "fecha_entrega": "2025-02-11"
 }
 
 ### Eliminar usuario

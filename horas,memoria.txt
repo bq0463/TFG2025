@@ -59,3 +59,6 @@ y tambien modificar campos existentes del resultado para que devuelva bien las f
 updateById de examen ,todos los delete hechos,mirar el resto de updates ,createTarea y jwt
 problemas con update: estaba pasando data en vez de input que es como esta en los parametros del controller
 
+10/02
+3h
+falta el create tarea y delete tarea en proyecto, tambien el de asociar usuarios al proyecto y update de password en usuario,jwt

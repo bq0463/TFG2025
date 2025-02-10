@@ -26,20 +26,42 @@ export class UsuarioModel {
     }
   }
 
-  static async update({ id, input }) {
+  static async updateById({ id, input }) {
+    const [rows] = await connection.execute('SELECT * FROM usuario WHERE id = ?', [id]);
+
+    if (rows.length === 0) {
+        throw new Error('Recurso no encontrado');
+    }
+
+    const existingRow = rows[0];
+    const datosAValidar = {};
+
+    datosAValidar.email = input.email !== undefined ? input.email : existingRow.email;
+    datosAValidar.nombre_usuario = input.nombre_usuario !== undefined ? input.nombre_usuario : existingRow.nombre_usuario;
+
+    const updatedRow = {
+        nombre_usuario: datosAValidar.nombre_usuario,
+        email: datosAValidar.email,
+    };
+
+    // Actualizar en la base de datos
     const [result] = await connection.execute(
-      'UPDATE usuario SET nombre_usuario = ?, email = ? WHERE id = ?',
-      [input.nombre_usuario, input.email, id]
+        `UPDATE usuario
+         SET nombre_usuario = ?, email = ?
+         WHERE id = ?`,
+        [updatedRow.nombre_usuario, updatedRow.email, id]
     );
 
-    return result;
-  }
+    // Devolver el resultado completo
+    return { success: true, affectedRows: result.affectedRows, id, ...updatedRow };
+}
+
 
   static async updatecontrasena({ id, newcontrasena }) {
     try {
       const saltRounds = 10;
       const hashedcontrasena = await bcrypt.hash(newcontrasena, saltRounds);
-  
+      
       await connection.execute(
         'UPDATE usuario SET contrasena = ? WHERE id = ?',
         [hashedcontrasena, id]

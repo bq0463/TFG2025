@@ -21,7 +21,6 @@ const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 //se coge del controller funciones de modelo y maneja errores CRUD para no saber su implementación
 import { Router } from "express";
 import { UsuarioController } from "../controllers/usuarioController.js";
-import { validarCredencialesUsuario } from "../middlewares/validacionesCreaciones.js"; // Middleware de validación
 export const usuarioRouter = Router();
 
 // Métodos relacionados con la entidad usuario
@@ -36,7 +35,7 @@ usuarioRouter.post('/login', UsuarioController.login);
 usuarioRouter.get('/usuarios/:id', UsuarioController.getById);
 
 // Actualizar un usuario (parcial)
-usuarioRouter.patch('/usuarios/:id',UsuarioController.update);
+usuarioRouter.patch('/usuarios/:id',UsuarioController.updateById);
 
 // Actualizar contraseña de un usuario
 usuarioRouter.patch('/usuarios/:id/password', UsuarioController.updatePassword);

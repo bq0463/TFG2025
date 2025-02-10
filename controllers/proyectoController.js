@@ -31,13 +31,12 @@ export class ProyectoController {
     }
   }
 
-  static async update(req, res) {
+  static async updateById(req, res) {
     const { id } = req.params;
-    const { titulo, descripcion, fecha_entrega } = req.body;
-
-    const proyectoActualizado = await ProyectoModel.update({ 
+    
+    const proyectoActualizado = await ProyectoModel.updateById({ 
       id, 
-      input: { titulo, descripcion, fecha_entrega } 
+      input: req.body
     });
 
     if (!proyectoActualizado) {

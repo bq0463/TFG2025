@@ -25,14 +25,15 @@ export class UsuarioController {
     }
   }
 
-  static async update(req, res) {
+  static async updateById(req, res) {
     try {
-      const { id,nombre_usuario, email } = req.body;
-      const result = await UsuarioModel.update({ id, input: { nombre_usuario, email} });
+      const { id} = req.params;
+
+      const result = await UsuarioModel.updateById({ id, input: req.body });
       if (result.affectedRows === 0) {
         return res.status(404).json({ message: 'Usuario no encontrado' });
       }
-      res.status(201).json({ message: 'Usuario actualizado' });
+      res.status(200).json({ message: 'Usuario actualizado' });
     } catch (error) {
       res.status(500).json({ message: 'Error al actualizar usuario', error });
     }

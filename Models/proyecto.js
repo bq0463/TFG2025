@@ -1,13 +1,14 @@
 
 import { TareaModel } from './tarea.js';
 import { connection } from '../config/mysqlConnection.js';
+import { validarCredencialesProyecto } from '../middlewares/validacionesCreaciones.js';
 
 export class ProyectoModel {
 
     static async getProyectoById({ id }) {
         const [rows] = await connection.execute(`
             SELECT 
-                p.fecha_entrega,
+                p.fecha_entrega_entrega,
                 p.titulo,
                 p.descripcion,
                 GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
@@ -30,7 +31,7 @@ export class ProyectoModel {
     
         return rows.map(row => ({
             ...row,
-            fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
+            fecha_entrega_entrega: row.fecha_entrega_entrega.toISOString().split('T')[0],
         }));
     }
 
@@ -39,7 +40,7 @@ export class ProyectoModel {
             SELECT 
                 p.titulo,
                 p.descripcion,
-                p.fecha_entrega,GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
+                p.fecha_entrega_entrega,GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
                 GROUP_CONCAT(DISTINCT t.descripcion SEPARATOR ', ') AS tareas
             FROM 
                 usuario_proyecto up
@@ -59,13 +60,64 @@ export class ProyectoModel {
     
         return rows.map(row => ({
             ...row,
-            fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
+            fecha_entrega_entrega: row.fecha_entrega_entrega.toISOString().split('T')[0],
         }));
     }
     
     
-    static async update({id, input}) {
-        await connection.execute('UPDATE proyecto SET titulo = ?, descripcion = ?, fecha_entrega = ? WHERE id = ?', [input.titulo, input.descripcion, input.fecha_entrega, id]);
+    static async updateById({ id, input }) {
+        const [rows] = await connection.execute('SELECT * FROM proyecto WHERE id = ?', [id]);
+        if (rows.length === 0) {
+            throw new Error('Recurso no encontrado');
+        }
+    
+        const existingRow = rows[0]; 
+        const datosAValidar = {};
+    
+        if (input.descripcion !== undefined) 
+            datosAValidar.descripcion = input.descripcion;
+        else{
+          datosAValidar.descripcion = existingRow.descripcion;
+        }
+
+        if (input.fecha_entrega !== undefined) 
+            datosAValidar.fecha_entrega = input.fecha_entrega;
+        else{
+          datosAValidar.fecha_entrega = existingRow.fecha_entrega;
+        }
+
+        if (input.titulo !== undefined) 
+            datosAValidar.titulo = input.titulo;
+        else{
+          datosAValidar.titulo = existingRow.titulo;
+        }
+
+        // Llama al middleware para validar los datos
+        const validacion = await validarCredencialesProyecto({ body: datosAValidar });
+
+        if (!validacion.success) {
+            return { success: false, status: validacion.status, message: validacion.message };
+        }
+    
+        const updatedRow = {
+            descripcion: datosAValidar.descripcion,
+            fecha_entrega: datosAValidar.fecha_entrega,
+            titulo: datosAValidar.titulo,
+        };
+    
+        const result = await connection.execute(`
+            UPDATE proyecto
+            SET descripcion = ?, fecha_entrega = ?, titulo = ?
+            WHERE id = ?`,
+            [
+                updatedRow.descripcion,
+                updatedRow.fecha_entrega,
+                updatedRow.titulo,
+                id,
+            ]
+        );
+    
+        return { success: true, id, ...updatedRow }; 
     }
 
     static async create({input}) {
@@ -82,7 +134,6 @@ export class ProyectoModel {
             throw error;
         }
     }
-    
 
     static async createTarea({idProyecto, idTarea}) {
         const tarea = TareaModel.getTareaById({id: idTarea});
