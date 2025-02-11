@@ -41,15 +41,33 @@ export class UsuarioController {
 
   static async updatePassword(req, res) {
     try {
-      const { id } = req.params;
-      const { newPassword } = req.body;
-      const result = await UsuarioModel.updatePassword({ id, newPassword });
-      if (result) return res.json({ message: 'Contraseña actualizada' });
+      const { id } = req.params; 
+      const { oldPassword, newPassword } = req.body; 
+  
+      if (!oldPassword || !newPassword) {
+        return res.status(400).json({ message: 'Se requieren la antigua y nueva contraseña' });
+      }
+  
+      const result = await UsuarioModel.updatePassword({ id, oldPassword, newPassword });
+  
+      if (result.success) {
+        return res.json({ message: 'Contraseña actualizada correctamente' });
+      }
+  
       res.status(404).json({ message: 'Usuario no encontrado' });
     } catch (error) {
-      res.status(500).json({ message: 'Error al actualizar contraseña', error });
+      if (error.message === 'La contraseña antigua no es correcta') {
+        return res.status(400).json({ message: 'La contraseña antigua no es correcta' });
+      }
+      if (error.message === 'Usuario no encontrado') {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+  
+      // Otros errores del servidor
+      res.status(500).json({ message: 'Error al actualizar contraseña', error: error.message });
     }
   }
+  
 
   static async login(req, res) {
     const { nombre_usuario, password } = req.body;

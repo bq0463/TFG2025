@@ -12,9 +12,9 @@ POST http://localhost:1234/register
 Content-Type: application/json
 
 {
-  "nombre_usuario": "nuevoUsuari",
-  "email": "usuario8@example1.com",
-  "contrasena": "password1234"
+  "nombre_usuario": "prueba13",
+  "email": "usuario13@example1.com",
+  "contrasena": "password12345"
 }
 
 ### Crear tarea
@@ -84,11 +84,11 @@ Content-Type: application/json
 }
 
 ### Actualizar contraseña
-PATCH http://localhost:1234/usuarios/1/password
+PATCH http://localhost:1234/usuarios/16/password
 Content-Type: application/json
 
 {
-  "oldPassword": "password123",
+  "oldPassword": "password12345",
   "newPassword": "nuevoPassword456"
 }
 

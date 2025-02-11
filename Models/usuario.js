@@ -57,22 +57,44 @@ export class UsuarioModel {
 }
 
 
-  static async updatecontrasena({ id, newcontrasena }) {
-    try {
-      const saltRounds = 10;
-      const hashedcontrasena = await bcrypt.hash(newcontrasena, saltRounds);
-      
-      await connection.execute(
-        'UPDATE usuario SET contrasena = ? WHERE id = ?',
-        [hashedcontrasena, id]
-      );
-  
-      return true;
-    } catch (error) {
-      console.error('Error al actualizar la contraseña:', error);
-      throw error;
+static async updatePassword({ id, oldPassword, newPassword }) {
+  try {
+    // Obtener el usuario por ID
+    const [rows] = await connection.execute(
+      'SELECT contrasena FROM usuario WHERE id = ?',
+      [id]
+    );
+    
+    if (rows.length === 0) {
+      throw new Error('Usuario no encontrado');
     }
+
+    const usuario = rows[0];
+
+    // Verificar si la contraseña antigua coincide
+    const passwordMatch = await bcrypt.compare(oldPassword, usuario.contrasena);
+
+    if (!passwordMatch) {
+      return { success: false, message: 'Contraseña antigua incorrecta' };
+    }
+
+    // Encriptar la nueva contraseña
+    const saltRounds = 10;
+    const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    // Actualizar la contraseña en la base de datos
+    await connection.execute(
+      'UPDATE usuario SET contrasena = ? WHERE id = ?',
+      [hashedNewPassword, id]
+    );
+
+    return { success: true, message: 'Contraseña actualizada correctamente' };
+  } catch (error) {
+    console.error('Error al actualizar la contraseña:', error);
+    throw error;
   }
+}
+
   
   static async login({ nombre_usuario, contrasena }) {
     try {

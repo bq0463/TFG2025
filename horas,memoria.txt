@@ -62,3 +62,7 @@ problemas con update: estaba pasando data en vez de input que es como esta en lo
 10/02
 3h
 falta el create tarea y delete tarea en proyecto, tambien el de asociar usuarios al proyecto y update de password en usuario,jwt
+
+11/02
+1h y 20min
+arreglado update password ,falta  el create tarea y delete tarea en proyecto, tambien el de asociar usuarios al proyecto y update de password en usuario,jwt
