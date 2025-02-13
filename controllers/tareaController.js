@@ -27,26 +27,30 @@ export class TareaController {
   
   static async create(req, res) {
     try {
-      const { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor, } = req.body;
-      // Validar credenciales
-      const validacion = await validarCredencialesTarea(req);
-        
-            // Si la validación falla, envía el error al cliente
-      if (!validacion.success) {
-        return res.status(validacion.status).json({ message: validacion.message });
-      }
+        const { id_usuario } = req.params;
+        const {  descripcion, fecha_inicio, fecha_fin, estado, valor } = req.body;
 
-      const tarea = await TareaModel.create({ input: { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor } });
+        // Validar credenciales
+        const validacion = await validarCredencialesTarea(req);
 
-      if (tarea.affectedRows > 0) {
-        return res.status(201).json({ message: "Tarea creada correctamente" });
-      }
+        if (!validacion.success) {
+            return res.status(validacion.status).json({ message: validacion.message });
+        }
 
-      return res.status(500).json({ message: "Error desconocido al crear tarea" });
+        const tarea = await TareaModel.create({ input: { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor } });
+
+        if (tarea.affectedRows > 0) {
+            return res.status(201).json({ 
+                message: "Tarea creada correctamente",
+                id_tarea: tarea.id_tarea
+            });
+        }
+
+        return res.status(500).json({ message: "Error desconocido al crear tarea" });
     } catch (error) {
-      return res.status(500).json({ message: 'Datos incorrectos', error: error.message });
+        return res.status(500).json({ message: 'Datos incorrectos', error: error.message });
     }
-  }  
+  }
 
   static async delete(req, res) {
     try {

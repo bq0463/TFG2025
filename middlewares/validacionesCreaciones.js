@@ -59,7 +59,7 @@ export async function validarCredencialesUsuario(req) {
 
 
 export async function validarCredencialesTarea(req) {
-
+  console.log("Validando credenciales de tarea...");
   const { descripcion, fecha_fin } = req.body;
 
   // Verificar que todos los campos estén presentes

@@ -1,6 +1,9 @@
 
 import { validarCredencialesProyecto } from '../middlewares/validacionesCreaciones.js';
 import {ProyectoModel} from '../Models/proyecto.js';
+import { TareaModel } from '../Models/tarea.js';
+import {UsuarioModel} from '../Models/usuario.js';
+import { TareaController } from './tareaController.js';
 export class ProyectoController {
   
   static async getById(req, res) {
@@ -48,13 +51,14 @@ export class ProyectoController {
 
   static async create(req, res) {
     try {
-      const { titulo, descripcion, fecha_entrega, id_usuario } = req.body;
+      const { titulo, descripcion, fecha_entrega } = req.body;
+      const {id_usuario} =req.params;
       const validacion = await validarCredencialesProyecto(req);
 
       if (!validacion.success) {
         return res.status(validacion.status).json({ message: validacion.message });
       }
-
+      
       const proyecto = await ProyectoModel.create({  
         input: { titulo, descripcion, fecha_entrega,id_usuario } 
       });
@@ -71,22 +75,42 @@ export class ProyectoController {
 
   static async createTarea(req, res) {
     try {
-      const {  idProyecto,idTarea } = req.body;
-      const validacion = await validarCredencialesProyecto(req);
+      console.log("Llamada a createTarea");
+      console.log("Parámetros recibidos en createTarea:", req.params);
+      console.log("Cuerpo de la petición:", req.body);
+        const tarea = await ProyectoModel.createTareaProyecto(req,res);
+        console.log("Resultado de createTP:", tarea);
 
-      if (!validacion.success) {
-        return res.status(validacion.status).json({ message: validacion.message });
-      }
+        if (!tarea || !tarea.id_tarea) {
+            return res.status(500).json({ message: 'Error al crear la tarea' });
+        }
 
-      const proyecto = await ProyectoModel.createTarea({ 
-        idProyecto,idTarea
+        return res.status(201).json({ message: 'Tarea asociada correctamente al proyecto', id_tarea });
+    } catch (error) {
+        return res.status(500).json({ message: 'Error al poner la tarea en proyecto', error: error.message });
+    }
+  }
+
+
+  static async associateByUsername(req,res){
+    try {
+      const {  nombre_usuario } = req.body;
+      const {id_proyecto} = req.params;
+
+      const usuario = await UsuarioModel.getByUsername({ nombre_usuario
       });
 
-      if (proyecto.affectedRows > 0) {
-        return res.status(201).json({ message: 'Tarea creado' });
+      if (!usuario) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
       } 
+      
+      const asociado = await ProyectoModel.associateByUsername(usuario.id,id_proyecto);
 
-      return res.status(500).json({ message: 'Error desconocido al poner la tarea en el proyecto' });
+      if(!asociado){
+        return res.status(500).json({message: 'Error al asociar al usuario'});
+      }
+
+      return res.status(201).json({ message: 'usuario asociado al proyecto' });
     } catch (error) {
       return res.status(500).json({ message: 'Error al poner la tarea en proyecto' });
     }

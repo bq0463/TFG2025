@@ -1,7 +1,5 @@
 USE TFG2025;
 
--- SELECT * FROM usuario_proyecto;
-
 -- SHOW TABLES;
 SHOW CREATE TABLE usuario;
 SHOW CREATE TABLE examen;

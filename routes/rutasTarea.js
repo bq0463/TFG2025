@@ -6,4 +6,4 @@ tareaRouter.get('/tareas/:id', TareaController.getById);
 tareaRouter.get('/usuarios/:id_usuario/tareas', TareaController.getAll);
 tareaRouter.delete('/tareas/:id', TareaController.delete);
 tareaRouter.patch('/tareas/:id', TareaController.updateById);
-tareaRouter.post('/tareas',TareaController.create);
+tareaRouter.post('/tareas/:id_usuario',TareaController.create);

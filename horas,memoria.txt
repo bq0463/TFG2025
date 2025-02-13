@@ -66,3 +66,8 @@ falta el create tarea y delete tarea en proyecto, tambien el de asociar usuarios
 11/02
 1h y 20min
 arreglado update password ,falta  el create tarea y delete tarea en proyecto, tambien el de asociar usuarios al proyecto y update de password en usuario,jwt
+
+13/02
+6h
+hecho el associateByUsername al proyecto,falta createTP y deleteTP,jwt
+tambien se ha cambiado el create de tarea,examen,proyecto para que el id_usuario vaya por req.params

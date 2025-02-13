@@ -119,16 +119,50 @@ export class TareaModel {
     
   
 
-  static async create({ input }) {
-    try{
-      const [result] = await connection.execute(
-      'INSERT INTO tarea (id_usuario,descripcion, fecha_inicio_inicio, fecha_inicio_fin, estado, valor) VALUES (?,?,?,?,?,?)',
-      [input.id_usuario, input.descripcion, input.fecha_inicio_inicio, input.fecha_inicio_fin, input.estado, input.valor]
-      );
-      return result;
-    } catch (error) {
-      console.error('Error al crear tarea:', error);
-      throw error;
-    }
+    static async create({ input }) {
+      try {
+
+          const [result] = await connection.execute(
+              'INSERT INTO tarea (id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
+              [input.id_usuario, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
+          );
+          console.log('Resultado',result);
+          return { id_tarea: result.insertId, affectedRows: result.affectedRows };
+      } catch (error) {
+          console.error('Error al crear tarea:', error);
+          throw error;
+      }
   }
+  
+  static async createTP(req) {  // ❌ Quitamos "res" como parámetro
+    try {
+        const { id_usuario } = req.params;
+        const { descripcion, fecha_inicio, fecha_fin, estado, valor } = req.body;
+
+        // Validar credenciales
+        const validacion = await validarCredencialesTarea(req);
+
+        if (!validacion.success) {
+            throw new Error(validacion.message); // ❌ No usamos res.json() aquí
+        }
+        
+        console.log("Parámetros recibidos en createTarea:", req.params);
+        console.log("Cuerpo de la petición:", req.body);
+        const tarea = await TareaModel.create({
+            input: { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor }
+        });
+
+        console.log("Resultado de TareaModel.create:", tarea);
+
+        if (tarea.affectedRows > 0) {
+            return { id_tarea: tarea.id_tarea }; // ✅ Devolvemos solo los datos
+        }
+
+
+        throw new Error("Error desconocido al crear tarea");
+    } catch (error) {
+        throw error; // ❌ No usamos res.status() aquí, que lo maneje quien llama la función
+    }
+}
+
 }

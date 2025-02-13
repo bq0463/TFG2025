@@ -8,7 +8,12 @@ export class UsuarioModel {
   }
 
   static async getByUsername({ nombre_usuario }) {
-    return connection.execute('SELECT * FROM usuario WHERE nombre_usuario = ?', [nombre_usuario]);
+    const [rows] = await connection.execute(
+        'SELECT * FROM usuario WHERE nombre_usuario = ?', 
+        [nombre_usuario]
+    );
+
+    return rows.length > 0 ? rows[0] : null;
   }
 
   static async getByEmail({ email }) {

@@ -18,38 +18,56 @@ Content-Type: application/json
 }
 
 ### Crear tarea
-POST http://localhost:1234/tareas
+POST http://localhost:1234/tareas/6
 Content-Type: application/json
 
 {
-  "descripcion": "tarea de no se que",
+  "descripcion": "tarea de no se que 2",
   "valor":  10,
-  "id_usuario": 6,
   "fecha_inicio": "2025-02-15",
   "fecha_fin": "2025-02-17",
   "estado": "Sin finalizar"
 }
 
 ### Crear examen
-POST http://localhost:1234/examenes
+POST http://localhost:1234/examenes/6
 Content-Type: application/json
 
 {
   "asignatura": "tlp",
   "nota":  10,
-  "id_usuario": 6,
   "fecha": "2025-02-17"
 }
 
 ### Crear proyecto
-POST http://localhost:1234/proyectos
+POST http://localhost:1234/proyectos/6
 Content-Type: application/json
 
 {
   "titulo": "trabajo de bien 23334",
-  "id_usuario": 6,
   "descripcion": "uno dos tres",
   "fecha_entrega": "2025-02-18"
+}
+
+### crear tarea en proyecto
+POST http://localhost:1234/proyectos/tarea/1/13
+Content-Type: application/json
+
+{
+  "descripcion": "Tarea de prueba",
+  "fecha_inicio": "2025-03-01",
+  "fecha_fin": "2025-03-10",
+  "estado": "Pendiente",
+  "valor": 50.00
+}
+
+
+### asociar usuarios al proyecto
+POST http://localhost:1234/proyectos/asociar/1
+Content-Type: application/json
+
+{
+  "nombre_usuario" : "nuevoUsuario8"
 }
 
 ### Obtener usuario por ID

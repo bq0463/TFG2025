@@ -27,7 +27,8 @@ export class ExamenController {
 
   static async create(req, res) {
     try {
-      const { asignatura, fecha, nota,id_usuario } = req.body;
+      const { asignatura, fecha, nota } = req.body;
+      const {id_usuario} = req.params;
       const validacion = await validarCredencialesExamen(req);
       if (!validacion.success) {
         return res.status(validacion.status).json({ message: validacion.message });

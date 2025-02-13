@@ -8,7 +8,7 @@ export class ProyectoModel {
     static async getProyectoById({ id }) {
         const [rows] = await connection.execute(`
             SELECT 
-                p.fecha_entrega_entrega,
+                p.fecha_entrega,
                 p.titulo,
                 p.descripcion,
                 GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
@@ -31,7 +31,7 @@ export class ProyectoModel {
     
         return rows.map(row => ({
             ...row,
-            fecha_entrega_entrega: row.fecha_entrega_entrega.toISOString().split('T')[0],
+            fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
         }));
     }
 
@@ -40,7 +40,7 @@ export class ProyectoModel {
             SELECT 
                 p.titulo,
                 p.descripcion,
-                p.fecha_entrega_entrega,GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
+                p.fecha_entrega,GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
                 GROUP_CONCAT(DISTINCT t.descripcion SEPARATOR ', ') AS tareas
             FROM 
                 usuario_proyecto up
@@ -135,12 +135,46 @@ export class ProyectoModel {
         }
     }
 
-    static async createTarea({idProyecto, idTarea}) {
-        const tarea = TareaModel.getTareaById({id: idTarea});
-        if (!tarea) {
-            throw new Error('Tarea no encontrada');}
-        const tareaproyecto = await connection.execute('INSERT INTO proyecto_tarea (id_proyecto, id_tarea) VALUES (?,?)', [idProyecto, idTarea]);
+    static async createTareaProyecto(req, res) {
+        //hacer aqui todo,llamar al createTP de la tarea y asociarla 
+        /*
+        try {
+            const { id_usuario } = req.params;
+            const {  descripcion, fecha_inicio, fecha_fin, estado, valor } = req.body;
+    
+            // Validar credenciales
+            const validacion = await validarCredencialesTarea(req);
+            console.log("Resultado de validacion:", validacion);
+    
+            if (!validacion.success) {
+                return res.status(validacion.status).json({ message: validacion.message });
+            }
+    
+            const tarea = await TareaModel.createTP({ input: { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor } });
+    
+            if (tarea.affectedRows > 0) {
+                return { 
+                    id_tarea: tarea.id_tarea
+                };
+            }
+    
+            return res.status(500).json({ message: "Error desconocido al crear tarea" });
+        } catch (error) {
+            return res.status(500).json({ message: 'Datos incorrectos', error: error.message });
+        }
+            */
+        const [associate_tarea_proyecto] = await connection.execute(
+            'INSERT INTO proyecto_tiene_tarea (id_proyecto, id_tarea) VALUES (?,?)', 
+            [idProyecto, id_tarea]
+        );
         
-        return tareaproyecto;
+        return associate_tarea_proyecto;
+    }
+    
+
+    static async associateByUsername(id_usuario,id_proyecto){
+        const proyectousuario = await connection.execute('INSERT INTO usuario_proyecto (id_proyecto, id_usuario) VALUES (?,?)', [id_proyecto, id_usuario]);
+        
+        return proyectousuario;
     }
 }    
