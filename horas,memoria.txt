@@ -71,3 +71,13 @@ arreglado update password ,falta  el create tarea y delete tarea en proyecto, ta
 6h
 hecho el associateByUsername al proyecto,falta createTP y deleteTP,jwt
 tambien se ha cambiado el create de tarea,examen,proyecto para que el id_usuario vaya por req.params
+
+16/02
+1h y 35min
+arreglado , se estaba pasando mal el input de createTarea porque estaba pasando un objeto con propiedad input :({input}) a proyectomodel,
+para acceder a las propiedades de input pues se llama asi (input) y despues en tareaModel para create ya se le pasa un objeto con propiedad input ({input})
+en el resto no ocurre nada porque ya estamos pasando req en vez de input
+porque hago esto?,porque necesito tanto req.params como body en la tabla proyecto_tiene_tarea y porque estoy llamando a tareamodel.create desde proyectoModel 
+
+eliminar tarea de proyecto === eliminar tarea
+de ahi el que no haya deleteTarea en proyecto

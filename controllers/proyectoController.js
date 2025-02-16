@@ -1,5 +1,5 @@
 
-import { validarCredencialesProyecto } from '../middlewares/validacionesCreaciones.js';
+import { validarCredencialesProyecto, validarCredencialesTarea } from '../middlewares/validacionesCreaciones.js';
 import {ProyectoModel} from '../Models/proyecto.js';
 import { TareaModel } from '../Models/tarea.js';
 import {UsuarioModel} from '../Models/usuario.js';
@@ -75,17 +75,27 @@ export class ProyectoController {
 
   static async createTarea(req, res) {
     try {
-      console.log("Llamada a createTarea");
-      console.log("Parámetros recibidos en createTarea:", req.params);
-      console.log("Cuerpo de la petición:", req.body);
-        const tarea = await ProyectoModel.createTareaProyecto(req,res);
-        console.log("Resultado de createTP:", tarea);
+        const validacion = await validarCredencialesTarea(req);
 
-        if (!tarea || !tarea.id_tarea) {
+        if (!validacion.success) {
+            return res.status(validacion.status).json({ message: validacion.message });
+        }
+
+        // Combinar req.params y req.body en un solo objeto input
+        const input = {
+          id_proyecto: req.params.id_proyecto, 
+          id_usuario: req.params.id_usuario, 
+          ...req.body
+      };
+
+        const tarea = await ProyectoModel.createTareaProyecto(input);
+
+        if (tarea.affectedRows === 0) {
             return res.status(500).json({ message: 'Error al crear la tarea' });
         }
 
-        return res.status(201).json({ message: 'Tarea asociada correctamente al proyecto', id_tarea });
+        return res.status(201).json({ message: 'Tarea asociada correctamente al proyecto', id_tarea: tarea.id_tarea });
+
     } catch (error) {
         return res.status(500).json({ message: 'Error al poner la tarea en proyecto', error: error.message });
     }

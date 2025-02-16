@@ -1,9 +1,6 @@
 USE TFG2025;
 
--- SELECT * FROM usuario_proyecto;
+ SELECT * FROM tarea;
 
--- SHOW TABLES;
-SHOW CREATE TABLE usuario;
-SHOW CREATE TABLE examen;
-SHOW CREATE TABLE proyecto;
-SHOW CREATE TABLE tarea;
+
+
