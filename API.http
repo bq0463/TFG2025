@@ -3,8 +3,8 @@ POST http://localhost:1234/login
 Content-Type: application/json
 
 {
-  "username": "usuario123",
-  "password": "password123"
+  "nombre_usuario": "prueba14",
+  "contrasena": "password123456"
 }
 
 ### Registro
@@ -12,13 +12,14 @@ POST http://localhost:1234/register
 Content-Type: application/json
 
 {
-  "nombre_usuario": "prueba13",
-  "email": "usuario13@example1.com",
-  "contrasena": "password12345"
+  "nombre_usuario": "prueba14",
+  "email": "usuario14@example1.com",
+  "contrasena": "password123456"
 }
 
 ### Crear tarea
-POST http://localhost:1234/tareas/6
+POST http://localhost:1234/tareas/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -30,7 +31,8 @@ Content-Type: application/json
 }
 
 ### Crear examen
-POST http://localhost:1234/examenes/6
+POST http://localhost:1234/examenes/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -40,7 +42,8 @@ Content-Type: application/json
 }
 
 ### Crear proyecto
-POST http://localhost:1234/proyectos/6
+POST http://localhost:1234/proyectos/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -50,7 +53,8 @@ Content-Type: application/json
 }
 
 ### crear tarea en proyecto
-POST http://localhost:1234/proyectos/tarea/1/13
+POST http://localhost:1234/proyectos/tarea/1/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -64,6 +68,7 @@ Content-Type: application/json
 
 ### asociar usuarios al proyecto
 POST http://localhost:1234/proyectos/asociar/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -72,28 +77,29 @@ Content-Type: application/json
 
 ### Obtener usuario por ID
 GET http://localhost:1234/usuarios/6
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 ### Obtener tarea por ID 
 GET http://localhost:1234/tareas/6
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 ### Obtener proyecto por ID
 GET http://localhost:1234/proyectos/1
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 ### Obtener examen por ID
 GET http://localhost:1234/examenes/1
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 
 ### Obtener todas las tareas por ID de usuario
-GET http://localhost:1234/usuarios/1/tareas
-
+GET http://localhost:1234/usuarios/17/tareas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 ### Obtener proyectos por ID de usuario
-GET http://localhost:1234/usuarios/1/proyectos
-
+GET http://localhost:1234/usuarios/17/proyectos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 ### Obtener examenes por ID de usuario
-GET http://localhost:1234/usuarios/1/examenes
-
+GET http://localhost:1234/usuarios/17/examenes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 ### Actualizar usuario
-PATCH http://localhost:1234/usuarios/6
+PATCH http://localhost:1234/usuarios/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -102,7 +108,8 @@ Content-Type: application/json
 }
 
 ### Actualizar contraseña
-PATCH http://localhost:1234/usuarios/16/password
+PATCH http://localhost:1234/usuarios/17/password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -112,6 +119,7 @@ Content-Type: application/json
 
 ### Actualizar examen
 PATCH http://localhost:1234/examenes/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -122,6 +130,7 @@ Content-Type: application/json
 
 ### Actualizar tarea
 PATCH http://localhost:1234/tareas/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -133,6 +142,7 @@ Content-Type: application/json
 
 ### Actualizar proyecto
 PATCH http://localhost:1234/proyectos/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 Content-Type: application/json
 
 {
@@ -142,9 +152,12 @@ Content-Type: application/json
 
 ### Eliminar usuario
 DELETE http://localhost:1234/usuarios/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 
 ### Eliminar tarea
 DELETE http://localhost:1234/tareas/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
 
 ### Eliminar examen
 DELETE http://localhost:1234/examenes/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8

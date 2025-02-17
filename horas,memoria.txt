@@ -75,9 +75,13 @@ tambien se ha cambiado el create de tarea,examen,proyecto para que el id_usuario
 16/02
 1h y 35min
 arreglado , se estaba pasando mal el input de createTarea porque estaba pasando un objeto con propiedad input :({input}) a proyectomodel,
-para acceder a las propiedades de input pues se llama asi (input) y despues en tareaModel para create ya se le pasa un objeto con propiedad input ({input})
-en el resto no ocurre nada porque ya estamos pasando req en vez de input
-porque hago esto?,porque necesito tanto req.params como body en la tabla proyecto_tiene_tarea y porque estoy llamando a tareamodel.create desde proyectoModel 
+para acceder a las propiedades de input pues sele estaba llamando asi (input) y despues en tareaModel para create ya se le pasa un objeto con propiedad input ({input})
+
 
 eliminar tarea de proyecto === eliminar tarea
 de ahi el que no haya deleteTarea en proyecto
+
+17/02
+todos los metodos que tienen datos privados o propios del usuario deben llevar la cabecera Authorization: Bearer token
+el token se genera a traves del login de usuario a traves de un jwt_secret a traves de la variable de entorno,tras esto si el usuario y la contraseña son las buenas, pues firma con el jwt y saca un token de turno para verificar la informacion de las sesiones y poder hacer sus operaciones con el resto de entidades
+

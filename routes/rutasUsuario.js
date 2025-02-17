@@ -21,6 +21,7 @@ const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 //se coge del controller funciones de modelo y maneja errores CRUD para no saber su implementación
 import { Router } from "express";
 import { UsuarioController } from "../controllers/usuarioController.js";
+import { verifyToken } from '../middlewares/authMiddleware.js';
 export const usuarioRouter = Router();
 
 // Métodos relacionados con la entidad usuario
@@ -28,17 +29,17 @@ export const usuarioRouter = Router();
 // Registro de usuarios con validación previa
 usuarioRouter.post('/register', UsuarioController.register);
 
-// Inicio de sesión
-usuarioRouter.post('/login', UsuarioController.login);
+// Inicio de sesión con jwt
+usuarioRouter.post('/login', UsuarioController.loginUser);
 
 // Obtener un usuario por ID
-usuarioRouter.get('/usuarios/:id', UsuarioController.getById);
+usuarioRouter.get('/usuarios/:id',verifyToken ,UsuarioController.getById);
 
-// Actualizar un usuario (parcial)
-usuarioRouter.patch('/usuarios/:id',UsuarioController.updateById);
+// Actualizar un usuario (parcialmente)
+usuarioRouter.patch('/usuarios/:id',verifyToken ,UsuarioController.updateById);
 
 // Actualizar contraseña de un usuario
-usuarioRouter.patch('/usuarios/:id/password', UsuarioController.updatePassword);
+usuarioRouter.patch('/usuarios/:id/password', verifyToken ,UsuarioController.updatePassword);
 
 // Eliminar un usuario
-usuarioRouter.delete('/usuarios/:id', UsuarioController.delete);
+usuarioRouter.delete('/usuarios/:id',verifyToken , UsuarioController.delete);

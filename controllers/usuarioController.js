@@ -63,30 +63,26 @@ export class UsuarioController {
         return res.status(404).json({ message: 'Usuario no encontrado' });
       }
   
-      // Otros errores del servidor
       res.status(500).json({ message: 'Error al actualizar contraseña', error: error.message });
     }
   }
   
 
-  static async login(req, res) {
-    const { nombre_usuario, password } = req.body;
-    const result = await UsuarioModel.login({ nombre_usuario, password });
+  static async loginUser(req, res) {
+    try {
+        const { nombre_usuario, contrasena } = req.body;
+        const result = await UsuarioModel.login({ nombre_usuario, contrasena });
+        console.log(result.token);
+        if (!result) {
+            return res.status(401).json({ message: 'Credenciales incorrectas' });
+        }
 
-    if (!result) {
-      return res.status(401).json({ message: 'Credenciales incorrectas' });
+        res.status(201).json({ message: 'Login exitoso', usuario: result.usuario, token: result.token });
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error });
     }
+  };
 
-    return res.json({
-      message: 'Inicio de sesión exitoso',
-      token: result.token,
-      usuario: {
-        id: result.usuario.id,
-        nombre_usuario: result.usuario.nombre_usuario,
-        email: result.usuario.email
-      }
-    });
-  }
 
   static async register(req, res) {
     try {
@@ -100,15 +96,12 @@ export class UsuarioController {
         return res.status(validacion.status).json({ message: validacion.message });
       }
   
-      // Crear usuario
       const result = await UsuarioModel.register({ nombre_usuario, email, contrasena });
   
-      // Verificar si el registro fue exitoso
       if (result.affectedRows > 0) {
         return res.status(201).json({ message: "Usuario creado correctamente" });
       }
   
-      // Si no se afectó ninguna fila, devolver un error inesperado
       return res.status(500).json({ message: "Error desconocido al registrar el usuario" });
     } catch (error) {
       console.error("Error en el controlador de registro:", error);
