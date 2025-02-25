@@ -1,3 +1,32 @@
+18/01
+2h
+
+nodejs para backend
+recomendable para comunicar con DB
+y
+reactjs para fronend
+recomendable porque usa componentes
+lo cual hace el desarrollo escalable
+y en cuanto a rendimiento es rapido
+
+instalando nodejs con fast node manager
+Para instalar fnm simplemnete use choco install fnm
+Para ponerlo en la consola depende de la consola que se use y que se pueda ejecutar fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+
+luego para instalar nodejs en un proyecto (version recomendada)
+fnm install --lts
+
+React.js
+para instalar:
+npm create vite@latest . -- --template react en la carpeta de view,
+npm install
+npm run dev
+
+
+
+y entendiendo la diferencia entre manejo de modulos mediante CommonJS y ES Modules el cual se usa a base de export,import
+
+version de node = 20.16.0
 19/01
 2 horas //creada DB en mysql workbench
 
@@ -82,6 +111,24 @@ eliminar tarea de proyecto === eliminar tarea
 de ahi el que no haya deleteTarea en proyecto
 
 17/02
+2h y 20min
 todos los metodos que tienen datos privados o propios del usuario deben llevar la cabecera Authorization: Bearer token
 el token se genera a traves del login de usuario a traves de un jwt_secret a traves de la variable de entorno,tras esto si el usuario y la contraseña son las buenas, pues firma con el jwt y saca un token de turno para verificar la informacion de las sesiones y poder hacer sus operaciones con el resto de entidades
+
+23/02
+1h y 30min
+Empezando con react
+main.jsx es el portal de entrada 
+
+componente = funcion que devuelve un elemento html o parecido
+
+todos los componentes deben tener nombre con PascalCase ... ejemplo = SpecialButton
+si no no funcionan cuando se introducen en root
+
+creados los botones de operaciones CRUD (css)
+
+25/02
+1h y 30min
+creando los formularios de login y register
+con useState que es un hook para renderizar los cambios hechos en el input label y tambien para manejar el submit
 
