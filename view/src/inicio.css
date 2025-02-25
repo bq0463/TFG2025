@@ -1,18 +1,63 @@
-/* Estilos generales */
+/* Estilos de la pagina de inicio */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     font-family: "Press Start 2P", cursive;
     background-color: #111;
     color: #00ff00;
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
 }
-  
-  /* Contenedor de los formularios */
-.formContainer {
-    display: flex;
-    gap: 200px; /* Espacio entre formularios */
-  }
 
+header {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+  color: #ffcc00;
+  background-color: #333;
+  text-align: center;
+  padding: 15px;
+  border-bottom: 2px solid #ffcc00;
+  animation: shadowMove 1s linear infinite;
+  text-shadow: 2px 2px 5px #be6806;
+
+}
+
+footer {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  color: #ffcc00;
+  background-color: #333;
+  text-align: center;
+  padding: 15px;
+  border-top: 2px solid #ffcc00;
+  animation: shadowMove 1s linear infinite;
+  text-shadow: 2px 2px 5px #be6806;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes shadowMove {
+  0% {
+      text-shadow: 2px 2px 5px #be6806; 
+  }
+  50% {
+      text-shadow: -5px 2px 5px #be6806; 
+  }
+  100% {
+      text-shadow: 2px 2px 5px #be6806;
+  }
+}
+
+  /* Contenedor de formularios */
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.00001px; 
+}

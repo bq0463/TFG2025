@@ -18,7 +18,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="retro-container">
+    <div className="retro-container-R">
       <h2>Registro</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Nombre de usuario" onChange={handleChange} required />

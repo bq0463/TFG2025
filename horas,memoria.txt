@@ -128,7 +128,7 @@ si no no funcionan cuando se introducen en root
 creados los botones de operaciones CRUD (css)
 
 25/02
-1h y 30min
+3h y 45min
 creando los formularios de login y register
 con useState que es un hook para renderizar los cambios hechos en el input label y tambien para manejar el submit
 
