@@ -15,7 +15,7 @@ Para ponerlo en la consola depende de la consola que se use y que se pueda ejecu
 
 luego para instalar nodejs en un proyecto (version recomendada)
 fnm install --lts
-
+para arrancar node --watch app.js
 React.js
 para instalar:
 npm create vite@latest . -- --template react en la carpeta de view,
@@ -132,3 +132,8 @@ creados los botones de operaciones CRUD (css)
 creando los formularios de login y register
 con useState que es un hook para renderizar los cambios hechos en el input label y tambien para manejar el submit
 
+01/03
+2h
+hecho con exito el primer fetch de registro de usuario desde react con react y node levantados,
+cada uno con PORT=5000 para node y PORT=5173 para react.
+cors manejado

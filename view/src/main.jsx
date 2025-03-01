@@ -14,7 +14,7 @@ root.render(
     <ButtonDelete text="eliminar tarea"></ButtonDelete>
     <ButtonUpdate text="actualizar tarea"></ButtonUpdate> */
     <>
-      <body>
+      
         <header className='header'>
           <div className='header-top'>
             Gestor personal
@@ -29,7 +29,6 @@ root.render(
             TFG 2025
           </div>
         </footer>
-        </body>
     </>
     }
   </>
