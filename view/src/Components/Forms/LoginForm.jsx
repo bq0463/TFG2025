@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./forms.css";
 
 const LoginForm = () => {
@@ -7,23 +7,48 @@ const LoginForm = () => {
     password: ""
   });
 
+  const [message, setMessage] = useState("");
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login:", formData);
+    setMessage("");
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre_usuario: formData.username,
+          contrasena: formData.password
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setMessage(`✅ Registro exitoso: ${data.message}`);
+        console.log(data);
+      } else {
+        setMessage(`❌ Error: ${data.message}`);
+      }
+      
+    } catch (error) {
+      setMessage("❌ Error en la conexión con el servidor");
+    }
   };
 
   return (
-    <div className="retro-container">
+    <div className="retro-container-L">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Nombre de usuario" onChange={handleChange} required />
         <input type="password" name="password" placeholder="Contraseña" onChange={handleChange} required />
         <button type="submit">Ingresar</button>
+        <p>¿No tienes cuenta? Regístrate</p>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };

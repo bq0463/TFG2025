@@ -12,15 +12,12 @@ const RegisterForm = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Formulario enviado");
     setMessage("");
     try {
-      console.log("empezando fetch");
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,7 +29,6 @@ const RegisterForm = () => {
       });
 
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         setMessage(`✅ Registro exitoso: ${data.message}`);
       } else {

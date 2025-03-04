@@ -72,12 +72,17 @@ export class UsuarioController {
     try {
         const { nombre_usuario, contrasena } = req.body;
         const result = await UsuarioModel.login({ nombre_usuario, contrasena });
-        console.log(result.token);
         if (!result) {
             return res.status(401).json({ message: 'Credenciales incorrectas' });
         }
 
-        res.status(201).json({ message: 'Login exitoso', usuario: result.usuario, token: result.token });
+        res.status(201).json({ 
+          id: result.usuario.id, 
+          token: result.token,
+          nombre_usuario: result.usuario.nombre_usuario,
+          email: result.usuario.email,
+          message: 'Login exitoso' 
+      });
     } catch (error) {
         res.status(500).json({ message: 'Error en el servidor', error });
     }

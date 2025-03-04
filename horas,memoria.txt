@@ -1,3 +1,6 @@
+10/01
+10 horas preparatorias de nodejs
+
 18/01
 2h
 
@@ -137,3 +140,12 @@ con useState que es un hook para renderizar los cambios hechos en el input label
 hecho con exito el primer fetch de registro de usuario desde react con react y node levantados,
 cada uno con PORT=5000 para node y PORT=5173 para react.
 cors manejado
+
+04/03
+1h
+
+fetch login conseguido,pasa los datos relevantes como token,id de usuario para obtener los recursos etc..
+
+intentando implementando react router DOM para redirigir a otro html cuando el login sea exitoso
+otra proposicion es gestionar el token a traves de cookie HTTP-only en lugar de usar session o localstorage para evitar ataques de inyeccion js
+(XSS) estableciendo CSP (Content Security Policy)

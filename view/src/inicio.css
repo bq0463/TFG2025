@@ -3,8 +3,8 @@
 
 body {
     font-family: "Press Start 2P", cursive;
-    background-color: #111;
-    color: #00ff00;
+    background-color: #c9af20;
+    color: #07c787;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -17,7 +17,7 @@ header {
   background-color: #333;
   text-align: center;
   padding: 15px;
-  border-bottom: 2px solid #ffcc00;
+  border-bottom: 2px solid #07c787;
   animation: shadowMove 1s linear infinite;
   text-shadow: 2px 2px 5px #be6806;
 
@@ -30,7 +30,7 @@ footer {
   background-color: #333;
   text-align: center;
   padding: 15px;
-  border-top: 2px solid #ffcc00;
+  border-top: 2px solid #07c787;
   animation: shadowMove 1s linear infinite;
   text-shadow: 2px 2px 5px #be6806;
   bottom: 0;
