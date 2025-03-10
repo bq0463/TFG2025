@@ -161,4 +161,14 @@ export class ProyectoModel {
         
         return proyectousuario;
     }
+
+    static async dissassociateProyecto({ id_proyecto, id_usuario }) {
+        const [result] = await connection.execute('DELETE FROM usuario_proyecto WHERE id_proyecto = ? AND id_usuario = ?', [id_proyecto, id_usuario]);
+
+        return { success: true, message: 'Usuario desasociado del proyecto' };
+    }
+
+
+
+
 }    

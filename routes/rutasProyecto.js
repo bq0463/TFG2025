@@ -9,3 +9,4 @@ proyectoRouter.get('/usuarios/:id_usuario/proyectos',verifyToken , ProyectoContr
 proyectoRouter.patch('/proyectos/:id',verifyToken , ProyectoController.updateById);
 proyectoRouter.post('/proyectos/asociar/:id_proyecto',verifyToken ,ProyectoController.associateByUsername);
 proyectoRouter.post('/proyectos/tarea/:id_proyecto/:id_usuario',verifyToken ,ProyectoController.createTarea);
+proyectoRouter.delete('/proyectos/:id_proyecto/usuario/:id_usuario', verifyToken, ProyectoController.disassociateProyecto);

@@ -134,12 +134,11 @@ export class TareaModel {
 
   static async create({ input }) {
       try {
-        console.log("input en tarea:", input);
         const [result] = await connection.execute(
               'INSERT INTO tarea (id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
               [input.id_usuario, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
         );
-        console.log("Resultado de la inserción en tarea:", result);
+        
         return { id_tarea: result.insertId, affectedRows: result.affectedRows };
       } catch (error) {
         console.error('Error al crear tarea:', error);

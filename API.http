@@ -3,8 +3,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-  "nombre_usuario": "prueba14",
-  "contrasena": "password500056"
+  "nombre_usuario": "pruebaf1",
+  "contrasena": "pruebaf1"
 }
 
 ### Registro
@@ -42,23 +42,23 @@ Content-Type: application/json
 }
 
 ### Crear proyecto
-POST http://localhost:5000/proyectos/17
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
+POST http://localhost:5000/proyectos/19
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhZjEiLCJpYXQiOjE3NDE2MjY1MjgsImV4cCI6MTc0MTcxMjkyOH0.VbT_zOjlWjRgkCpQ7RluaXxkOx011_yWk3m3uXOmAwY
 Content-Type: application/json
 
 {
-  "titulo": "trabajo de bien 23334",
-  "descripcion": "uno dos tres",
-  "fecha_entrega": "2025-02-18"
+  "titulo": "trabajo f3",
+  "descripcion": "f123",
+  "fecha_entrega": "2025-03-18"
 }
 
 ### crear tarea en proyecto
-POST http://localhost:5000/proyectos/tarea/1/17
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
+POST http://localhost:5000/proyectos/tarea/15/19
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhZjEiLCJpYXQiOjE3NDE2MjY1MjgsImV4cCI6MTc0MTcxMjkyOH0.VbT_zOjlWjRgkCpQ7RluaXxkOx011_yWk3m3uXOmAwY
 Content-Type: application/json
 
 {
-  "descripcion": "Tarea de prueba",
+  "descripcion": "Tarea de prueba 1",
   "fecha_inicio": "2025-03-01",
   "fecha_fin": "2025-03-10",
   "estado": "Pendiente",
@@ -78,12 +78,15 @@ Content-Type: application/json
 ### Obtener usuario por ID
 GET http://localhost:5000/usuarios/6
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
+
 ### Obtener tarea por ID 
 GET http://localhost:5000/tareas/6
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
+
 ### Obtener proyecto por ID
 GET http://localhost:5000/proyectos/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
+
 ### Obtener examen por ID
 GET http://localhost:5000/examenes/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
@@ -160,4 +163,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZ
 
 ### Eliminar examen
 DELETE http://localhost:5000/examenes/4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhMTQiLCJpYXQiOjE3Mzk3OTY0NjcsImV4cCI6MTczOTg4Mjg2N30.KvzjrXxiOhFo3VBz3xH2tkHu7BHB9nwIneBbf684Ql8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhZjEiLCJpYXQiOjE3NDE2MjY1MjgsImV4cCI6MTc0MTcxMjkyOH0.VbT_zOjlWjRgkCpQ7RluaXxkOx011_yWk3m3uXOmAwY
+
+### desasociar usuario de proyecto
+DELETE http://localhost:5000/proyectos/15/usuario/19
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIm5vbWJyZV91c3VhcmlvIjoicHJ1ZWJhZjEiLCJpYXQiOjE3NDE2MjY1MjgsImV4cCI6MTc0MTcxMjkyOH0.VbT_zOjlWjRgkCpQ7RluaXxkOx011_yWk3m3uXOmAwY

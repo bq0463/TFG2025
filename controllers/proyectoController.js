@@ -125,4 +125,19 @@ export class ProyectoController {
       return res.status(500).json({ message: 'Error al poner la tarea en proyecto' });
     }
   }
+
+  static async disassociateProyecto(req, res) {
+    try {
+      const { id_proyecto, id_usuario } = req.params;
+      const result = await ProyectoModel.dissassociateProyecto({ id_proyecto, id_usuario });
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: 'Usuario o proyecto no encontrado' });
+      }
+
+      return res.status(201).json({ message: 'Usuario desasociado del proyecto' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Error al desasociar el proyecto' });
+    }
+  }
 }

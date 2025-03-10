@@ -142,10 +142,34 @@ cada uno con PORT=5000 para node y PORT=5173 para react.
 cors manejado
 
 04/03
-1h
+2h y 30min
 
 fetch login conseguido,pasa los datos relevantes como token,id de usuario para obtener los recursos etc..
 
 intentando implementando react router DOM para redirigir a otro html cuando el login sea exitoso
-otra proposicion es gestionar el token a traves de cookie HTTP-only en lugar de usar session o localstorage para evitar ataques de inyeccion js
-(XSS) estableciendo CSP (Content Security Policy)
+*posible idea*
+otra proposicion es gestionar el token 
+tratamiento del token y demas a traves de cookie HTTP-only en lugar de usar session o localstorage para evitar ataques de inyeccion js
+(XSS) estableciendo CSP (Content Security Policy) y refresh del token automaticamente sin tener que obligar al usuario a cerrar sesion.
+
+la ruta de logueado esta protegida con un middleware
+
+este middleware se encarga de:
+1. que el usuario se ha logueado correctamente
+2. outlet carga el componente hijo de la ruta protegida, si no redirige a la pagina de inicio
+
+10/03
+1h y 30min
+
+una pequeña vuelta al BACKEND
+UN SOLO trigger para eliminar de manera automatica el proyecto cuando no hay usuarios asociados a dicho proyecto y sus tareas, creada la funcion en model y controller , tambien puestos los trigger de update en cada tabla para que contengan el nombre anterior o lo que sea si se deja el campo en blanco.
+dissasociateProyecto testeado.
+
+40min FRONTEND
+
+arreglado en router de react dom
+
+
+
+
+
