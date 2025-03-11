@@ -1,18 +1,18 @@
 import jwt from 'jsonwebtoken';
 
-// Middleware para verificar el token JWT
+// Middleware para verificar el token JWT desde cookies
 export const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'];
+  const token = req.cookies.token;
 
   if (!token) {
-    return res.status(403).json({ message: 'Acceso denegado. Token no proporcionado.' });
+    return res.status(401).json({ message: "No autenticado" });
   }
 
-  try {
-    const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
-    req.user = decoded;  // Guardamos la información del usuario en la solicitud
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Token inválido" });
+    }
+    req.user = user;
     next();
-  } catch (error) {
-    return res.status(401).json({ message: 'Token inválido o expirado.' });
-  }
+  });
 };

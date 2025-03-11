@@ -169,6 +169,36 @@ dissasociateProyecto testeado.
 
 arreglado en router de react dom
 
+11/03
+2h
+
+cambiando localstorage por cookies,cambiado el routerUsuario para administrar el logout y la informacion de sesion, el LoginForm para el fetch de informacion
+
+cambiado tambien la PaginaLogueado para que incluya el fetch de informacion de usuario
+
+cambiado el middleware de cors para que acepte credenciales
+
+Uso de cookies:
+
+✅ Mayor seguridad:
+
+    Puedes configurar una cookie como HttpOnly, lo que significa que JavaScript no podrá acceder a ella. Esto la protege de ataques XSS (Cross-Site Scripting).
+    Puedes usar Secure, lo que obliga a que la cookie solo se envíe por HTTPS, evitando ataques Man-in-the-Middle (MITM).
+
+✅ Persistencia controlada:
+
+    Las cookies pueden expirar automáticamente cuando tú decidas (maxAge o Expires).
+    sessionStorage desaparece cuando cierras la pestaña, y localStorage solo se borra manualmente.
+
+✅ Envío automático al servidor:
+
+    Cada vez que el usuario haga una petición, la cookie se envía automáticamente al backend sin necesidad de incluirla en fetch.
+    localStorage y sessionStorage no se envían automáticamente, por lo que deberías incluir manualmente el token en cada petición.
+
+
+
+
+
 
 
 

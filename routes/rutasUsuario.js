@@ -32,6 +32,17 @@ usuarioRouter.post('/register', UsuarioController.register);
 // Inicio de sesión con jwt
 usuarioRouter.post('/login', UsuarioController.loginUser);
 
+// quitar informacion de cookie
+usuarioRouter.post("/logout", (req, res) => {
+    res.clearCookie("token", { httpOnly: true, secure: false, sameSite: "Strict" });
+    res.json({ message: "Sesión cerrada correctamente" });
+});
+
+// información de usuario
+usuarioRouter.get("/usuarios/me", verifyToken, (req, res) => {
+    res.json({ id: req.user.id, nombre_usuario: req.user.nombre_usuario });
+});
+
 // Obtener un usuario por ID
 usuarioRouter.get('/usuarios/:id',verifyToken ,UsuarioController.getById);
 
@@ -43,3 +54,4 @@ usuarioRouter.patch('/usuarios/:id/password', verifyToken ,UsuarioController.upd
 
 // Eliminar un usuario
 usuarioRouter.delete('/usuarios/:id',verifyToken , UsuarioController.delete);
+

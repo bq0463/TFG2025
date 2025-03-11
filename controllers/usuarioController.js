@@ -76,9 +76,16 @@ export class UsuarioController {
             return res.status(401).json({ message: 'Credenciales incorrectas' });
         }
 
+        // Guardar el token en una cookie segura
+        res.cookie('token', result.token, {
+            httpOnly: true,  // Evita que JavaScript del cliente acceda a la cookie
+            secure: process.env.NODE_ENV === 'production',  // Solo en HTTPS en producción
+            sameSite: 'Strict',  // Protege contra ataques CSRF
+            maxAge: 24 * 60 * 60 * 1000 // Expira en 1 día
+        });
+
         res.status(201).json({ 
           id: result.usuario.id, 
-          token: result.token,
           nombre_usuario: result.usuario.nombre_usuario,
           email: result.usuario.email,
           message: 'Login exitoso' 
@@ -86,9 +93,9 @@ export class UsuarioController {
     } catch (error) {
         res.status(500).json({ message: 'Error en el servidor', error });
     }
-  };
+  }
 
-
+  
   static async register(req, res) {
     try {
       const { nombre_usuario, email, contrasena } = req.body;

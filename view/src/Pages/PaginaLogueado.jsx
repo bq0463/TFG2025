@@ -1,24 +1,43 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const PaginaLogueado = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
-    if (!storedUsername) {
-      navigate("/"); // Si no hay usuario, redirigir al inicio
-    } else {
-      setUsername(storedUsername);
-    }
+    const verificarAutenticacion = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/usuarios/me", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("No autenticado");
+        }
+
+        const data = await response.json();
+        setUsername(data.nombre_usuario);
+      } catch (error) {
+        navigate("/");
+      }
+    };
+
+    verificarAutenticacion();
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("username");
-    navigate("/"); // Redirigir al inicio después de cerrar sesión
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
   };
 
   return (

@@ -23,22 +23,18 @@ const LoginForm = () => {
       const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // Necesario para que las cookies funcionen
         body: JSON.stringify({
           nombre_usuario: formData.username,
           contrasena: formData.password,
         }),
       });
 
-      const data = await response.json();
       if (response.ok) {
-        
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("username", formData.username);
-        setMessage(`✅ Inicio de sesión exitoso`);
-        
-        
+        setMessage("✅ Inicio de sesión exitoso");
         navigate("/logueado");
       } else {
+        const data = await response.json();
         setMessage(`❌ Error: ${data.message}`);
       }
     } catch (error) {

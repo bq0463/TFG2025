@@ -8,14 +8,18 @@ import dotenv from 'dotenv';
 import { tareaRouter } from "./routes/rutasTarea.js";
 import { examenRouter } from "./routes/rutasExamen.js";
 import {proyectoRouter} from "./routes/rutasProyecto.js";
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 
 const app = express();
 app.disable("x-powered-by");
 app.use(json());
+
 // esto es para definir los orígenes permitidos de puertos o paginas web en vez de usar * que es para todos
 app.use(corsMiddleware());
-
+// Middleware para manejar cookies
+app.use(cookieParser());
 // cargar rutas con router
 app.use("/", usuarioRouter);
 app.use("/",tareaRouter);

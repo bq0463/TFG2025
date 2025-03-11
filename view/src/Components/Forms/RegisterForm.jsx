@@ -45,7 +45,7 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit} acceptCharset="UTF-8">
         <input type="text" name="username" placeholder="Nombre de usuario" onChange={handleChange} required />
         <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Contraseña" onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Contraseña " onChange={handleChange} required />
         <button type="submit">Registrarse</button>
       </form>
       {message && <p>{message}</p>}
