@@ -196,6 +196,11 @@ Uso de cookies:
     localStorage y sessionStorage no se envían automáticamente, por lo que deberías incluir manualmente el token en cada petición.
 
 
+12/03
+30min
+
+colocando logout , me en MVC
+
 
 
 

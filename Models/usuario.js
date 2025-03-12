@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { connection } from '../config/mysqlConnection.js';
+
 export class UsuarioModel {
   static async getById({ id }) {
     return connection.execute('SELECT nombre_usuario,email,rol FROM usuario WHERE id = ?', [id]);
@@ -159,5 +160,14 @@ static async login({ nombre_usuario, contrasena }) {
       console.error('Error al registrar usuario:', error);
       throw error;
     }
+  }
+
+  static async logout(req,res) {
+    res.clearCookie("token", { httpOnly: true, secure: false, sameSite: "Strict" });
+    res.json({ message: "Sesión cerrada correctamente" });
+  }
+
+  static async me(req, res) {
+    res.json({ id: req.user.id, nombre_usuario: req.user.nombre_usuario });
   }
 }

@@ -33,15 +33,10 @@ usuarioRouter.post('/register', UsuarioController.register);
 usuarioRouter.post('/login', UsuarioController.loginUser);
 
 // quitar informacion de cookie
-usuarioRouter.post("/logout", (req, res) => {
-    res.clearCookie("token", { httpOnly: true, secure: false, sameSite: "Strict" });
-    res.json({ message: "Sesión cerrada correctamente" });
-});
+usuarioRouter.post("/logout", UsuarioController.logout);
 
 // información de usuario
-usuarioRouter.get("/usuarios/me", verifyToken, (req, res) => {
-    res.json({ id: req.user.id, nombre_usuario: req.user.nombre_usuario });
-});
+usuarioRouter.get("/usuarios/me", verifyToken, UsuarioController.me);
 
 // Obtener un usuario por ID
 usuarioRouter.get('/usuarios/:id',verifyToken ,UsuarioController.getById);

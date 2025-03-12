@@ -120,5 +120,12 @@ export class UsuarioController {
       res.status(500).json({ message: "Error al registrar usuario", error });
     }
   }
-  
+
+  static async logout(req, res) {
+    await UsuarioModel.logout(req,res);
+  }
+
+  static async me(req, res) {
+    await UsuarioModel.me(req, res);
+  }
 }
