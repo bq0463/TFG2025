@@ -9,7 +9,11 @@ function App() {
       <Routes>
         <Route path="/" element={<PaginaInicio />} />
         <Route element={<RutaProtegida />}>
-          <Route path="/logueado" element={<PaginaLogueado />} />
+          <Route path="/inicio" element={<PaginaLogueado />} />
+          <Route path="/tareas" element={<PaginaLogueado />} />
+          <Route path="/proyectos" element={<PaginaLogueado />} />
+          <Route path="/examenes" element={<PaginaLogueado />} />
+          <Route path="/perfil" element={<PaginaLogueado />} />
         </Route>
       </Routes>
     </Router>

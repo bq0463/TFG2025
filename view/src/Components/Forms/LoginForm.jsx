@@ -32,7 +32,7 @@ const LoginForm = () => {
 
       if (response.ok) {
         setMessage("✅ Inicio de sesión exitoso");
-        navigate("/logueado");
+        navigate("/inicio");
       } else {
         const data = await response.json();
         setMessage(`❌ Error: ${data.message}`);
@@ -60,10 +60,11 @@ const LoginForm = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Ingresar</button>
         <p>¿No tienes cuenta? Regístrate</p>
+        {message && <p>{message}</p>}
+        <button type="submit">Ingresar</button>
       </form>
-      {message && <p>{message}</p>}
+      
     </div>
   );
 };

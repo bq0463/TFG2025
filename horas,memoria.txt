@@ -201,7 +201,9 @@ Uso de cookies:
 
 colocando logout , me en MVC
 
-
+15/03
+2h
+enrutando cada boton del nav a una pagina propia
 
 
 

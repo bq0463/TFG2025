@@ -1,30 +1,32 @@
 body {
     font-family: "Press Start 2P", cursive;
-    background-color: #1b1b1b;
-    color: #fff;
+    background-color: #07c787;
     text-align: center;
+    align-items: center;
 }
 
 .retro-container-L,.retro-container-R {
-    width: 300px;
+    height: 300px;
     background: #222;
     padding: 20px;
     margin: 100px auto;
     border: 4px solid #07c787;
-    box-shadow: 0 0 15px #07c787;
+    border-radius: 10px ;
     text-align: center;
-
+    width: 20%;
+    
 }
 
 .retro-container-R button{
-    margin-top: 5em;
+    margin-top: 3em;
 }
 
 .retro-container-L button{
-    margin-top: 8em;
+    margin-top: 1em;
 }
 
-h2 {
+.retro-container-L h2, .retro-container-R h2 {
+    font-family: "Press Start 2P", cursive;
     font-size: 18px;
     margin-bottom: 20px;
     color: #ffcc00;
@@ -76,3 +78,4 @@ p{
     border: #ffcc00 2px solid;
     padding: 1em;
 }
+

@@ -7,11 +7,8 @@
 /* import fs from "node:fs";
 const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 
-// Tercera forma ,recomendada , con createRequire en utils.js , se usa en movies_routes.js
+// Tercera forma ,recomendada,import {readJSON} from utils.js
 //const movies = readJSON("./movies.json");
-
-// /movies corresponde al router,por eso es diferente la ruta
-
 
 // métodos normales: GET/HEAD/POST
 // métodos complejos: PUT/PATCH/DELETE => PREFLIGHT

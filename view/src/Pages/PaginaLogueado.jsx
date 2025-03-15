@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./PaginaLogueado.css";
 
 const PaginaLogueado = () => {
   const [username, setUsername] = useState("");
@@ -33,22 +34,69 @@ const PaginaLogueado = () => {
         method: "POST",
         credentials: "include",
       });
-
       navigate("/");
     } catch (error) {
       console.error("Error al cerrar sesión", error);
     }
   };
 
+  const handleExams = async () => {
+    try {
+      navigate("/examenes");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
+  };
+
+  const handleIntro = async () => {
+    try {
+      navigate("/inicio");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
+  };
+
+  const handleProfile = async () => {
+    try {
+      navigate("/perfil");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
+  }
+
+  const handleTasks = async () => {
+    try {
+      navigate("/usuarios");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
+  }
+
+  const handleProjects = async () => {
+    try {
+      navigate("/proyectos");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
+  }
+
   return (
     <div className="PaginaLogueado">
       <header className="header">
         <div className="header-top">Bienvenido, {username || "Usuario"}</div>
+        <div className="header-bottom">
+          <nav>
+                <button onClick={handleIntro} className="nav-b">Inicio</button>
+                <button onClick={handleProfile} className="nav-b">Perfil</button>
+                <button onClick={handleTasks} className="nav-b">Usuarios</button>
+                <button onClick={handleProjects} className="nav-b">Proyectos</button>
+                <button onClick={handleExams} className="nav-b">Examenes</button>
+                <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
+          </nav>
+        </div>
       </header>
       <div className="content">
-        <p>Has iniciado sesión correctamente.</p>
       </div>
-      <button onClick={handleLogout}>Cerrar sesión</button>
       <footer>
         <div className="footer">TFG 2025</div>
       </footer>

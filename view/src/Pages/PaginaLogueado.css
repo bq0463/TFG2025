@@ -1,0 +1,23 @@
+
+.header-bottom{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #db810b ;
+    padding: 0.1em 0.1em;
+    border-radius: 8px;
+    margin: 0.5em 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-b{
+    border: #db810b 2px solid;
+    border-radius: 8px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffcc00;
+    text-align: center;
+    
+}

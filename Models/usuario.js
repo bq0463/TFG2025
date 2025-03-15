@@ -103,28 +103,20 @@ static async updatePassword({ id, oldPassword, newPassword }) {
   
 static async login({ nombre_usuario, contrasena }) {
   try {
-    console.log("Intentando login para:", nombre_usuario);
     const [rows] = await connection.execute(
       'SELECT * FROM usuario WHERE nombre_usuario = ?',
       [nombre_usuario]
     );
-    console.log("Resultado de la consulta:", rows);
+
     if (rows.length === 0) {
       return null; // Usuario no encontrado
     }
 
     const usuario = rows[0];
-    console.log("Contraseña ingresada:", contrasena);
-    console.log("Contraseña almacenada en BD:", usuario.contrasena);
     const contrasenaMatch = await bcrypt.compare(contrasena, usuario.contrasena);
-    console.log("¿Las contraseñas coinciden?:", contrasenaMatch);
     if (!contrasenaMatch) {
       return null; 
     }
-
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
-    console.log("JWT_EXPIRES_IN:", process.env.JWT_EXPIRES_IN);
-
 
     // Generar token JWT
     const token = jwt.sign(
