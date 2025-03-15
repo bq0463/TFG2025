@@ -204,7 +204,12 @@ colocando logout , me en MVC
 15/03
 2h
 enrutando cada boton del nav a una pagina propia
+los css en REACT se aplican a nivel global, por lo tanto hay que poner el nombre del jsx 
+ej:
+.PaginaInicio .header{}
 
+2h y 15min
+Un poco de css
 
 
 

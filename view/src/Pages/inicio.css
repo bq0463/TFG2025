@@ -1,38 +1,53 @@
 /* Estilos de la pagina de inicio */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-body {
-    font-family: "Press Start 2P", cursive;
-    background-color: #c9af20;
+body,html {
+    background-color: #b9a429;
     color: #07c787;
-    justify-content: center;
-    align-items: center;
     margin: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
 }
 
 header {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 24px;
+  letter-spacing: 15px;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 40px;
   color: #ffcc00;
+  text-transform: uppercase;
+  background: linear-gradient(
+    to right,
+    #333 0%,
+    #07c787 10%,
+    #333 20%,
+  );
+  
   background-color: #333;
   text-align: center;
-  padding: 15px;
+  width: 100%;
+  left: 0;
+  right: 0;
   border-bottom: 2px solid #07c787;
-  animation: shadowMove 1s linear infinite;
-  text-shadow: 2px 2px 5px #be6806;
+  animation: shine 1s linear infinite;
+  
+}
 
+.header-top{
+  padding-top: 15px;
 }
 
 footer {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 20px;
+  font-family: monospace;
+  font-size: 35px;
+  font-weight: bold;
   color: #ffcc00;
   background-color: #333;
   text-align: center;
   padding: 15px;
   border-top: 2px solid #07c787;
-  animation: shadowMove 1s linear infinite;
-  text-shadow: 2px 2px 5px #be6806;
+  animation: shine 3s linear infinite;
   bottom: 0;
   position: fixed;
   width: 100%;
@@ -42,20 +57,20 @@ footer {
   margin-right: auto;
 }
 
-@keyframes shadowMove {
+@keyframes shine {
   0% {
-      text-shadow: 2px 2px 5px #be6806; 
+      box-shadow: 2px 2px 5px #07c787; 
   }
   50% {
-      text-shadow: -5px 2px 5px #be6806; 
+      box-shadow: -5px 2px 5px #07c787; 
   }
-  100% {
-      text-shadow: 2px 2px 5px #be6806;
+  80% {
+      box-shadow: 2px 2px 5px #07c787;
   }
 }
 
   /* Contenedor de formularios */
-.formContainer {
+.PaginaInicio .formContainer {
   display: flex;
   justify-content: center;
   align-items: center;

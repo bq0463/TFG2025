@@ -83,7 +83,7 @@ const PaginaLogueado = () => {
   return (
     <div className="PaginaLogueado">
       <header className="header">
-        <div className="header-top">Bienvenido, {username || "Usuario"}</div>
+        <div className="header-top">Bienvenido {username}</div>
         <div className="header-bottom">
           <nav>
                 <button onClick={handleIntro} className="nav-b">Inicio</button>

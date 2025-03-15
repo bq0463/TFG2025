@@ -1,23 +1,42 @@
-
-.header-bottom{
-    display: inline-flex;
-    justify-content: space-between;
+.PaginaLogueado .header-bottom {
+    display: flex;
+    width: 90%;
+    margin-left: 50px;
     align-items: center;
-    background-color: #db810b ;
-    padding: 0.1em 0.1em;
-    border-radius: 8px;
-    margin: 0.5em 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
+    margin-top: 0.3em;
+    margin-bottom: 0;
+    padding: 0;
+    background: transparent;
 }
 
-.nav-b{
-    border: #db810b 2px solid;
-    border-radius: 8px;
+.PaginaLogueado nav {
     display: flex;
+    width: 100%;
+    gap: 10px;
+    padding: 5px 5px 0 0;
+    background: transparent;
+}
+
+.PaginaLogueado .nav-b {
     flex: 1;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffcc00;
+    color: #347e65;
+    letter-spacing: 5px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: monospace;
+    border-radius: 8px 8px 0 0;
+    text-decoration: none;
+    background-color: #07c787;
     text-align: center;
-    
+    padding: 5px;
+    border: #347e65 2px solid;
+    cursor: pointer;
+    box-shadow: 2px #000;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.PaginaLogueado .nav-b:hover {
+    background-color: #254b3e; 
+    color: #07c787;
 }
