@@ -1,4 +1,7 @@
-
+@font-face {
+    font-family: "HelveticaCondensed";
+    src: url("../fonts/HelveticaCondensed.ttf") format("truetype");
+  }
 
 .retro-container-L,.retro-container-R {
     height: 300px;
@@ -21,10 +24,10 @@
 }
 
 .retro-container-L h2, .retro-container-R h2 {
-    font-family: "Press Start 2P", cursive;
-    font-size: 18px;
+    font-family: "HelveticaCondensed";
+    font-size: 25px;
     margin-bottom: 20px;
-    color: #ffcc00;
+    color: #07c787;
     animation: 2s shadowMove linear infinite;
 }
 
@@ -46,15 +49,17 @@
     margin: 10px auto;
     padding: 8px;
     border: 2px solid #07c787;
-    background: black;
-    color: #ffcc00;
+    background: #254b3e;
+    color: #07c787;
     font-size: 14px;
+    font-family: "HelveticaCondensed";
+    outline: none; 
 }
 
 .PaginaInicio button {
-    background: black;
-    color: #ffcc00;
-    border: 2px solid #ffcc00;
+    background: #07c787;
+    color: #254b3e;
+    border: 2px solid #347e65;
     padding: 10px;
     width: 100%;
     cursor: pointer;
@@ -62,15 +67,15 @@
 }
 
 .PaginaInicio button:hover {
-    background: #07c787;
-    color: black;
+    background-color: #254b3e;
+    color: #07c787;
 }
 
 .PaginaInicio p{
     color: #07c787;
-    font-size: 14px;
+    font-size: 18px;
     margin-top: 1em;
-    border: #ffcc00 2px solid;
+    border: #07c787 2px solid;
     padding: 1em;
 }
 

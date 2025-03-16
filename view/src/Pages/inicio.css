@@ -1,75 +1,78 @@
 /* Estilos de la pagina de inicio */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-body,html {
-    background-color: #b9a429;
-    color: #07c787;
-    margin: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
+@font-face {
+  font-family: "HelveticaCondensed";
+  src: url("../fonts/Helvetica Condensed Bold Italic.ttf") format("truetype");
 }
 
-header {
-  letter-spacing: 15px;
-  font-weight: bold;
-  font-family: monospace;
-  font-size: 40px;
-  color: #ffcc00;
-  text-transform: uppercase;
-  background: linear-gradient(
-    to right,
-    #333 0%,
-    #07c787 10%,
-    #333 20%,
-  );
+@keyframes radarBackground {
+  0% { 
+    background: linear-gradient(90deg, #254b3e 0%, #356d59 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+  }
   
-  background-color: #333;
+  100% {
+    background: linear-gradient(90deg, #254b3e 0%, #356d59 100%);
+    background-position: -100% 0;
+    background-size: 300% 100%;
+  }
+}
+
+@keyframes radarText {
+  0% {
+    color: #356d59;
+  }
+  50% {
+    color: #07c787;
+  }
+  100% {
+    color: #356d59;
+  }
+}
+
+body, html {
+  background-color: #356d59;
+  color: #07c787;
+  margin: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+header, footer {
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-family: "HelveticaCondensed", Arial, sans-serif;
+  font-size: 40px;
+  color: #07c787;
+  text-transform: uppercase;
   text-align: center;
   width: 100%;
   left: 0;
   right: 0;
   border-bottom: 2px solid #07c787;
-  animation: shine 1s linear infinite;
-  
+  position: relative;
+  overflow: hidden;
+  animation: radarBackground 10s linear infinite alternate ;
 }
 
-.header-top{
-  padding-top: 15px;
+.header-top, .footer {
+  padding: 15px;
+  animation: radarText 10s linear infinite alternate ;
 }
 
 footer {
-  font-family: monospace;
   font-size: 35px;
-  font-weight: bold;
-  color: #ffcc00;
-  background-color: #333;
-  text-align: center;
+  letter-spacing: 2px;
   padding: 15px;
   border-top: 2px solid #07c787;
-  animation: shine 3s linear infinite;
   bottom: 0;
   position: fixed;
   width: 100%;
-  left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
 }
 
-@keyframes shine {
-  0% {
-      box-shadow: 2px 2px 5px #07c787; 
-  }
-  50% {
-      box-shadow: -5px 2px 5px #07c787; 
-  }
-  80% {
-      box-shadow: 2px 2px 5px #07c787;
-  }
-}
-
-  /* Contenedor de formularios */
 .PaginaInicio .formContainer {
   display: flex;
   justify-content: center;

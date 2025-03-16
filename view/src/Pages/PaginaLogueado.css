@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 0.3em;
-    margin-bottom: 0;
     padding: 0;
     background: transparent;
 }
@@ -25,7 +24,6 @@
     font-size: 22px;
     font-weight: bold;
     font-family: monospace;
-    border-radius: 8px 8px 0 0;
     text-decoration: none;
     background-color: #07c787;
     text-align: center;
@@ -34,9 +32,10 @@
     cursor: pointer;
     box-shadow: 2px #000;
     transition: background-color 0.1s ease, color 0.1s ease;
+    animation: shine 1s linear infinite;
 }
 
 .PaginaLogueado .nav-b:hover {
-    background-color: #254b3e; 
+    background-color: #254b3e;
     color: #07c787;
 }

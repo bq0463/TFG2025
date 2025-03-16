@@ -1,5 +1,5 @@
-import RegisterForm from "../components/Forms/RegisterForm.jsx";
-import LoginForm from "../components/Forms/LoginForm.jsx";
+import RegisterForm from "../Components/Forms/RegisterForm.jsx";
+import LoginForm from "../Components/Forms/LoginForm.jsx";
 import './inicio.css';
 
 const PaginaInicio = () => {
