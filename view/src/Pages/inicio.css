@@ -6,29 +6,49 @@
 
 @keyframes radarBackground {
   0% { 
-    background: linear-gradient(90deg, #254b3e 0%, #356d59 100%);
-    background-size: 300% 100%;
+    background: linear-gradient(90deg, #254b3e 0%, #2c5d4f 25%, #356d59 50%, #2c5d4f 75%, #254b3e 100%);
+    background-size: 400% 100%;
     background-position: 100% 0;
   }
-  
+
+  50% {
+    background: linear-gradient(90deg, #48a98b 0%, #3fa184 25%, #2E8B75 50%, #1f9674 75%, #07c787 100%);
+    background-size: 400% 100%;
+    background-position: 0% 0;
+  }
+
   100% {
-    background: linear-gradient(90deg, #254b3e 0%, #356d59 100%);
-    background-position: -100% 0;
-    background-size: 300% 100%;
+    background: linear-gradient(90deg, #254b3e 0%, #2c5d4f 25%, #356d59 50%, #2c5d4f 75%, #254b3e 100%);
+    background-size: 400% 100%;
+    background-position: 100% 0;
   }
 }
 
+
 @keyframes radarText {
-  0% {
-    color: #356d59;
-  }
-  50% {
-    color: #07c787;
-  }
-  100% {
-    color: #356d59;
-  }
+  0% { color: #07c787; }
+  25% { color: #2E8B75; }
+  50% { color: #254b3e; }
+  75% { color: #2E8B75; }
+  100% { color: #07c787; }
 }
+
+@keyframes radarBorderHeader {
+  0%   { border-bottom-color: #07c787; }
+  25%  { border-bottom-color: #2E8B75; }
+  50%  { border-bottom-color: #254b3e; }
+  75%  { border-bottom-color: #2E8B75; }
+  100% { border-bottom-color: #07c787; }
+}
+
+@keyframes radarBorderFooter {
+  0%   { border-top-color: #07c787; }
+  25%  { border-top-color: #2E8B75; }
+  50%  { border-top-color: #254b3e; }
+  75%  { border-top-color: #2E8B75; }
+  100% { border-top-color: #07c787; }
+}
+
 
 body, html {
   background-color: #356d59;
@@ -39,7 +59,7 @@ body, html {
   width: 100%;
 }
 
-header, footer {
+.PaginaInicio header, footer {
   letter-spacing: 1px;
   font-weight: bold;
   font-family: "HelveticaCondensed", Arial, sans-serif;
@@ -50,27 +70,28 @@ header, footer {
   width: 100%;
   left: 0;
   right: 0;
-  border-bottom: 2px solid #07c787;
   position: relative;
   overflow: hidden;
-  animation: radarBackground 10s linear infinite alternate ;
+  
 }
 
-.header-top, .footer {
-  padding: 15px;
-  animation: radarText 10s linear infinite alternate ;
-}
-
-footer {
-  font-size: 35px;
-  letter-spacing: 2px;
-  padding: 15px;
+.PaginaInicio footer {
+  position: fixed;
   border-top: 2px solid #07c787;
   bottom: 0;
-  position: fixed;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  animation: radarText 15s linear infinite,  radarBorderFooter 15s linear infinite;
+  
+}
+
+.PaginaInicio header{
+  border-bottom: 2px solid #07c787;
+  animation: radarText 15s linear infinite,radarBorderHeader 15s linear infinite;
+}
+
+.PaginaInicio .header-top, .footer {
+  padding: 15px;
+  animation: radarText 15s linear infinite;
+  animation: radarBackground 15s linear infinite;
 }
 
 .PaginaInicio .formContainer {

@@ -12,6 +12,7 @@
     border-radius: 10px ;
     text-align: center;
     width: 20%;
+    padding-bottom: 40px;
     
 }
 
@@ -20,7 +21,7 @@
 }
 
 .retro-container-L button{
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 .retro-container-L h2, .retro-container-R h2 {
@@ -33,13 +34,13 @@
 
 @keyframes shadowMove {
     0% {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombras iniciales */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
     50% {
-        text-shadow: -5px 2px 5px rgba(0, 0, 0, 0.5); /* Desplazamiento de la sombra a la izquierda */
+        text-shadow: -5px 2px 5px rgba(0, 0, 0, 0.5);
     }
     100% {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Regresa a la posición original */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
 }
 
@@ -51,7 +52,7 @@
     border: 2px solid #07c787;
     background: #254b3e;
     color: #07c787;
-    font-size: 14px;
+    font-size: 20px;
     font-family: "HelveticaCondensed";
     outline: none; 
 }

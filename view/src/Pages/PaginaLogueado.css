@@ -1,36 +1,37 @@
-.PaginaLogueado .header-bottom {
-    display: flex;
-    width: 90%;
-    margin-left: 50px;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.3em;
-    padding: 0;
-    background: transparent;
+
+
+.PaginaLogueado header{
+    border-bottom: 2px solid #07c787;
+    padding: 15px;
+    background-color: #254b3e;
 }
 
 .PaginaLogueado nav {
     display: flex;
-    width: 100%;
+    width: 90%;
     gap: 10px;
     padding: 5px 5px 0 0;
     background: transparent;
+    margin-top: 10px;
+    margin-left: 120px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .PaginaLogueado .nav-b {
     flex: 1;
-    color: #347e65;
-    letter-spacing: 5px;
+    color: #254b3e;
+    letter-spacing: 2px;
     font-size: 22px;
     font-weight: bold;
-    font-family: monospace;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
     text-decoration: none;
     background-color: #07c787;
     text-align: center;
     padding: 5px;
     border: #347e65 2px solid;
     cursor: pointer;
-    box-shadow: 2px #000;
     transition: background-color 0.1s ease, color 0.1s ease;
     animation: shine 1s linear infinite;
 }
@@ -38,4 +39,27 @@
 .PaginaLogueado .nav-b:hover {
     background-color: #254b3e;
     color: #07c787;
+    border-color: #07c787;
+}
+
+.PaginaLogueado .username {
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 18px;
+    color: #07c787;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: #07c787 2px solid;
+    border-radius: 4px;
+    background: transparent;
+    margin-left: 20px;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.PaginaLogueado .username:hover {
+    background-color: #07c787;
+    color: #254b3e;
+    border-color: #254b3e;
+    cursor: pointer;
+
 }

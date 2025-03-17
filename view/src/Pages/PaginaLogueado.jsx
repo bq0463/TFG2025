@@ -83,25 +83,21 @@ const PaginaLogueado = () => {
   return (
     <div className="PaginaLogueado">
       <header className="header">
-        <div className="header-top">Bienvenido {username}</div>
         <div className="header-bottom">
           <nav>
-                <button onClick={handleIntro} className="nav-b">Inicio</button>
-                <button onClick={handleProfile} className="nav-b">Perfil</button>
-                <button onClick={handleTasks} className="nav-b">Usuarios</button>
-                <button onClick={handleProjects} className="nav-b">Proyectos</button>
-                <button onClick={handleExams} className="nav-b">Examenes</button>
-                <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
+            <button onClick={handleIntro} className="nav-b">Inicio</button>
+            <button onClick={handleTasks} className="nav-b">Usuarios</button>
+            <button onClick={handleProjects} className="nav-b">Proyectos</button>
+            <button onClick={handleExams} className="nav-b">Examenes</button>
+            <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
+            <button onClick={handleProfile} className="username">{username}</button>
           </nav>
         </div>
       </header>
       <div className="content">
       </div>
-      <footer>
-        <div className="footer">TFG 2025</div>
-      </footer>
     </div>
-  );
+  );  
 };
 
 export default PaginaLogueado;
