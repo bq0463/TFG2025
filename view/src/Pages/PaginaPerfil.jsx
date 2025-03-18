@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./PaginaLogueado.css";
+import ProfilePasswordForm from "../Components/Forms/ProfilePasswordForm";
+import "./PaginaPerfil.css";
 
-const PaginaLogueado = () => {
+const PaginaPerfil = () => {
   const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const PaginaLogueado = () => {
 
         const data = await response.json();
         setUsername(data.nombre_usuario);
+        setUserId(data.id);
       } catch (error) {
         navigate("/");
       }
@@ -66,7 +69,7 @@ const PaginaLogueado = () => {
 
   const handleTasks = async () => {
     try {
-      navigate("/tareas");
+      navigate("/usuarios");
     } catch (error) {
       console.error("Error al cerrar sesión", error);
     }
@@ -86,7 +89,7 @@ const PaginaLogueado = () => {
         <div className="header-bottom">
           <nav>
             <button onClick={handleIntro} className="nav-b">Inicio</button>
-            <button onClick={handleTasks} className="nav-b">Tareas</button>
+            <button onClick={handleTasks} className="nav-b">Usuarios</button>
             <button onClick={handleProjects} className="nav-b">Proyectos</button>
             <button onClick={handleExams} className="nav-b">Examenes</button>
             <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
@@ -94,10 +97,12 @@ const PaginaLogueado = () => {
           </nav>
         </div>
       </header>
-      <div className="content">
+      <div className="profileContent">
+        <h2>Ajustes de perfil</h2>
+        <ProfilePasswordForm userId={userId}/>
       </div>
     </div>
   );  
 };
 
-export default PaginaLogueado;
+export default PaginaPerfil;

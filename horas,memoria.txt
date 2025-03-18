@@ -215,6 +215,21 @@ CSS time
 2h y 20min
 CSS time
 
+18/03
+3h
+PaginaPerfil
+problemas que hubo:
+1.
+ `` no es igual que "" dado que la primera evalua variables y se necesitan en req.params ,`http://localhost:5000/usuarios/${userId}/password`
+
+2.
+coger props para pasarlos a componentes como forms y demas.
+
+3.
+el css no estaba funcionando bien porque tenia que ponerse retro-container-P dado que era el div principal de passwordForm, y no se podia con .PaginaPerfil como tal
+
+Hay que hacer navigate a / para cuando se cambia algo de la cuenta.
+
 
 
 

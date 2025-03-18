@@ -1,6 +1,6 @@
 @font-face {
     font-family: "HelveticaCondensed";
-    src: url("../fonts/HelveticaCondensed.ttf") format("truetype");
+    src: url("../fonts/Helvetica Condensed Bold Italic.ttf") format("truetype");
   }
 
 .retro-container-L,.retro-container-R {
@@ -24,7 +24,11 @@
     margin-top: 0.5em;
 }
 
-.retro-container-L h2, .retro-container-R h2 {
+.retro-container-P button{
+    margin-top: 0.5em;
+}
+
+.retro-container-L h2, .retro-container-R h2,.retro-container-P h2 {
     font-family: "HelveticaCondensed";
     font-size: 25px;
     margin-bottom: 20px;
@@ -44,7 +48,7 @@
     }
 }
 
-.PaginaInicio input {
+.PaginaInicio input, .retro-container-P input {
     display: block;
     width: 90%;
     margin: 10px auto;
@@ -57,14 +61,15 @@
     outline: none; 
 }
 
-.PaginaInicio button {
+.PaginaInicio button, .retro-container-P button {
     background: #07c787;
     color: #254b3e;
     border: 2px solid #347e65;
     padding: 10px;
     width: 100%;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 18px;
+    margin-top: 20px;
 }
 
 .PaginaInicio button:hover {
@@ -72,11 +77,27 @@
     color: #07c787;
 }
 
-.PaginaInicio p{
+.retro-container-P button:hover {
+    background-color: #254b3e;
+    color: #07c787;
+}
+
+.PaginaInicio p, .PaginaPerfil p{
     color: #07c787;
     font-size: 18px;
     margin-top: 1em;
     border: #07c787 2px solid;
     padding: 1em;
+}
+
+.retro-container-P {
+    height:  250px;
+    background: #222;
+    padding: 20px;
+    border: 4px solid #07c787;
+    border-radius: 10px ;
+    text-align: center;
+    width: 20%;
+    padding-bottom: 40px;
 }
 

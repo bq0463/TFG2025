@@ -1,15 +1,15 @@
 @font-face {
-    font-family: "HelveticaCondensed";
-    src: url("../fonts/Helvetica Condensed Bold Italic.ttf") format("truetype");
-  }
+  font-family: "HelveticaCondensed";
+  src: url("../fonts/Helvetica Condensed Bold Italic.ttf") format("truetype");
+}
 
-.PaginaLogueado header{
+.PaginaPerfil header{
     border-bottom: 2px solid #07c787;
     padding: 15px;
     background-color: #254b3e;
 }
 
-.PaginaLogueado nav {
+.PaginaPerfil nav {
     display: flex;
     width: 90%;
     gap: 10px;
@@ -22,7 +22,7 @@
     flex-wrap: wrap;
 }
 
-.PaginaLogueado .nav-b {
+.PaginaPerfil .nav-b {
     flex: 1;
     color: #254b3e;
     letter-spacing: 2px;
@@ -39,13 +39,13 @@
     animation: shine 1s linear infinite;
 }
 
-.PaginaLogueado .nav-b:hover {
+.PaginaPerfil .nav-b:hover {
     background-color: #254b3e;
     color: #07c787;
     border-color: #07c787;
 }
 
-.PaginaLogueado .username {
+.PaginaPerfil .username {
     font-family: "HelveticaCondensed", Arial, sans-serif;
     font-size: 18px;
     color: #07c787;
@@ -59,9 +59,32 @@
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-.PaginaLogueado .username:hover {
+.PaginaPerfil .username:hover {
     background-color: #07c787;
     color: #254b3e;
     border-color: #254b3e;
     cursor: pointer;
 }
+
+.profileContent{
+    width: 100%;
+    align-items: center;
+    background: #254b3e;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-bottom: #07c787 2px solid;
+    bottom: 0;
+}
+
+.profileContent h2{
+    text-align: center;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    color: #07c787;
+    letter-spacing: 2px;
+    font-size: 22px;
+    z-index: 0;
+    text-shadow: -1px -1px 1px #193b30,1px -1px 1px #193b30, -1px 1px 1px #193b30, 1px 1px 1px #193b30,2px 2px 4px #193b30;
+}
+
