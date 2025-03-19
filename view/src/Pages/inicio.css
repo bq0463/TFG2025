@@ -72,7 +72,6 @@ body, html {
   right: 0;
   position: relative;
   overflow: hidden;
-  
 }
 
 .PaginaInicio footer {
@@ -98,4 +97,8 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+button{
+  transition: background-color 0.5s ease, color 0.5s ease;
 }

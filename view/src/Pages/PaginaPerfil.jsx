@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfilePasswordForm from "../Components/Forms/ProfilePasswordForm";
 import "./PaginaPerfil.css";
+import ProfileEmailUsernameForm from "../Components/Forms/ProfileEmailUsernameForm";
 
 const PaginaPerfil = () => {
   const [username, setUsername] = useState("");
@@ -98,8 +99,9 @@ const PaginaPerfil = () => {
         </div>
       </header>
       <div className="profileContent">
-        <h2>Ajustes de perfil</h2>
+        <h1>Ajustes de perfil</h1>
         <ProfilePasswordForm userId={userId}/>
+        <ProfileEmailUsernameForm userId={userId}/>
       </div>
     </div>
   );  

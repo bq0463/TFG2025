@@ -14,7 +14,7 @@ function App() {
           <Route path="/tareas" element={<PaginaLogueado />} />
           <Route path="/proyectos" element={<PaginaLogueado />} />
           <Route path="/examenes" element={<PaginaLogueado />} />
-          <Route path="/perfil" element={<PaginaPerfil />} />
+          <Route path="/perfil" element={<PaginaPerfil/>} />
         </Route>
       </Routes>
     </Router>

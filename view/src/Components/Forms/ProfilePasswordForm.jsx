@@ -1,5 +1,6 @@
 import './forms.css';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePasswordForm = ({userId}) => {
   const [passwordForm, setPasswordForm] = useState({
@@ -16,7 +17,7 @@ const ProfilePasswordForm = ({userId}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-    
+    const navigate= useNavigate;
     try {
       const response = await fetch(`http://localhost:5000/usuarios/${userId}/password`, {
         method: "PATCH",
@@ -31,6 +32,7 @@ const ProfilePasswordForm = ({userId}) => {
       const data = await response.json();
       if (response.ok) {
         setMessage(`✅ Cambio de contraseña exitoso: ${data.message}`);
+        navigate("/");
       } else {
         setMessage(`❌ Error: ${data.message}`);
       }

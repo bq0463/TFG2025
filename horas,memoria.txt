@@ -230,6 +230,11 @@ el css no estaba funcionando bien porque tenia que ponerse retro-container-P dad
 
 Hay que hacer navigate a / para cuando se cambia algo de la cuenta.
 
+19/03
+3h
 
+para acceder a input en fetch de react hay que acceder a la estructura ,email.email etc...
+
+mañana ver porque cambia los datos en bd bien y no devuelve el ok
 
 
