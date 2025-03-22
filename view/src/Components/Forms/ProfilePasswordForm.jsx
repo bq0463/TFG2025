@@ -3,21 +3,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePasswordForm = ({userId}) => {
+  const navigate= useNavigate();
   const [passwordForm, setPasswordForm] = useState({
     newPassword: "",
     oldPassword:""
   });
 
   const [message, setMessage] = useState("");
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleChange = (e) => {
     setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-    const navigate= useNavigate;
+    setIsSubmitting(true);
     try {
       const response = await fetch(`http://localhost:5000/usuarios/${userId}/password`, {
         method: "PATCH",
@@ -38,6 +39,8 @@ const ProfilePasswordForm = ({userId}) => {
       }
     } catch (error) {
       setMessage("❌ Error en la conexión con el servidor");
+    } finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -47,7 +50,9 @@ const ProfilePasswordForm = ({userId}) => {
       <form onSubmit={handleSubmit} acceptCharset="UTF-8">
         <input type="password" name="oldPassword" placeholder="Contraseña antigua " onChange={handleChange} required />
         <input type="password" name="newPassword" placeholder="Contraseña nueva " onChange={handleChange} required />
-        <button type="submit">Cambiar contraseña</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "⏳ Procesando..." : "Cambiar contraseña"}
+        </button>
       </form>
       {message && <p>{message}</p>}
     </div>

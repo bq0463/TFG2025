@@ -7,8 +7,8 @@ button{
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.retro-container-L,.retro-container-R,.retro-container-EU {
-    height: 300px;
+.retro-container-L,.retro-container-R,.retro-container-EU,.retro-container-DELETE {
+    height: 300px auto;
     background: #222;
     padding: 20px;
     margin: 100px auto;
@@ -24,15 +24,11 @@ button{
     margin-top: 3em;
 }
 
-.retro-container-L button{
+.retro-container-P button,.retro-container-DELETE,.retro-container-EU button{
     margin-top: 0.5em;
 }
 
-.retro-container-P button,.retro-container-EU button{
-    margin-top: 0.5em;
-}
-
-.retro-container-L h2, .retro-container-R h2,.retro-container-P h2 {
+.retro-container-L h2, .retro-container-R h2,.retro-container-P h2 ,.retro-container-DELETE h2{
     font-family: "HelveticaCondensed";
     font-size: 25px;
     margin-bottom: 20px;
@@ -52,7 +48,7 @@ button{
     outline: none; 
 }
 
-.PaginaInicio button, .retro-container-P button ,.retro-container-EU button{
+.PaginaInicio button, .retro-container-P button ,.retro-container-EU button,.retro-container-DELETE button{
     background: #07c787;
     color: #254b3e;
     border: 2px solid #347e65;
@@ -60,10 +56,10 @@ button{
     width: 100%;
     cursor: pointer;
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-.PaginaInicio button:hover,.retro-container-EU button:hover,.retro-container-P button:hover {
+.PaginaInicio button:hover,.retro-container-EU button:hover,.retro-container-P button:hover,.retro-container-DELETE button:hover {
     background-color: #254b3e;
     color: #07c787;
 }
@@ -78,7 +74,7 @@ button{
 }
 
 .retro-container-P ,.retro-container-EU{
-    height:  250px;
+    height:  250px auto;
     background: #222;
     padding: 20px;
     border: 4px solid #07c787;

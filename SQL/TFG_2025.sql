@@ -84,7 +84,6 @@ END $$
 
 DELIMITER ;
 
-
 DELIMITER $$
 
 CREATE TRIGGER usuario_update BEFORE UPDATE ON usuario

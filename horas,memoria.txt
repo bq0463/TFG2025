@@ -1,6 +1,6 @@
 10/01
 10 horas preparatorias de nodejs
-
+10 horas de reactjs
 18/01
 2h
 
@@ -236,5 +236,12 @@ Hay que hacer navigate a / para cuando se cambia algo de la cuenta.
 para acceder a input en fetch de react hay que acceder a la estructura ,email.email etc...
 
 mañana ver porque cambia los datos en bd bien y no devuelve el ok
+
+22/03
+2h
+
+llamar a navigate fera de otros hooks y no estaba accediendo bien a los parametros en handleChange.
+
+Seccion de perfil terminada en FrontEnd.
 
 

@@ -7,24 +7,26 @@ const ProfileEmailUsernameForm = ({userId}) => {
   const [username,setUsernameForm]= useState("");
   const [message, setMessage] = useState("");
 
+  const navigate = useNavigate();
+  
   const handleChange = (e) => {
-    setEmailForm({ ...email, [e.target.name]: e.target.value });
-    setUsernameForm({...username,[e.target.name]: e.target.value});
+    const { name, value } = e.target;
+    if (name === "email") setEmailForm(value);
+    if (name === "username") setUsernameForm(value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-    const navigate = useNavigate;
-
+  
     try {
       const response = await fetch(`http://localhost:5000/usuarios/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          nombre_usuario: username.username,
-          email: email.email
+          nombre_usuario: username,
+          email: email
         })
       });
 
@@ -44,8 +46,8 @@ const ProfileEmailUsernameForm = ({userId}) => {
     <div className="retro-container-EU">
       <h2>Cambio de Email/Nombre usuario</h2>
       <form onSubmit={handleSubmit} acceptCharset="UTF-8">
-        <input type="email" name="email" placeholder="Email nuevo" onChange={handleChange}/>
-        <input type="text" name="username" placeholder="Nombre nuevo" onChange={handleChange}/>
+        <input type="email" name="email"  value={email} placeholder="Email nuevo" onChange={handleChange}/>
+        <input type="text" name="username" value={username} placeholder="Nombre nuevo" onChange={handleChange}/>
         <button type="submit">Cambiar Email/Nombre</button>
       </form>
       {message && <p>{message}</p>}

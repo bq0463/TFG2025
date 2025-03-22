@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ProfilePasswordForm from "../Components/Forms/ProfilePasswordForm";
 import "./PaginaPerfil.css";
 import ProfileEmailUsernameForm from "../Components/Forms/ProfileEmailUsernameForm";
+import ProfileDeleteForm from "../Components/Forms/ProfileDeleteForm";
 
 const PaginaPerfil = () => {
   const [username, setUsername] = useState("");
@@ -90,7 +91,7 @@ const PaginaPerfil = () => {
         <div className="header-bottom">
           <nav>
             <button onClick={handleIntro} className="nav-b">Inicio</button>
-            <button onClick={handleTasks} className="nav-b">Usuarios</button>
+            <button onClick={handleTasks} className="nav-b">Tareas</button>
             <button onClick={handleProjects} className="nav-b">Proyectos</button>
             <button onClick={handleExams} className="nav-b">Examenes</button>
             <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
@@ -100,8 +101,9 @@ const PaginaPerfil = () => {
       </header>
       <div className="profileContent">
         <h1>Ajustes de perfil</h1>
-        <ProfilePasswordForm userId={userId}/>
-        <ProfileEmailUsernameForm userId={userId}/>
+          <ProfilePasswordForm userId={userId}/>
+          <ProfileEmailUsernameForm userId={userId}/>
+          <ProfileDeleteForm userId={userId}></ProfileDeleteForm>
       </div>
     </div>
   );  
