@@ -1,14 +1,17 @@
 @font-face {
     font-family: "HelveticaCondensed";
-    src: url("../fonts/Helvetica Condensed Bold Italic.ttf") format("truetype");
+    src: url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
   }
 
 button{
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.retro-container-L,.retro-container-R,.retro-container-EU,.retro-container-DELETE {
-    height: 300px auto;
+.retro-container-L,.retro-container-R {
+    min-height: 320px;
+    height: auto;
     background: #222;
     padding: 20px;
     margin: 100px auto;
@@ -17,7 +20,19 @@ button{
     text-align: center;
     width: 20%;
     padding-bottom: 40px;
-    
+}
+
+.retro-container-EU,.retro-container-DELETE {
+    min-height: 200px;
+    height: auto;
+    background: #222;
+    padding: 20px;
+    margin: 100px auto;
+    border: 4px solid #07c787;
+    border-radius: 10px ;
+    text-align: center;
+    width: 20%;
+    padding-bottom: 40px;
 }
 
 .retro-container-R button{
@@ -30,9 +45,10 @@ button{
 
 .retro-container-L h2, .retro-container-R h2,.retro-container-P h2 ,.retro-container-DELETE h2{
     font-family: "HelveticaCondensed";
-    font-size: 25px;
+    font-size: 30px;
     margin-bottom: 20px;
     color: #07c787;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
 }
 
 .PaginaInicio input, .retro-container-P input,.retro-container-EU input {
@@ -73,8 +89,9 @@ button{
     padding: 1em;
 }
 
-.retro-container-P ,.retro-container-EU{
-    height:  250px auto;
+.retro-container-P{
+    height: auto;
+    min-height: 200px;
     background: #222;
     padding: 20px;
     border: 4px solid #07c787;

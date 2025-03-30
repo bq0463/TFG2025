@@ -1,6 +1,9 @@
 @font-face {
   font-family: "HelveticaCondensed";
-  src: url("../fonts/Helvetica Condensed Bold Italic.ttf") format("truetype");
+  src: 
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
 }
 
 .PaginaPerfil header{

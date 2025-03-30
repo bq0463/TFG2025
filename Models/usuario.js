@@ -108,11 +108,16 @@ static async login({ nombre_usuario, contrasena }) {
       [nombre_usuario]
     );
 
-    if (rows.length === 0) {
+    const [rows1] = await connection.execute(
+      'SELECT * FROM usuario WHERE email = ?',
+      [nombre_usuario]
+    );
+
+    if (rows.length === 0 && rows1.length === 0) {
       return null; // Usuario no encontrado
     }
 
-    const usuario = rows[0];
+    const usuario = rows[0] || rows1[0];
     const contrasenaMatch = await bcrypt.compare(contrasena, usuario.contrasena);
     if (!contrasenaMatch) {
       return null; 

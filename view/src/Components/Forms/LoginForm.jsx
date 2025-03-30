@@ -49,7 +49,7 @@ const LoginForm = () => {
         <input
           type="text"
           name="username"
-          placeholder="Nombre de usuario"
+          placeholder="Nombre de usuario/Email"
           onChange={handleChange}
           required
         />
