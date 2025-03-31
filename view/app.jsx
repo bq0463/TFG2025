@@ -3,6 +3,7 @@ import PaginaInicio from "./src/Pages/PaginaInicio.jsx";
 import PaginaLogueado from "./src/Pages/PaginaLogueado.jsx";
 import RutaProtegida from "./src/middleware/RutaProtegida.jsx";
 import PaginaPerfil from "./src/Pages/PaginaPerfil.jsx";
+import PaginaExamenes from "./src/Pages/PaginaExamenes.jsx";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           <Route path="/inicio" element={<PaginaLogueado />} />
           <Route path="/tareas" element={<PaginaLogueado />} />
           <Route path="/proyectos" element={<PaginaLogueado />} />
-          <Route path="/examenes" element={<PaginaLogueado />} />
+          <Route path="/examenes" element={<PaginaExamenes />} />
           <Route path="/perfil" element={<PaginaPerfil/>} />
         </Route>
       </Routes>

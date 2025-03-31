@@ -75,7 +75,7 @@ button{
     margin-top: 10px;
 }
 
-.PaginaInicio button:hover,.retro-container-EU button:hover,.retro-container-P button:hover,.retro-container-DELETE button:hover {
+.PaginaInicio button:hover,.retro-container-EU button:hover,.retro-container-P button:hover,.retro-container-DELETE button:hover,.PaginaExamenes button:hover {
     background-color: #254b3e;
     color: #07c787;
 }

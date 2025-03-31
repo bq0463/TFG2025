@@ -245,7 +245,7 @@ llamar a navigate fera de otros hooks y no estaba accediendo bien a los parametr
 Seccion de perfil terminada en FrontEnd.
 
 30/03
-1h
+1h y 30min
 
 login ahora acepta tanto nombre de usuario como email
 

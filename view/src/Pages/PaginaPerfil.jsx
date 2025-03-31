@@ -71,7 +71,7 @@ const PaginaPerfil = () => {
 
   const handleTasks = async () => {
     try {
-      navigate("/usuarios");
+      navigate("/tareas");
     } catch (error) {
       console.error("Error al cerrar sesión", error);
     }
