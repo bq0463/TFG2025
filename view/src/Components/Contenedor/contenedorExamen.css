@@ -1,61 +1,82 @@
 .contenedor-examen {
-  background-color: #254b3e;
+  background-color: #2f3b37;
   border: 2px solid #07c787;
   border-radius: 8px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
   text-align: center;
-  width: calc((100% / 3) - 30px); 
+  width: calc(25% - 30px);
   min-width: 250px; 
   margin: 10px;
   transition: transform 0.3s ease-in-out;
+  height: auto;
+}
+
+@media (max-width: 1024px) { 
+  .contenedor-examen {
+    width: calc(33.33% - 20px);
+  }
 }
 
 @media (max-width: 800px) {
   .contenedor-examen {
-    width: calc((100% / 2) - 20px); 
+    width: calc(50% - 20px); 
   }
 }
 
 @media (max-width: 500px) {
   .contenedor-examen {
-    width: 100%;
+    width: 100%; 
   }
 }
+
 
 .contenedor-examen:hover {
   transform: scale(1.05);
 }
 
 .contenedor-examen h2 {
-  font-family: "HelveticaCondensed", Arial, sans-serif;
-  color: #07c787;
-  font-size: 24px;
-  text-shadow: 1px 1px 2px #000;
-  margin-bottom: 10px;
+  font-family: "HelveticaCondensed";
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: #07c787;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
 }
 
-.contenedor-examen .fecha {
-  font-family: "HelveticaCondensed", Arial, sans-serif;
+.contenedor-examen p {
+  font-family: "HelveticaCondensed";
   font-size: 24px;
   color: #07c787;
   margin-bottom: 10px;
-}
-
-.contenedor-examen .nota {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  color: #ddd;
 }
 
 .examenes {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
-  padding: 20px;
+  gap: 10px;
 }
 
-.contenedor-examen button{
-  
+.gestion-examen{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
 }
+
+.gestion-examen button{
+  background: #07c787;
+  color: #254b3e;
+  border: 2px solid #347e65;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 20px;
+  text-align: center;
+  font-family: "HelveticaCondensed";
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 150px;
+  min-width: 100px;
+} 

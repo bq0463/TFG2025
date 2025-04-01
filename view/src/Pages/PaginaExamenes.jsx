@@ -79,7 +79,7 @@ const PaginaExamenes = () => {
   const handleGuardarExamen = async () => {
     try {
       const fechaFormateada = new Date(nuevoExamen.fecha).toISOString().split('T')[0]; 
-  
+      
       const response = await fetch(`http://localhost:5000/examenes/${userId}`, {
         method: "POST",
         credentials: "include",
@@ -118,14 +118,14 @@ const PaginaExamenes = () => {
       </header>
 
       <div className="examenes">
-        <h1>Lista de Exámenes</h1>
+        <h1>Tus Exámenes</h1>
         <button onClick={toggleFormulario} className="nav-b">{mostrarFormulario ? "Cerrar Formulario" : "Crear Examen"}</button>
         
         {mostrarFormulario && (
           <div className="formulario-examen">
             <input type="text" name="asignatura" placeholder="Asignatura/fecha requerida" value={nuevoExamen.asignatura} onChange={handleInputChange} required/>
             <input type="date" name="fecha" value={nuevoExamen.fecha} onChange={handleInputChange} required />
-            <input type="number" name="nota" placeholder="Nota opcional" value={nuevoExamen.nota} onChange={handleInputChange} step="1"/>
+            <input type="number" name="nota" placeholder="Max 2 dec" value={nuevoExamen.nota} onChange={handleInputChange} step="0.1"/>
             <button onClick={handleGuardarExamen} className="nav-b">Guardar Examen</button>
             {creationMessage && <p>{creationMessage}</p>}
           </div>
@@ -136,6 +136,7 @@ const PaginaExamenes = () => {
             {examenes.map((examen) => (
               <ContenedorExamen
                 key={examen.id}
+                id={examen.id}
                 fecha={examen.fecha}
                 asignatura={examen.asignatura}
                 nota={examen.nota}

@@ -4,7 +4,7 @@ import { validarCredencialesExamen } from '../middlewares/validacionesCreaciones
 export class ExamenModel {
 
   static async getById({ id }) {
-    const [rows] = await connection.execute('SELECT asignatura,nota,fecha FROM examen WHERE id = ?', [id]);
+    const [rows] = await connection.execute('SELECT id,asignatura,nota,fecha FROM examen WHERE id = ?', [id]);
     return rows.map(row => ({
       ...row,
       fecha: row.fecha.toISOString().split('T')[0],
@@ -12,7 +12,7 @@ export class ExamenModel {
   }
 
   static async getAll({ id_usuario }) {
-    const [rows] = await connection.execute('SELECT asignatura,nota,fecha FROM examen WHERE id_usuario = ?', [id_usuario]);
+    const [rows] = await connection.execute('SELECT id,asignatura,nota,fecha FROM examen WHERE id_usuario = ?', [id_usuario]);
     return rows.map(row => ({
       ...row,
       fecha: row.fecha.toISOString().split('T')[0],

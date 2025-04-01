@@ -1,3 +1,3 @@
 USE TFG2025;
 
-SELECT * FROM usuario;
+SELECT * FROM examen;

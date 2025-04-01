@@ -1,4 +1,4 @@
-    @font-face {
+@font-face {
     font-family: "HelveticaCondensed";
     src: 
         url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
@@ -75,6 +75,7 @@
         flex-direction: column;
         border-bottom: #07c787 2px solid;
         bottom: 0;
+        align-items: center;
     }
 
     .examenes h2{
@@ -98,7 +99,7 @@
         padding: 10px;
         border: #07c787 2px solid;
         background: #222;
-        width: 95%;
+        width: 50%;
     }
 
     .PaginaExamenes .examenes button{
@@ -114,7 +115,7 @@
         font-family: "HelveticaCondensed";
     }
 
-    .examenes .formulario-examen input{
+    .examenes input{
         margin: 10px auto;
         padding: 12px;
         border: 2px solid #07c787;
@@ -136,4 +137,33 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
+        min-width: 200px;
+        margin: 8px;
+    }
+
+    .formulario-eliminar button {
+        margin-right: 20px;
+        padding: 12px 25px;
+        font-size: 18px; 
+        text-align: center;
+        font-family: "HelveticaCondensed", Arial, sans-serif;
+        background: #07c787;
+        color: #254b3e;
+        
+        cursor: pointer;
+        transition: background 0.3s ease;
+        min-width: 150px; 
+    }
+
+    .formulario-modificar input {
+        margin: 10px 0; 
+        padding: 12px;
+        border: 2px solid #07c787;
+        background: #254b3e;
+        color: #07c787;
+        font-size: 18px;
+        font-family: "HelveticaCondensed", Arial, sans-serif;
+        outline: none;
+        width: 100%; 
+        box-sizing: border-box; 
     }

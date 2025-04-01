@@ -255,6 +255,6 @@ login ahora acepta tanto nombre de usuario como email
 PaginaExamenes con botones por hacer y fetch de crear examen
 
 01/04
-2h
+5h
 
-Retocar el campo numerico de crear examen y retocar el numero de elementos por fila
+Hecha la pagina de examenes
