@@ -7,8 +7,11 @@ const PaginaExamenes = () => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
   const [examenes, setExamenes] = useState([]);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [nuevoExamen, setNuevoExamen] = useState({ asignatura: "", fecha: "", nota: 0.00 });
   const navigate = useNavigate();
-
+  const [creationMessage, setCreationMessage] = useState("");
+  
   useEffect(() => {
     const verificarAutenticacion = async () => {
       try {
@@ -64,85 +67,81 @@ const PaginaExamenes = () => {
     }
   };
 
-  const handleIntro = async () => {
-    try {
-      navigate("/inicio");
-    } catch (error) {
-      console.error("Error al ir a Inicio", error);
-    }
+  const toggleFormulario = () => {
+    setMostrarFormulario(!mostrarFormulario);
   };
 
-  const handleTasks = async () => {
-    try {
-      navigate("/tareas");
-    } catch (error) {
-      console.error("Error al ir a Tareas", error);
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNuevoExamen({ ...nuevoExamen, [name]: name === "nota" ? (value === "" ? 0.00 : parseFloat(value)) : value});
   };
 
-  const handleProjects = async () => {
+  const handleGuardarExamen = async () => {
     try {
-      navigate("/proyectos");
-    } catch (error) {
-      console.error("Error al ir a Proyectos", error);
-    }
-  };
-
-  const handleExams = async () => {
-    try {
-      navigate("/examenes");
-    } catch (error) {
-      console.error("Error al ir a Exámenes", error);
-    }
-  };
-
-  const handleProfile = async () => {
-    try {
-      navigate("/perfil");
-    } catch (error) {
-      console.error("Error al ir a Perfil", error);
-    }
-  };
-
-  const handleExamCreation = async () => {
-    try {
-      await fetch("http://localhost:5000/usuarios/${userId}/examenes", {
+      const fechaFormateada = new Date(nuevoExamen.fecha).toISOString().split('T')[0]; 
+  
+      const response = await fetch(`http://localhost:5000/examenes/${userId}`, {
         method: "POST",
         credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          asignatura: nuevoExamen.asignatura,
+          fecha: fechaFormateada,
+          nota: nuevoExamen.nota,
+        }),
       });
-      navigate("/examenes");
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        setCreationMessage(data.message);
+      }
     } catch (error) {
       console.error("Error al crear examen", error);
     }
   };
+  
 
   return (
     <div className="PaginaExamenes">
       <header className="header">
-        <div className="header-bottom">
-          <nav>
-            <button onClick={handleIntro} className="nav-b">Inicio</button>
-            <button onClick={handleTasks} className="nav-b">Tareas</button>
-            <button onClick={handleProjects} className="nav-b">Proyectos</button>
-            <button onClick={handleExams} className="nav-b">Examenes</button>
-            <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
-            <button onClick={handleProfile} className="username">{username}</button>
-          </nav>
-        </div>
+        <nav>
+          <button onClick={() => navigate("/inicio")} className="nav-b">Inicio</button>
+          <button onClick={() => navigate("/tareas")} className="nav-b">Tareas</button>
+          <button onClick={() => navigate("/proyectos")} className="nav-b">Proyectos</button>
+          <button onClick={() => navigate("/examenes")} className="nav-b">Exámenes</button>
+          <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
+          <button onClick={() => navigate("/perfil")} className="username">{username}</button>
+        </nav>
       </header>
 
       <div className="examenes">
         <h1>Lista de Exámenes</h1>
-        <button onClick={handleExamCreation}>Crear Examen</button>
+        <button onClick={toggleFormulario} className="nav-b">{mostrarFormulario ? "Cerrar Formulario" : "Crear Examen"}</button>
+        
+        {mostrarFormulario && (
+          <div className="formulario-examen">
+            <input type="text" name="asignatura" placeholder="Asignatura/fecha requerida" value={nuevoExamen.asignatura} onChange={handleInputChange} required/>
+            <input type="date" name="fecha" value={nuevoExamen.fecha} onChange={handleInputChange} required />
+            <input type="number" name="nota" placeholder="Nota opcional" value={nuevoExamen.nota} onChange={handleInputChange} step="1"/>
+            <button onClick={handleGuardarExamen} className="nav-b">Guardar Examen</button>
+            {creationMessage && <p>{creationMessage}</p>}
+          </div>
+        )}
+
         {examenes.length > 0 ? (
-          examenes.map((examen) => (
-            <ContenedorExamen
-              key={examen.id}
-              fecha={examen.fecha}
-              asignatura={examen.asignatura}
-              nota={examen.nota}
-            />
-          ))
+          <div className="contenedor-examenes">
+            {examenes.map((examen) => (
+              <ContenedorExamen
+                key={examen.id}
+                fecha={examen.fecha}
+                asignatura={examen.asignatura}
+                nota={examen.nota}
+              />
+            ))}
+          </div>
         ) : (
           <h2>No hay exámenes disponibles.</h2>
         )}

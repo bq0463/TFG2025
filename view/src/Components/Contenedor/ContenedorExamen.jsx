@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./contenedorExamen.css";
 
 const ContenedorExamen = ({ asignatura, fecha, nota }) => {

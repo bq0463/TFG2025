@@ -5,10 +5,22 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
   text-align: center;
-  width: 22%;
-  min-width: 250px;
-  margin: 15px;
+  width: calc((100% / 3) - 30px); 
+  min-width: 250px; 
+  margin: 10px;
   transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 800px) {
+  .contenedor-examen {
+    width: calc((100% / 2) - 20px); 
+  }
+}
+
+@media (max-width: 500px) {
+  .contenedor-examen {
+    width: 100%;
+  }
 }
 
 .contenedor-examen:hover {
@@ -25,14 +37,14 @@
 
 .contenedor-examen .fecha {
   font-family: "HelveticaCondensed", Arial, sans-serif;
-  font-size: 18px;
-  color: #fff;
+  font-size: 24px;
+  color: #07c787;
   margin-bottom: 10px;
 }
 
 .contenedor-examen .nota {
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #ddd;
 }
 
