@@ -17,11 +17,10 @@ const PaginaTareas = () => {
   });
   const navigate = useNavigate();
   const [creationMessage, setCreationMessage] = useState("");
-
-  const [seccionesAbiertas, setSeccionesAbiertas] = useState({
-    Pendiente: true,
-    "En progreso": true,
-    Completada: true,
+  const [seccionesExpandidas, setSeccionesExpandidas] = useState({
+    Pendiente: false,
+    "En progreso": false,
+    Completada: false,
   });
 
   const agruparPorEstado = (tareas) => {
@@ -32,8 +31,7 @@ const PaginaTareas = () => {
       return grupo;
     }, {});
   };
-  
-  
+
   useEffect(() => {
     const verificarAutenticacion = async () => {
       try {
@@ -99,14 +97,14 @@ const PaginaTareas = () => {
   };
 
   const handleGuardarTarea = async () => {
-    try { 
+    try {
       if (!nuevaTarea.descripcion || !nuevaTarea.fecha_inicio || !nuevaTarea.fecha_fin) {
         setCreationMessage("Faltan campos obligatorios como fechas o descripción");
         return;
       }
 
       const fechaFormateadaInicio = new Date(nuevaTarea.fecha_inicio).toISOString().split('T')[0];
-      const fechaFormateadaFin = new Date(nuevaTarea.fecha_fin).toISOString().split('T')[0];  
+      const fechaFormateadaFin = new Date(nuevaTarea.fecha_fin).toISOString().split('T')[0];
       const valorNumerico = nuevaTarea.valor !== "" ? parseFloat(nuevaTarea.valor) : 0;
 
       const response = await fetch(`http://localhost:5000/tareas/${userId}`, {
@@ -121,9 +119,9 @@ const PaginaTareas = () => {
           descripcion: nuevaTarea.descripcion,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         window.location.reload();
       } else {
@@ -133,6 +131,15 @@ const PaginaTareas = () => {
       console.error("Error al crear tarea", error);
     }
   };
+
+  const toggleSeccion = (estado) => {
+    setSeccionesExpandidas({
+      ...seccionesExpandidas,
+      [estado]: !seccionesExpandidas[estado], // Solo cambia el estado de la sección seleccionada
+    });
+  };
+
+  const tareasPorEstado = agruparPorEstado(tareas);
 
   return (
     <div className="PaginaTareas">
@@ -169,23 +176,31 @@ const PaginaTareas = () => {
           </div>
         )}
 
-        {tareas.length > 0 ? (
-          <div className="contenedor-tareas">
-            {tareas.map((tarea) => (
-              <ContenedorTarea
-                key={tarea.id}
-                id={tarea.id}
-                descripcion={tarea.descripcion}
-                valor={tarea.valor}
-                fecha_inicio={tarea.fecha_inicio}
-                fecha_fin={tarea.fecha_fin}
-                estado={tarea.estado}
-              />
-            ))}
+        {Object.keys(tareasPorEstado).map((estado) => (
+          <div key={estado} className="seccion-tareas">
+            <button onClick={() => toggleSeccion(estado)} id="seccion-titulo">
+              <span className={`icono ${seccionesExpandidas[estado] ? 'expandido' : ''}`}>
+                {seccionesExpandidas[estado] ? 'v' : '>'}
+              </span>
+              {estado} ({tareasPorEstado[estado].length})
+            </button>
+            {seccionesExpandidas[estado] && (
+              <div className="contenedor-tareas">
+                {tareasPorEstado[estado].map((tarea) => (
+                  <ContenedorTarea
+                    key={tarea.id}
+                    id={tarea.id}
+                    descripcion={tarea.descripcion}
+                    valor={tarea.valor}
+                    fecha_inicio={tarea.fecha_inicio}
+                    fecha_fin={tarea.fecha_fin}
+                    estado={tarea.estado}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-        ) : (
-          <h2>No tienes tareas</h2>
-        )}
+        ))}
       </div>
     </div>
   );

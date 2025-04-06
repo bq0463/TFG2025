@@ -64,7 +64,6 @@ export class UsuarioModel {
 
 static async updatePassword({ id, oldPassword, newPassword }) {
   try {
-    // Obtener el usuario por ID
     const [rows] = await connection.execute(
       'SELECT contrasena FROM usuario WHERE id = ?',
       [id]
@@ -83,11 +82,9 @@ static async updatePassword({ id, oldPassword, newPassword }) {
       return { success: false, message: 'Contraseña antigua incorrecta' };
     }
 
-    // Encriptar la nueva contraseña
     const saltRounds = 10;
     const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
 
-    // Actualizar la contraseña en la base de datos
     await connection.execute(
       'UPDATE usuario SET contrasena = ? WHERE id = ?',
       [hashedNewPassword, id]
@@ -141,7 +138,6 @@ static async login({ nombre_usuario, contrasena }) {
 
   static async register({ nombre_usuario, email, contrasena }) {
     try {
-      // Generar un hash de la contraseña con un "salt" de 10 rondas
 
       const saltRounds = 10;
       const hashedcontrasena = await bcrypt.hash(contrasena, saltRounds);

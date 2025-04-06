@@ -5,26 +5,16 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
   text-align: center;
-  width: calc(25% - 30px);
+  width: calc(35% - 30px);
   min-width: 250px; 
   margin: 10px;
   transition: transform 0.3s ease-in-out;
   height: auto;
+  min-height: 200px; 
 }
 
-.contenedor-tarea[data-estado="pendiente"] {
-  background-color: rgb(255, 230, 0);
-  border: 6px solid rgb(185, 153, 47);
-}
-
-.contenedor-tarea[data-estado="en-progreso"] {
-  background-color: #d1ecf1;
-  border: 6px solid #926e00;
-}
-
-.contenedor-tarea[data-estado="completada"] {
-  background-color: #1c7030;
-  
+.contenedor-tarea{
+  background-color: #314941;
 }
 
 @media (max-width: 1024px) { 
@@ -52,10 +42,11 @@
 
 .contenedor-tarea h2 {
   font-family: "HelveticaCondensed";
-    font-size: 25px;
-    margin-bottom: 20px;
-    color: #07c787;
-    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: #07c787;
+  text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+  
 }
 
 .contenedor-tarea p {
@@ -83,7 +74,7 @@
 .gestion-tarea button{
   background: #07c787;
   color: #254b3e;
-  border: 2px solid #347e65;
+  border: 2px solid #254b3e;
   cursor: pointer;
   font-size: 20px;
   margin-right: 20px;
@@ -95,3 +86,16 @@
   max-width: 150px;
   min-width: 100px;
 } 
+
+.gestion-tarea button:hover {
+  background: #254b3e;
+  color: #07c787;
+  border: 2px solid #07c787;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.gestion-tarea button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+

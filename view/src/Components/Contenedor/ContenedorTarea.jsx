@@ -58,7 +58,8 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
     <div className="contenedor-tarea" data-estado={estado.toLowerCase().replace(/\s/g, "-")}>
       <h2>{descripcion}</h2>
       <p className="valor">Valor: {valor}</p>
-      <p className="fecha">Inicio: {fecha_inicio} | Fin: {fecha_fin}</p>
+      <p className="fecha">{fecha_inicio}</p>
+      <p className="fecha"> Limite: {fecha_fin}</p>
       <p className={`estado`}>{estado}</p>
       
       <div className="gestion-tarea">
