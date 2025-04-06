@@ -5,17 +5,17 @@ import { validarCredencialesTarea } from '../middlewares/validacionesCreaciones.
 export class TareaModel {
   
   static async getById({ id }) {
-    const [rows] = await connection.execute('SELECT descripcion, valor, fecha_inicio_inicio, fecha_inicio_fin, estado FROM tarea WHERE id = ?', [id]);
+    const [rows] = await connection.execute('SELECT id,descripcion, valor, fecha_inicio, fecha_fin, estado FROM tarea WHERE id = ?', [id]);
 
     if (rows.length > 0) {
         const row = rows[0]; 
-        const fecha_inicio_inicio = new Date(row.fecha_inicio_inicio);
-        const fecha_inicio_fin = new Date(row.fecha_inicio_fin);
+        const fecha_inicio = new Date(row.fecha_inicio);
+        const fecha_fin = new Date(row.fecha_fin);
 
         return {
             ...row,
-            fecha_inicio_inicio: fecha_inicio_inicio.toISOString().split('T')[0],
-            fecha_inicio_fin: fecha_inicio_fin.toISOString().split('T')[0],
+            fecha_inicio: fecha_inicio.toISOString().split('T')[0],
+            fecha_fin: fecha_fin.toISOString().split('T')[0],
         };
     } else {
         return null; 
@@ -23,22 +23,19 @@ export class TareaModel {
   }
 
   static async getAll({ id_usuario }) {
-    const [rows] = await connection.execute('SELECT descripcion,valor,fecha_inicio_inicio,fecha_inicio_fin,estado FROM tarea WHERE id_usuario = ?', [id_usuario]);
+    const [rows] = await connection.execute('SELECT id,descripcion,valor,fecha_inicio,fecha_fin,estado FROM tarea WHERE id_usuario = ?', [id_usuario]);
 
-    if (rows.length > 0) {
+    
       return rows.map(row => {
-          const fecha_inicio_inicio = new Date(row.fecha_inicio_inicio);
-          const fecha_inicio_fin = new Date(row.fecha_inicio_fin);
+          const fecha_inicio= new Date(row.fecha_inicio);
+          const fecha_fin = new Date(row.fecha_fin);
 
           return {
               ...row,
-              fecha_inicio_inicio: fecha_inicio_inicio.toISOString().split('T')[0], // Formatea la fecha_inicio de inicio
-              fecha_inicio_fin: fecha_inicio_fin.toISOString().split('T')[0], // Formatea la fecha_inicio de fin
+              fecha_inicio: fecha_inicio.toISOString().split('T')[0], // Formatea la fecha_inicio de inicio
+              fecha_fin: fecha_fin.toISOString().split('T')[0], // Formatea la fecha_inicio de fin
           };
       });
-    } else {
-      return null; 
-    }
   }
 
   static async delete({ id }) {
@@ -116,21 +113,6 @@ export class TareaModel {
     
         return { success: true, id, ...updatedRow }; 
     }
-    
-  
-
-    static async create({ input }) {
-      try {
-          const [result] = await connection.execute(
-              'INSERT INTO tarea (id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
-              [input.id_usuario, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
-          );
-          return { id_tarea: result.insertId, affectedRows: result.affectedRows };
-      } catch (error) {
-          console.error('Error al crear tarea:', error);
-          throw error;
-      }
-  }
 
   static async create({ input }) {
       try {
@@ -139,7 +121,7 @@ export class TareaModel {
               [input.id_usuario, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
         );
         
-        return { id_tarea: result.insertId, affectedRows: result.affectedRows };
+        return result;
       } catch (error) {
         console.error('Error al crear tarea:', error);
         throw error;

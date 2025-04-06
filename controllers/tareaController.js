@@ -40,10 +40,7 @@ export class TareaController {
         const tarea = await TareaModel.create({ input: { id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor } });
 
         if (tarea.affectedRows > 0) {
-            return res.status(201).json({ 
-                message: "Tarea creada correctamente",
-                id_tarea: tarea.id_tarea
-            });
+          return res.status(201).json({ message: "Tarea creada correctamente",});
         }
 
         return res.status(500).json({ message: "Error desconocido al crear tarea" });

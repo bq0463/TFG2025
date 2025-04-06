@@ -1,0 +1,97 @@
+.contenedor-tarea {
+  background-color: #2f3b37;
+  border: 6px solid #07c787;
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: center;
+  width: calc(25% - 30px);
+  min-width: 250px; 
+  margin: 10px;
+  transition: transform 0.3s ease-in-out;
+  height: auto;
+}
+
+.contenedor-tarea[data-estado="pendiente"] {
+  background-color: rgb(255, 230, 0);
+  border: 6px solid rgb(185, 153, 47);
+}
+
+.contenedor-tarea[data-estado="en-progreso"] {
+  background-color: #d1ecf1;
+  border: 6px solid #926e00;
+}
+
+.contenedor-tarea[data-estado="completada"] {
+  background-color: #1c7030;
+  
+}
+
+@media (max-width: 1024px) { 
+  .contenedor-tarea {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 800px) {
+  .contenedor-tarea {
+    width: calc(50% - 20px); 
+  }
+}
+
+@media (max-width: 500px) {
+  .contenedor-tarea {
+    width: 100%; 
+  }
+}
+
+
+.contenedor-tarea:hover {
+  transform: scale(1.05);
+}
+
+.contenedor-tarea h2 {
+  font-family: "HelveticaCondensed";
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: #07c787;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+}
+
+.contenedor-tarea p {
+  font-family: "HelveticaCondensed";
+  font-size: 24px;
+  color: #07c787;
+  margin-bottom: 10px;
+}
+
+.tareas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gestion-tarea{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gestion-tarea button{
+  background: #07c787;
+  color: #254b3e;
+  border: 2px solid #347e65;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 20px;
+  text-align: center;
+  font-family: "HelveticaCondensed";
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 150px;
+  min-width: 100px;
+} 

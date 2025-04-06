@@ -73,12 +73,13 @@ const PaginaExamenes = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNuevoExamen({ ...nuevoExamen, [name]: name === "nota" ? (value === "" ? 0.00 : parseFloat(value)) : value});
+    setNuevoExamen({ ...nuevoExamen, [name]: value });
   };
 
   const handleGuardarExamen = async () => {
     try {
       const fechaFormateada = new Date(nuevoExamen.fecha).toISOString().split('T')[0]; 
+      const notaNumerica = nuevoExamen.nota !== "" ? parseFloat(nuevoExamen.nota) : 0;
       
       const response = await fetch(`http://localhost:5000/examenes/${userId}`, {
         method: "POST",
@@ -87,7 +88,7 @@ const PaginaExamenes = () => {
         body: JSON.stringify({
           asignatura: nuevoExamen.asignatura,
           fecha: fechaFormateada,
-          nota: nuevoExamen.nota,
+          nota: notaNumerica,
         }),
       });
   
@@ -144,7 +145,7 @@ const PaginaExamenes = () => {
             ))}
           </div>
         ) : (
-          <h2>No hay exámenes disponibles.</h2>
+          <h2>No tienes exámenes</h2>
         )}
       </div>
     </div>

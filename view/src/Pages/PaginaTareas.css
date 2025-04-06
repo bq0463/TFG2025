@@ -1,0 +1,201 @@
+@font-face {
+  font-family: "HelveticaCondensed";
+  src: 
+      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
+      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
+      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
+  }
+
+  .PaginaTareas header{
+      border-bottom: 2px solid #07c787;
+      padding:25px;
+      background-color: #254b3e;
+  }
+
+  .PaginaTareas nav {
+      display: flex;
+      width: 90%;
+      gap: 10px;
+      padding: 5px 5px 0 0;
+      background: transparent;
+      margin-top: 10px;
+      margin-left: 120px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+  }
+
+  .PaginaTareas .nav-b {
+      flex: 1;
+      color: #254b3e;
+      letter-spacing: 2px;
+      font-size: 22px;
+      font-weight: bold;
+      font-family: "HelveticaCondensed", Arial, sans-serif;
+      text-decoration: none;
+      background-color: #07c787;
+      text-align: center;
+      padding: 5px;
+      border: #347e65 2px solid;
+      cursor: pointer;
+  }
+
+  .PaginaTareas .nav-b:hover {
+      background-color: #254b3e;
+      color: #07c787;
+      border-color: #07c787;
+  }
+
+  .PaginaTareas .username {
+      font-family: "HelveticaCondensed", Arial, sans-serif;
+      font-size: 18px;
+      color: #07c787;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 5px 10px;
+      border: #07c787 2px solid;
+      border-radius: 4px;
+      background: transparent;
+      margin-left: 20px;
+      box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .PaginaTareas .username:hover {
+      background-color: #07c787;
+      color: #254b3e;
+      border-color: #254b3e;
+      cursor: pointer;
+  }
+
+  .tareas{
+      width: 100%;
+      background: #254b3e;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      border-bottom: #07c787 2px solid;
+      bottom: 0;
+      align-items: center;
+  }
+
+  .tareas h2{
+      text-align: center;
+      font-family: "HelveticaCondensed", Arial, sans-serif;
+      color: #07c787;
+      letter-spacing: 2px;
+      font-size: 24px;
+      z-index: 0;
+      text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+  }
+
+  .tareas h1{
+      text-align: center;
+      font-family: "HelveticaCondensed";
+      color: #07c787;
+      letter-spacing: 2px;
+      font-size: 34px;
+      z-index: 0;
+      text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+      padding: 10px;
+      border: #07c787 2px solid;
+      background: #222;
+      width: 50%;
+  }
+
+  .PaginaTareas .tareas button{
+      background: #07c787;
+      color: #254b3e;
+      border: 2px solid #347e65;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 10px;
+      text-align: left;
+      width: 20%;
+      font-family: "HelveticaCondensed";
+  }
+
+  .tareas input{
+      margin: 10px auto;
+      padding: 12px;
+      border: 2px solid #07c787;
+      background: #254b3e;
+      color: #07c787;
+      font-size: 25px;
+      font-family: "HelveticaCondensed";
+      outline: none; 
+      margin-right: 10px;
+  }
+
+  .tareas select {
+    margin: 10px auto;
+    padding: 12px;
+    border: 2px solid #07c787;
+    background: #254b3e;
+    color: #07c787;
+    font-size: 25px;
+    font-family: "HelveticaCondensed";
+    
+    margin-right: 10px;
+    
+    border-radius: 4px;
+}
+
+
+  .PaginaTareas button:hover{
+      background-color: #254b3e;
+      color: #07c787;
+  }
+
+  .mensaje-con-boton {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* espacio entre el botón y el mensaje */
+    margin-top: 1rem;
+  }
+  
+  .creation-message {
+    color: rgb(155, 24, 24); /* o verde si quieres que sea mensaje positivo */
+    font-size: 1.5rem;
+    font-family: "HelveticaCondensed";
+    font-weight: bold;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+
+  }
+  
+  
+  .contenedor-tareas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      min-width: 200px;
+      margin: 8px;
+  }
+
+  .formulario-eliminar button {
+      margin-right: 20px;
+      padding: 12px 25px;
+      font-size: 18px; 
+      text-align: center;
+      font-family: "HelveticaCondensed", Arial, sans-serif;
+      background: #07c787;
+      color: #254b3e;
+      
+      cursor: pointer;
+      transition: background 0.3s ease;
+      min-width: 150px; 
+  }
+
+  .formulario-modificar input {
+      margin: 10px 0; 
+      padding: 12px;
+      border: 2px solid #07c787;
+      background: #254b3e;
+      color: #07c787;
+      font-size: 18px;
+      font-family: "HelveticaCondensed", Arial, sans-serif;
+      outline: none;
+      width: 100%; 
+      box-sizing: border-box; 
+  }

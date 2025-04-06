@@ -8,7 +8,7 @@ export class ProyectoModel {
     static async getProyectoById({ id }) {
         const [rows] = await connection.execute(`
             SELECT 
-                p.fecha_entrega,
+                p.id,p.fecha_entrega,
                 p.titulo,
                 p.descripcion,
                 GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
@@ -38,7 +38,7 @@ export class ProyectoModel {
     static async getAll({ id_usuario }) {
         const [rows] = await connection.execute(`
             SELECT 
-                p.titulo,
+                p.id,p.titulo,
                 p.descripcion,
                 p.fecha_entrega,GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
                 GROUP_CONCAT(DISTINCT t.descripcion SEPARATOR ', ') AS tareas
@@ -167,8 +167,5 @@ export class ProyectoModel {
 
         return { success: true, message: 'Usuario desasociado del proyecto' };
     }
-
-
-
 
 }    

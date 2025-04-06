@@ -1,10 +1,7 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import "./contenedorExamen.css";
 
 const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
-  useEffect(() => {
-    console.log("Examen recibido:", { id, asignatura, fecha, nota });
-  }, []);
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
   const [nuevaAsignatura, setNuevaAsignatura] = useState(asignatura);
