@@ -265,7 +265,12 @@ Hecha la pagina de examenes
 corregido el campo de nota de examenes y hecho la pagina de tarea con problemas de que no retornaba el id porque no estaba en el SELECT
 
 06/04
-1h y 40min
+4h
 
 Ajustando la pagina de tareas y css
+Tambien hecho un map con los estados de las tareas para que se agrupen por este.
+
+06/04
+
+retoques e ideas para agrupar examenes
 

@@ -146,7 +146,6 @@ const PaginaTareas = () => {
       <header className="header">
         <nav>
           <button onClick={() => navigate("/inicio")} className="nav-b">Inicio</button>
-          <button onClick={() => navigate("/tareas")} className="nav-b">Tareas</button>
           <button onClick={() => navigate("/examenes")} className="nav-b">Examenes</button>
           <button onClick={() => navigate("/proyectos")} className="nav-b">Proyectos</button>
           <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
@@ -175,7 +174,7 @@ const PaginaTareas = () => {
             </div>
           </div>
         )}
-
+        
         {Object.keys(tareasPorEstado).map((estado) => (
           <div key={estado} className="seccion-tareas">
             <button onClick={() => toggleSeccion(estado)} id="seccion-titulo">
