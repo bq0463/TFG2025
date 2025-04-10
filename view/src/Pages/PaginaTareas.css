@@ -69,7 +69,7 @@
 
   .tareas{
       width: 100%;
-      background: #2f5f4e;
+      background: #254b3e;
       padding: 15px;
       display: flex;
       flex-direction: column;
@@ -196,7 +196,7 @@
     margin-top: 1rem;
   }
   
-  .creation-message {
+  .PaginaTareas .creation-message {
     color: rgb(155, 24, 24); 
     font-size: 1.5rem;
     font-family: "HelveticaCondensed";

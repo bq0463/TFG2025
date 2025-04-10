@@ -114,10 +114,14 @@ export async function validarCredencialesTarea(req) {
     const { nota,fecha,asignatura } = req.body;
   
     // Verificar que todos los campos estén presentes
-    if (!fecha || !asignatura) {
-      return { success: false, status: 400, message: "Falta fecha o asignatura" };
+    if (!fecha) {
+      return { success: false, status: 400, message: "Falta fecha" };
     }
     
+    if (!asignatura) {
+      return { success: false, status: 400, message: "Falta asignatura" };
+    }
+
     if(typeof nota !== 'number'){
       return { success: false, status: 400, message: "La nota debe ser un número" };
     }

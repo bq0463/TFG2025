@@ -11,7 +11,12 @@ const PaginaExamenes = () => {
   const [nuevoExamen, setNuevoExamen] = useState({ asignatura: "", fecha: "", nota: 0.00 });
   const navigate = useNavigate();
   const [creationMessage, setCreationMessage] = useState("");
-  
+  const [categorias, setCategorias] = useState([]);
+  const [nuevaCategoria, setNuevaCategoria] = useState("");
+  const [mostrarFormularioCategoria,setMostrarFormularioCategoria] = useState(false);
+  const [categoriasDesplegadas, setCategoriasDesplegadas] = useState({});
+  const [mostrarSinCategoria, setMostrarSinCategoria] = useState(false);
+
   useEffect(() => {
     const verificarAutenticacion = async () => {
       try {
@@ -55,6 +60,40 @@ const PaginaExamenes = () => {
     }
   }, [userId]);
 
+  useEffect(() => {
+    if (userId) {
+      const datosGuardados = localStorage.getItem(`categorias_${userId}`);
+      if (datosGuardados) {
+        setCategorias(JSON.parse(datosGuardados));
+      }
+    }
+  }, [userId]);
+  
+  const agregarCategoria = () => {
+    if (nuevaCategoria.trim() !== "" && !categorias.includes(nuevaCategoria)) {
+      const nuevasCategorias = [...categorias, nuevaCategoria];
+      setCategorias(nuevasCategorias);
+      localStorage.setItem(`categorias_${userId}`, JSON.stringify(nuevasCategorias));
+      setNuevaCategoria("");
+    }
+  };
+
+  const examenesPorCategoria = categorias.reduce((acc, cat) => {
+    acc[cat] = examenes.filter(ex => ex.asignatura.toLowerCase().includes(cat.toLowerCase()));
+    return acc;
+  }, {});
+
+  const sinCategoria = examenes.filter(ex => 
+    !categorias.some(cat => ex.asignatura.toLowerCase().includes(cat.toLowerCase()))
+  );
+  
+  const toggleCategoria = (cat) => {
+    setCategoriasDesplegadas((prev) => ({
+      ...prev,
+      [cat]: !prev[cat],
+    }));
+  };
+  
   const handleLogout = async () => {
     try {
       await fetch("http://localhost:5000/logout", {
@@ -71,12 +110,22 @@ const PaginaExamenes = () => {
     setMostrarFormulario(!mostrarFormulario);
   };
 
+  const toggleFormularioCategoria = () => {
+    setMostrarFormularioCategoria(!mostrarFormularioCategoria);
+  }
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNuevoExamen({ ...nuevoExamen, [name]: value });
   };
 
   const handleGuardarExamen = async () => {
+    // Validación previa
+    if (!nuevoExamen.asignatura.trim() || !nuevoExamen.fecha) {
+      setCreationMessage("Por favor completa todos los campos obligatorios (asignatura y fecha).");
+      return;
+    }
+
     try {
       const fechaFormateada = new Date(nuevoExamen.fecha).toISOString().split('T')[0]; 
       const notaNumerica = nuevoExamen.nota !== "" ? parseFloat(nuevoExamen.nota) : 0;
@@ -91,18 +140,20 @@ const PaginaExamenes = () => {
           nota: notaNumerica,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
-        window.location.reload();
+        window.location.reload(); // O mejor: actualizar el estado sin recargar.
       } else {
-        setCreationMessage(data.message);
+        setCreationMessage(data.message || "Hubo un error al crear el examen.");
       }
     } catch (error) {
       console.error("Error al crear examen", error);
+      setCreationMessage("Error inesperado: " + error.message);
     }
-  };
+};
+
   
 
   return (
@@ -127,25 +178,69 @@ const PaginaExamenes = () => {
             <input type="date" name="fecha" value={nuevoExamen.fecha} onChange={handleInputChange} required />
             <input type="number" name="nota" placeholder="Max 2 dec" value={nuevoExamen.nota} onChange={handleInputChange} step="0.1"/>
             <button onClick={handleGuardarExamen} className="nav-b">Guardar Examen</button>
-            {creationMessage && <p>{creationMessage}</p>}
+            {creationMessage && <span className="creation-message-E">{creationMessage}</span>}
           </div>
         )}
 
-        {examenes.length > 0 ? (
-          <div className="contenedor-examenes">
-            {examenes.map((examen) => (
-              <ContenedorExamen
-                key={examen.id}
-                id={examen.id}
-                fecha={examen.fecha}
-                asignatura={examen.asignatura}
-                nota={examen.nota}
-              />
-            ))}
+        <button onClick={toggleFormularioCategoria} className="nav-b">{mostrarFormularioCategoria ? "Cerrar Formulario" : "Crear Categoría"}</button>
+        
+        {mostrarFormularioCategoria && (
+          <div className="formulario-categoria">
+            <input
+              type="text"
+              placeholder="Agregar categoría"
+              value={nuevaCategoria}
+              onChange={(e) => setNuevaCategoria(e.target.value)}
+            />
+            <button onClick={agregarCategoria} className="nav-b">Añadir Categoría</button>
+            <span className="categoria-mensaje">Las categorias clasifican si el examen contiene la palabra clave que se pone en este formulario</span>
           </div>
-        ) : (
-          <h2>No tienes exámenes</h2>
         )}
+
+        {categorias.map((cat) => (
+          <div key={cat} className="grupo-categoria">
+            <button onClick={() => toggleCategoria(cat)} className="nav-b">
+              {categoriasDesplegadas[cat] ? "▼" : "►"} {cat} ({examenesPorCategoria[cat].length})
+            </button>
+            
+            {categoriasDesplegadas[cat] && (
+              <div className="contenedor-examenes">
+                {examenesPorCategoria[cat].map((examen) => (
+                  <ContenedorExamen
+                    key={examen.id}
+                    id={examen.id}
+                    fecha={examen.fecha}
+                    asignatura={examen.asignatura}
+                    nota={examen.nota}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {sinCategoria.length > 0 && (
+          <div className="grupo-categoria">
+            <button onClick={() => setMostrarSinCategoria(!mostrarSinCategoria)} className="nav-b">
+              {mostrarSinCategoria ? "▼" : "►"} Sin Categoría ({sinCategoria.length})
+            </button>
+
+            {mostrarSinCategoria && (
+              <div className="contenedor-examenes">
+                {sinCategoria.map((examen) => (
+                  <ContenedorExamen
+                    key={examen.id}
+                    id={examen.id}
+                    fecha={examen.fecha}
+                    asignatura={examen.asignatura}
+                    nota={examen.nota}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
       </div>
     </div>
   );

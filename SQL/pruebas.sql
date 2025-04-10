@@ -1,3 +1,3 @@
 USE TFG2025;
 
-SELECT * FROM examen;
+SELECT * FROM tarea;

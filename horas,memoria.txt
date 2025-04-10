@@ -271,6 +271,10 @@ Ajustando la pagina de tareas y css
 Tambien hecho un map con los estados de las tareas para que se agrupen por este.
 
 06/04
-
+1h y 20min
 retoques e ideas para agrupar examenes
 
+10/04
+1h y 45min
+
+hechas las categorias de examen y arreglando mensajes de error 

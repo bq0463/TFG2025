@@ -179,7 +179,7 @@ const PaginaTareas = () => {
           <div key={estado} className="seccion-tareas">
             <button onClick={() => toggleSeccion(estado)} id="seccion-titulo">
               <span className={`icono ${seccionesExpandidas[estado] ? 'expandido' : ''}`}>
-                {seccionesExpandidas[estado] ? 'v' : '>'}
+                {seccionesExpandidas[estado] ? "▼" : "►"}
               </span>
               {estado} ({tareasPorEstado[estado].length})
             </button>
