@@ -18,11 +18,11 @@ export async function validarCredencialesUsuario(req) {
     };
   }
 
-  if (nombre_usuario.length > 50 || contrasena.length > 50 || email.length > 100) {
+  if (nombre_usuario.length > 20 || contrasena.length > 15 || email.length > 50) {
     return { 
       success: false, 
       status: 411, 
-      message: "Credenciales inválidas: demasiados caracteres, MAX: 50 en usuario, 50 en contraseña y 100 en email" 
+      message: "Credenciales inválidas: demasiados caracteres, MAX: 20 en usuario, 15 en contraseña y 50 en email" 
     };
   }
 

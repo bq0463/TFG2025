@@ -192,9 +192,18 @@ Uso de cookies:
 
 ✅ Envío automático al servidor:
 
-    Cada vez que el usuario haga una petición, la cookie se envía automáticamente al backend sin necesidad de incluirla en fetch.
-    localStorage y sessionStorage no se envían automáticamente, por lo que deberías incluir manualmente el token en cada petición.
+    Cada vez que el usuario haga una petición, la cookie se envia.
+    Se debera incluir manualmente el token en cada petición.
 
+1. loginUser de controllers hace la firma de JWT y pone la informacion del token en la cookie
+
+2. verifyToken puede acceder al token en req.cookies.token porque el navegador lo envía automáticamente en cada solicitud, siempre y cuando:
+
+    a) Usando cookie-parser en backend
+
+    b) Enviando la cookie al cliente con .cookie(...)
+
+    c) El cliente reenvía cookies (con credentials: 'include')
 
 12/03
 30min
@@ -278,3 +287,9 @@ retoques e ideas para agrupar examenes
 1h y 45min
 
 hechas las categorias de examen y arreglando mensajes de error 
+
+13/04
+2h
+
+implementando los proyectos en FrontEnd
+falta ver como se limpian las categorias o una categoria

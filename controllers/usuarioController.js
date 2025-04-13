@@ -79,7 +79,7 @@ export class UsuarioController {
         // Guardar el token en una cookie segura
         res.cookie('token', result.token, {
             httpOnly: true,  // Evita que JavaScript del cliente acceda a la cookie
-            secure: process.env.NODE_ENV === 'production',  // Solo en HTTPS en producción
+            secure: process.env.NODE_ENV === 'production',  // true Solo si en HTTPS en producción, no en localhost, como en Vercel
             sameSite: 'Strict',  // Protege contra ataques CSRF
             maxAge: 24 * 60 * 60 * 1000 // Expira en 1 día
         });
