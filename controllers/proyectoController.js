@@ -25,10 +25,10 @@ export class ProyectoController {
       const { id_usuario } = req.params;
       const proyectos = await ProyectoModel.getAll({ id_usuario });
 
-      if (proyectos.length > 0) 
-        return res.json(proyectos);
-
-      return res.status(404).json({ message: 'Proyectos no encontrados' });
+      if (!proyectos)
+        return res.status(404).json({ message: 'Proyectos no encontrados' });
+      
+      return res.json(proyectos);
     }catch(error){
       return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }

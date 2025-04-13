@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PaginaExamenes.css";
 import ContenedorProyecto from "../Components/Contenedor/ContenedorProyecto.jsx";

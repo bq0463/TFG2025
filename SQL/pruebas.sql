@@ -1,1 +1,2 @@
-SELECT * from usuario;
+USE TFG2025;
+SELECT * FROM proyecto;

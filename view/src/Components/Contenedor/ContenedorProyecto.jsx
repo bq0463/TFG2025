@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./ContenedorProyecto.css";
 
-const ContenedorProyecto = ({ id, titulo, fecha, descripcion }) => {
+const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion,usuarios,tareas }) => {
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
   const [nuevoTitulo, setNuevoTitulo] = useState(titulo);
-  const [nuevaFecha, setNuevaFecha] = useState(fecha);
+  const [nuevaFecha, setNuevaFecha] = useState(fecha_entrega);
   const [nuevaDescripcion, setNuevaDescripcion] = useState(descripcion);
   
   const handleModificar = async () => {
@@ -18,7 +18,7 @@ const ContenedorProyecto = ({ id, titulo, fecha, descripcion }) => {
         },
         body: JSON.stringify({
           titulo: nuevoTitulo,
-          fecha: nuevaFecha,
+          fecha_entrega: nuevaFecha,
           descripcion: nuevaDescripcion,
         }),
       });
@@ -53,7 +53,7 @@ const ContenedorProyecto = ({ id, titulo, fecha, descripcion }) => {
   return (
     <div className="contenedor-proyecto">
       <h2>{titulo}</h2>
-      <p className="fecha">{fecha}</p>
+      <p className="fecha">{fecha_entrega}</p>
       <p className="nota">{descripcion}</p>
       <div className="gestion-proyecto">
         <button 
@@ -96,6 +96,7 @@ const ContenedorProyecto = ({ id, titulo, fecha, descripcion }) => {
           <button onClick={handleModificar}>Guardar</button>
         </div>
       )}
+
       {eliminando && (
         <div className="formulario-eliminar">
           <p>¿Estás seguro de que quieres desasociarte este proyecto?</p>

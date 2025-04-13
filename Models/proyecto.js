@@ -60,7 +60,7 @@ export class ProyectoModel {
     
         return rows.map(row => ({
             ...row,
-            fecha_entrega_entrega: row.fecha_entrega_entrega.toISOString().split('T')[0],
+            fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
         }));
     }
     

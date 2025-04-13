@@ -289,7 +289,11 @@ retoques e ideas para agrupar examenes
 hechas las categorias de examen y arreglando mensajes de error 
 
 13/04
-2h
+3h y 30min
 
 implementando los proyectos en FrontEnd
 falta ver como se limpian las categorias o una categoria
+.env para que no salga en repositorio
+
+el problema de proyectos era de controller 
+se disparaba el error 404 si no tenia proyectos el usuario pero con con la expresion !proyectos no se dispara dado que no devuelve falso
