@@ -82,6 +82,12 @@ const PaginaExamenes = () => {
     };
   }
 
+  const eliminarCategoria = (cat) => {
+    const nuevasCategorias = categorias.filter(c => c !== cat);
+    setCategorias(nuevasCategorias);
+    localStorage.setItem(`categorias_${userId}`, JSON.stringify(nuevasCategorias));
+  };
+
   const examenesPorCategoria = categorias.reduce((acc, cat) => {
     acc[cat] = examenes.filter(ex => ex.asignatura.toLowerCase().includes(cat.toLowerCase()));
     return acc;
@@ -206,7 +212,7 @@ const PaginaExamenes = () => {
             <button onClick={() => toggleCategoria(cat)} className="nav-b">
               {categoriasDesplegadas[cat] ? "▼" : "►"} {cat} ({examenesPorCategoria[cat].length})
             </button>
-            
+            <button onClick={() => eliminarCategoria(cat)} className="nav-b eliminar-categoria">Eliminar categoria</button>
             {categoriasDesplegadas[cat] && (
               <div className="contenedor-examenes">
                 {examenesPorCategoria[cat].map((examen) => (

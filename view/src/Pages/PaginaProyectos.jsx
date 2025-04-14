@@ -1,6 +1,6 @@
 import {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./PaginaExamenes.css";
+import "./PaginaProyectos.css";
 import ContenedorProyecto from "../Components/Contenedor/ContenedorProyecto.jsx";
 
 const PaginaProyectos = () => {
@@ -79,6 +79,12 @@ const PaginaProyectos = () => {
         alert("No puedes añadir más de 15 categorías.");
       }
     }
+  };
+
+  const eliminarCategoria = (cat) => {
+    const categoriasActualizadas = categorias.filter(c => c !== cat);
+    setCategorias(categoriasActualizadas);
+    localStorage.setItem(`categorias_proyecto_${userId}`, JSON.stringify(categoriasActualizadas));
   };
 
   const proyectosPorCategoria = categorias.reduce((acc, cat) => {
@@ -189,6 +195,7 @@ const PaginaProyectos = () => {
               name="fecha_entrega"
               value={nuevoProyecto.fecha_entrega}
               onChange={handleInputChange}
+              required
             />
 
             <button onClick={handleGuardarProyecto} className="nav-b">Guardar Proyecto</button>
@@ -221,18 +228,21 @@ const PaginaProyectos = () => {
             <button onClick={() => toggleCategoria(cat)} className="nav-b">
               {categoriasDesplegadas[cat] ? "▼" : "►"} {cat} ({proyectosPorCategoria[cat].length})
             </button>
-
+            <button onClick={() => eliminarCategoria(cat)} className="nav-b">
+              Eliminar Categoría
+            </button>
             {categoriasDesplegadas[cat] && (
-              <div className="contenedor-examenes">
+              <div className="contenedor-proyectos">
                 {proyectosPorCategoria[cat].map((proyecto) => (
                   <ContenedorProyecto
                     key={proyecto.id}
                     id={proyecto.id}
                     titulo={proyecto.titulo}
-                    descripcion={proyecto.descripcion}
                     fecha_entrega={proyecto.fecha_entrega}
-                    usuarios={proyecto.usuarios}
-                    tareas={proyecto.tareas}
+                    descripcion={proyecto.descripcion}
+                    usuarios={proyecto.usuarios || []}
+                    tareas={proyecto.tareas || []}
+                    userId={userId}
                   />
                 ))}
               </div>
@@ -245,18 +255,18 @@ const PaginaProyectos = () => {
             <button onClick={() => setMostrarSinCategoria(!mostrarSinCategoria)} className="nav-b">
               {mostrarSinCategoria ? "▼" : "►"} Sin Categoría ({sinCategoria.length})
             </button>
-
             {mostrarSinCategoria && (
-              <div className="contenedor-examenes">
+              <div className="contenedor-proyectos">
                 {sinCategoria.map((proyecto) => (
                   <ContenedorProyecto
                     key={proyecto.id}
                     id={proyecto.id}
                     titulo={proyecto.titulo}
-                    descripcion={proyecto.descripcion}
                     fecha_entrega={proyecto.fecha_entrega}
-                    usuarios={proyecto.usuarios}
-                    tareas={proyecto.tareas}
+                    descripcion={proyecto.descripcion}
+                    usuarios={proyecto.usuarios || []}
+                    tareas={proyecto.tareas || []}
+                    userId={userId}
                   />
                 ))}
               </div>

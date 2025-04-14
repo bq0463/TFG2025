@@ -297,3 +297,10 @@ falta ver como se limpian las categorias o una categoria
 
 el problema de proyectos era de controller 
 se disparaba el error 404 si no tenia proyectos el usuario pero con con la expresion !proyectos no se dispara dado que no devuelve falso
+
+14/04
+4h y 40min
+
+arreglando problemas de proyectos ,modificar getall para que devuelva bien los nombres de usuario porque esta devolviendo 1 usuario en vez de 3 y modificar el getall para que agrupe por id_proyecto y tenga en cuenta userId.
+
+hecho, faltan retoques de css y de spans

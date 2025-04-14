@@ -1,0 +1,146 @@
+.contenedor-proyecto {
+  background-color: #2f3b37;
+  border: 2px solid #07c787;
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: center;
+  width: calc(25% - 30px);
+  min-width: 250px; 
+  margin: 10px;
+  transition: transform 0.3s ease-in-out;
+  height: auto;
+}
+
+@media (max-width: 1024px) { 
+  .contenedor-proyecto {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 800px) {
+  .contenedor-proyecto {
+    width: calc(50% - 20px); 
+  }
+}
+
+@media (max-width: 500px) {
+  .contenedor-proyecto {
+    width: 100%; 
+  }
+}
+
+
+.contenedor-proyecto:hover {
+  transform: scale(1.05);
+}
+
+.contenedor-proyecto h2 {
+  font-family: "HelveticaCondensed";
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: #07c787;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+    text-transform: uppercase;
+}
+
+.contenedor-proyecto p {
+  font-family: "HelveticaCondensed";
+  font-size: 24px;
+  color: #07c787;
+  margin-bottom: 10px;
+}
+
+.proyectos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gestion-proyecto{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gestion-proyecto button{
+  background: #07c787;
+  color: #254b3e;
+  border: 2px solid #347e65;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 20px;
+  text-align: center;
+  font-family: "HelveticaCondensed";
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  max-width: 150px;
+  min-width: 100px;
+} 
+
+.contenedor-proyecto h3{
+  font-family: "HelveticaCondensed";
+  font-size: 25px;
+  color: #07c787;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  border-width: 3px;
+
+}
+.contenedor-proyecto .usuarios-asociados p{
+  font-family: "HelveticaCondensed";
+  font-size: 25px;
+  color: #07c787;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 0;
+}
+
+.contenedor-proyecto .formulario-tarea select {
+  font-family: "HelveticaCondensed";
+  font-size: 20px;
+  color: #07c787;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #254b3e;
+  border: 2px solid #07c787;
+  border-radius: 4px;
+} 
+
+.contenedor-proyecto .formulario-tarea select:hover {
+  background-color: #2f3b37;
+  color: #07c787;
+  border: 2px solid #347e65;
+}
+
+.contenedor-proyecto ul{
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.contenedor-proyecto li{
+  font-family: "HelveticaCondensed";
+  font-size: 20px;
+  color: #07c787;
+  margin-bottom: 10px;
+  text-align: center;
+}

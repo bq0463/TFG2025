@@ -5,42 +5,14 @@ import { validarCredencialesProyecto,validarCredencialesTarea } from '../middlew
 
 export class ProyectoModel {
 
-    static async getProyectoById({ id }) {
-        const [rows] = await connection.execute(`
-            SELECT 
-                p.id,p.fecha_entrega,
-                p.titulo,
-                p.descripcion,
-                GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
-                GROUP_CONCAT(DISTINCT t.descripcion SEPARATOR ', ') AS tareas
-            FROM 
-                proyecto p
-            LEFT JOIN 
-                usuario_proyecto up ON p.id = up.id_proyecto
-            LEFT JOIN 
-                usuario u ON up.id_usuario = u.id
-            LEFT JOIN 
-                proyecto_tiene_tarea ptt ON ptt.id_proyecto = p.id
-            LEFT JOIN 
-                tarea t ON t.id = ptt.id_tarea
-            WHERE 
-                p.id = ?
-            GROUP BY 
-                p.id;
-        `, [id]);
-    
-        return rows.map(row => ({
-            ...row,
-            fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
-        }));
-    }
-
     static async getAll({ id_usuario }) {
         const [rows] = await connection.execute(`
             SELECT 
-                p.id,p.titulo,
+                p.id,
+                p.titulo,
                 p.descripcion,
-                p.fecha_entrega,GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
+                p.fecha_entrega,
+                GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
                 GROUP_CONCAT(DISTINCT t.descripcion SEPARATOR ', ') AS tareas
             FROM 
                 usuario_proyecto up
@@ -51,13 +23,50 @@ export class ProyectoModel {
             LEFT JOIN 
                 tarea t ON t.id = ptt.id_tarea
             LEFT JOIN 
-            usuario u ON up.id_usuario = u.id
+                usuario u ON up.id_usuario = u.id
             WHERE 
                 up.id_usuario = ?
             GROUP BY 
                 p.id;
         `, [id_usuario]);
     
+        return rows.map(row => ({
+            ...row,
+            usuarios: row.usuarios ? row.usuarios.split(', ') : [],
+            fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
+        }));
+    }
+    
+
+    static async getAll({ id_usuario }) {
+        const [rows] = await connection.execute(`
+            SELECT 
+                p.id,
+                p.titulo,
+                p.descripcion,
+                p.fecha_entrega,
+                GROUP_CONCAT(DISTINCT u.nombre_usuario SEPARATOR ', ') AS usuarios,
+                GROUP_CONCAT(DISTINCT t.descripcion SEPARATOR ', ') AS tareas
+            FROM 
+                proyecto p
+            INNER JOIN 
+                usuario_proyecto up_filter ON p.id = up_filter.id_proyecto
+            LEFT JOIN 
+                usuario_proyecto up ON up.id_proyecto = p.id
+            LEFT JOIN 
+                usuario u ON u.id = up.id_usuario
+            LEFT JOIN 
+                proyecto_tiene_tarea ptt ON ptt.id_proyecto = p.id
+            LEFT JOIN 
+                tarea t ON t.id = ptt.id_tarea
+            WHERE 
+                up_filter.id_usuario = ?
+            GROUP BY 
+                p.id;
+        `, [id_usuario]);
+        
+        
+        console.log(rows);
         return rows.map(row => ({
             ...row,
             fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
