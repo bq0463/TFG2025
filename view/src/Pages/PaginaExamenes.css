@@ -139,6 +139,18 @@
         margin-right: 10px;
     }
 
+    .examenes input:hover{
+        background-color: #254b3e;
+        color: #07c787;
+        border-color: #07c787;
+    }
+    
+    .examenes input:focus{
+        background-color: #254b3e;
+        color: #07c787;
+        border-color: #07c787;
+    }
+
     .PaginaExamenes button:hover{
         background-color: #254b3e;
         color: #07c787;

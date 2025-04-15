@@ -81,17 +81,16 @@ export class ProyectoController {
             return res.status(validacion.status).json({ message: validacion.message });
         }
 
-        // Combinar req.params y req.body en un solo objeto input
         const input = {
           id_proyecto: req.params.id_proyecto, 
           id_usuario: req.params.id_usuario, 
           ...req.body
-      };
+        };
 
         const tarea = await ProyectoModel.createTareaProyecto(input);
 
-        if (tarea.affectedRows === 0) {
-            return res.status(500).json({ message: 'Error al crear la tarea' });
+        if (!tarea) {
+            return res.status(404).json({ message: 'Error al crear tarea en el proyecto' });
         }
 
         return res.status(201).json({ message: 'Tarea asociada correctamente al proyecto', id_tarea: tarea.id_tarea });

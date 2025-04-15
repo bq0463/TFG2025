@@ -183,7 +183,10 @@ const PaginaProyectos = () => {
               onChange={handleInputChange}
               required
             />
-            <input
+            <textarea
+              rows="4"
+              cols="50"
+              maxLength="200"
               type="text"
               name="descripcion"
               placeholder="Descripción del proyecto"

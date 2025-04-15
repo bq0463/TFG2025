@@ -54,7 +54,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
 
   const handleDesasociar = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
+      const response = await fetch(`http://localhost:5000/proyectos/${id}/usuario/${userId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -133,7 +133,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         <ul>
           {(listaTareas || []).map((tarea, i) => (
             <li key={i}>
-              <strong>{tarea.descripcion}</strong>
+              <strong>{tarea}</strong>
             </li>
           ))}
         </ul>
@@ -147,7 +147,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
           <div className="formulario-asociar">
             <input
               type="text"
-              placeholder="Nombre del compañero/a"
+              placeholder="Nombre de usuario"
               value={usuarioAsociado}
               onChange={(e) => setUsuarioAsociado(e.target.value)}
             />
@@ -230,8 +230,11 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
             value={nuevaFecha}
             onChange={(e) => setNuevaFecha(e.target.value)}
           />
-          <input
+          <textarea
+            rows="4"
+            cols="50"
             type="text"
+            maxLength="200"
             value={nuevaDescripcion}
             onChange={(e) => setNuevaDescripcion(e.target.value)}
             placeholder="Descripción"

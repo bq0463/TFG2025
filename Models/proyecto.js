@@ -65,8 +65,6 @@ export class ProyectoModel {
                 p.id;
         `, [id_usuario]);
         
-        
-        console.log(rows);
         return rows.map(row => ({
             ...row,
             fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
@@ -148,13 +146,15 @@ export class ProyectoModel {
             
         const tarea = await TareaModel.create({input});
         
-        if (tarea.affectedRows === 0) {
+        if (!tarea || !tarea.insertId) {
                 return {success: false,message: 'La tarea no se ha podido crear'}
         }
         
+        const id_tarea = tarea.insertId;
+
         const associate_tarea_proyecto = await connection.execute(
             'INSERT INTO proyecto_tiene_tarea (id_proyecto, id_tarea) VALUES (?,?)', 
-            [input.id_proyecto, tarea.id_tarea]
+            [input.id_proyecto, id_tarea]
         );
         
         if (associate_tarea_proyecto.affectedRows === 0) {

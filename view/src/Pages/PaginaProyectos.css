@@ -139,6 +139,35 @@
       margin-right: 10px;
   }
 
+  .proyectos input:focus{
+      border-color: #07c787;
+      box-shadow: 0 0 5px #07c787;
+  }
+
+  .proyectos input:hover{
+      background-color: #254b3e;
+      color: #07c787;
+      border-color: #07c787;
+  }
+
+  .proyectos textarea{
+      margin-left: 10px;
+      padding: 12px;
+      border: 2px solid #07c787;
+      background: #254b3e;
+      color: #07c787;
+      font-size: 20px;
+      font-family: "HelveticaCondensed";
+      outline: none; 
+      margin-right: 10px;
+      vertical-align: middle;
+  }
+
+  .proyectos textarea:focus{
+      border-color: #07c787;
+      box-shadow: 0 0 5px #07c787;
+  }
+
   .PaginaProyectos button:hover{
       background-color: #254b3e;
       color: #07c787;
@@ -208,4 +237,30 @@
       outline: none;
       width: 100%; 
       box-sizing: border-box; 
+  }
+
+  .formulario-modificar input:focus {
+        border-color: #07c787;
+        box-shadow: 0 0 5px #07c787;
+  }
+
+  .formulario-modificar input:hover {
+        background-color: #254b3e;
+        color: #07c787;
+        border-color: #07c787;
+  }
+
+  .formulario-proyecto{
+    background-color: #347e65;
+    padding: 15px;
+    margin: 10px auto;
+    border: #07c787 2px solid;
+    border-radius: 10px;
+    width: 70%;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.5);
+    
+  }
+
+  .formulario-proyecto .nav-b{
+    border: #254b3e 2px solid;
   }

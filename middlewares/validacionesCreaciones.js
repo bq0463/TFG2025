@@ -89,18 +89,12 @@ export async function validarCredencialesTarea(req) {
   export async function validarCredencialesProyecto(req) {
     const { titulo, descripcion, fecha_entrega } = req.body;
   
-    // Verificar que todos los campos estén presentes
-    if (!titulo || !descripcion || !fecha_entrega) {
+    if (!titulo  || !fecha_entrega) {
       return { success: false, status: 400, message: "Faltan credenciales" };
-    }
-  
-    // Validar longitud de los campos y formato del email
-    if (titulo.length < 5 ) {
-      return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado corto (5 caracteres minimo)" };
     }
 
     if (titulo.length > 100 || descripcion.length > 255 ) {
-      return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado largo (100 caracteres) o descripcion demasiado larga (255 caracteres)" };
+      return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado largo (100 caracteres máx) o descripcion demasiado larga (255 caracteres máx)" };
     }
 
     if ( isNaN(new Date(fecha_entrega))) {
@@ -124,6 +118,10 @@ export async function validarCredencialesTarea(req) {
 
     if(typeof nota !== 'number'){
       return { success: false, status: 400, message: "La nota debe ser un número" };
+    }
+
+    if(asignatura.length > 100){
+      return { success: false, status: 400, message: "La asignatura debe tener 100 caracteres máx" };
     }
 
     return { success: true , message: "Examen creado correctamente" };

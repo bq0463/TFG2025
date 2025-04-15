@@ -304,3 +304,8 @@ se disparaba el error 404 si no tenia proyectos el usuario pero con con la expre
 arreglando problemas de proyectos ,modificar getall para que devuelva bien los nombres de usuario porque esta devolviendo 1 usuario en vez de 3 y modificar el getall para que agrupe por id_proyecto y tenga en cuenta userId.
 
 hecho, faltan retoques de css y de spans
+
+15/04
+2h y 15min
+
+falta que cada tarea de proyecto tenga botones pequeños para eliminarlos o modificarlos o que se eliminen o modifiquen desde tareas 
