@@ -57,8 +57,12 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
   return (
     <div className="contenedor-tarea" data-estado={estado.toLowerCase().replace(/\s/g, "-")}>
       <h2>{descripcion}</h2>
-      <p className="valor">Valor: {valor}</p>
-      <p className="fecha">{fecha_inicio}</p>
+      {valor && parseFloat(valor) !== 0 && (
+        <p className="valor">Valor: {valor}</p>
+      )}
+      {fecha_inicio && fecha_inicio !== "1970-01-01" && (
+        <p className="fecha">Inicio: {fecha_inicio}</p>
+      )}
       <p className="fecha"> Limite: {fecha_fin}</p>
       <p className={`estado`}>{estado}</p>
       

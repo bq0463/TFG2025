@@ -11,7 +11,7 @@ const PaginaTareas = () => {
   const [nuevaTarea, setNuevaTarea] = useState({
     descripcion: "",
     valor: 0,
-    fecha_inicio: "",
+    fecha_inicio: null,
     fecha_fin: "",
     estado: "Pendiente",
   });
@@ -98,15 +98,36 @@ const PaginaTareas = () => {
 
   const handleGuardarTarea = async () => {
     try {
-      if (!nuevaTarea.descripcion || !nuevaTarea.fecha_inicio || !nuevaTarea.fecha_fin) {
+      if (!nuevaTarea.descripcion || !nuevaTarea.fecha_fin) {
         setCreationMessage("Faltan campos obligatorios como fechas o descripción");
         return;
       }
+  
+      const fechaInicioValida = nuevaTarea.fecha_inicio && nuevaTarea.fecha_inicio.trim() !== "";
+  
+      if (fechaInicioValida && nuevaTarea.fecha_inicio > nuevaTarea.fecha_fin) {
+        setCreationMessage("La fecha de inicio no puede ser mayor que la fecha de fin");
+        return;
+      }
+  
+      let fechaFormateadaInicio = null;
+      
+      if (
+        nuevaTarea.fecha_inicio !== null &&
+        nuevaTarea.fecha_inicio !== undefined &&
+        nuevaTarea.fecha_inicio !== ""
+      ) {
+        const fecha = new Date(nuevaTarea.fecha_inicio);
+        if (!isNaN(fecha.getTime())) {
+          fechaFormateadaInicio = fecha.toISOString().split("T")[0];
+        }
+      }
 
-      const fechaFormateadaInicio = new Date(nuevaTarea.fecha_inicio).toISOString().split('T')[0];
-      const fechaFormateadaFin = new Date(nuevaTarea.fecha_fin).toISOString().split('T')[0];
+  
+      const fechaFormateadaFin = new Date(nuevaTarea.fecha_fin).toISOString().split("T")[0];
+  
       const valorNumerico = nuevaTarea.valor !== "" ? parseFloat(nuevaTarea.valor) : 0;
-
+  
       const response = await fetch(`http://localhost:5000/tareas/${userId}`, {
         method: "POST",
         credentials: "include",
@@ -119,9 +140,9 @@ const PaginaTareas = () => {
           descripcion: nuevaTarea.descripcion,
         }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         window.location.reload();
       } else {
@@ -131,6 +152,7 @@ const PaginaTareas = () => {
       console.error("Error al crear tarea", error);
     }
   };
+  
 
   const toggleSeccion = (estado) => {
     setSeccionesExpandidas({

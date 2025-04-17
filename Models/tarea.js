@@ -32,8 +32,8 @@ export class TareaModel {
 
           return {
               ...row,
-              fecha_inicio: fecha_inicio.toISOString().split('T')[0], // Formatea la fecha_inicio de inicio
-              fecha_fin: fecha_fin.toISOString().split('T')[0], // Formatea la fecha_inicio de fin
+              fecha_inicio: fecha_inicio.toISOString().split('T')[0],
+              fecha_fin: fecha_fin.toISOString().split('T')[0], 
           };
       });
   }
@@ -118,7 +118,7 @@ export class TareaModel {
       try {
         const [result] = await connection.execute(
               'INSERT INTO tarea (id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
-              [input.id_usuario, input.descripcion, input.fecha_inicio, input.fecha_fin, input.estado, input.valor]
+              [input.id_usuario, input.descripcion, input.fecha_inicio || null, input.fecha_fin, input.estado, input.valor]
         );
         
         return result;
