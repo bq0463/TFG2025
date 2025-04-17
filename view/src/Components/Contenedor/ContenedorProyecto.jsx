@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./ContenedorProyecto.css";
+import { set } from "zod";
 
 const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, tareas, userId }) => {
   
@@ -26,6 +27,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
   const [TPEstado, setTPEstado] = useState("");
   const [TPValor, setTPValor] = useState("");
   const [mostrarFormularioTarea, setMostrarFormularioTarea] = useState(false);
+  const [creationMessage, setCreationMessage] = useState("");
 
   const handleModificar = async () => {
     try {
@@ -92,6 +94,40 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
 
   const handleCrearTareaProyecto = async () => {
     try {
+
+      if (!TPDescripcion || !TPFechaFin) {
+        setCreationMessage("Faltan campos obligatorios como fecha de fin o descripción");
+        return;
+      }
+
+      if (TPFechaInicio && TPFechaInicio > TPFechaFin) {
+        setCreationMessage("La fecha de inicio no puede ser mayor que la fecha de fin");
+        return;
+      }
+
+      if(TPFechaFin > fecha_entrega) {
+        setCreationMessage("La fecha fin de la tarea no puede ser mayor que la fecha de entrega del proyecto");
+        return;
+      }
+
+      let fechaFormateadaInicio = null;
+      
+      if (
+        TPFechaInicio !== null &&
+        TPFechaInicio !== undefined &&
+        TPFechaInicio !== ""
+      ) {
+        const fecha = new Date(TPFechaInicio);
+        if (!isNaN(fecha.getTime())) {
+          fechaFormateadaInicio = fecha.toISOString().split("T")[0];
+        }
+      }
+
+  
+      const fechaFormateadaFin = new Date(TPFechaFin).toISOString().split("T")[0];
+  
+      const valorNumerico = TPValor !== "" ? parseFloat(TPValor) : 0;
+
       const response = await fetch(`http://localhost:5000/proyectos/tarea/${id}/${userId}`, {
         method: "POST",
         credentials: "include",
@@ -100,10 +136,10 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         },
         body: JSON.stringify({
           descripcion: TPDescripcion,
-          fecha_inicio: TPFechaInicio,
-          fecha_fin: TPFechaFin,
+          fecha_inicio: fechaFormateadaInicio,
+          fecha_fin: fechaFormateadaFin,
           estado: TPEstado,
-          valor: TPValor,
+          valor: valorNumerico,
         }),
       });
 
@@ -128,16 +164,19 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         <p>{(listaUsuarios || []).join(', ')}</p>
       </div>
 
-      <div className="tareas-asociadas">
-        <h3>Tareas</h3>
-        <ul>
-          {(listaTareas || []).map((tarea, i) => (
-            <li key={i}>
-              <strong>{tarea}</strong>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {listaTareas.length > 0 && (
+        <div className="tareas-asociadas">
+          <h3>Tareas</h3>
+          <ul>
+            {listaTareas.map((tarea, i) => (
+              <li key={i}>
+                <strong>{tarea}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
 
       <div className="botones-acciones">
         <button onClick={() => setMostrarFormularioAsociar(!mostrarFormularioAsociar)}>
@@ -195,6 +234,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
             <button onClick={handleCrearTareaProyecto}>Crear tarea</button>
           </div>
         )}
+        {creationMessage && <span className="creation-message">{creationMessage}</span>}
       </div>
 
       <div className="gestion-proyecto">
@@ -224,11 +264,13 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
             value={nuevoTitulo}
             onChange={(e) => setNuevoTitulo(e.target.value)}
             placeholder="Título"
+            required
           />
           <input
             type="date"
             value={nuevaFecha}
             onChange={(e) => setNuevaFecha(e.target.value)}
+            required
           />
           <textarea
             rows="4"

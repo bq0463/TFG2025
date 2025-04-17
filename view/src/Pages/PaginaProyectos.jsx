@@ -125,9 +125,9 @@ const PaginaProyectos = () => {
   };
 
   const handleGuardarProyecto = async () => {
-    // Validación previa
+    
     if (!nuevoProyecto.titulo.trim() || !nuevoProyecto.fecha_entrega) {
-      setCreationMessage("Por favor completa todos los campos obligatorios (titulo, fecha_entrega).");
+      setCreationMessage("Por favor, complete todos los campos obligatorios (titulo, fecha_entrega).");
       return;
     }
 

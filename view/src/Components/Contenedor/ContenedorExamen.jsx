@@ -54,7 +54,7 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
     <div className="contenedor-examen">
       <h2>{asignatura}</h2>
       <p className="fecha">{fecha}</p>
-      <p className="nota">{nota}</p>
+      {nota && parseFloat(nota) !== 0 && (<p className="nota">{nota}</p>)}
       <div className="gestion-examen">
         <button 
           className="modificar-examen" 
@@ -65,7 +65,7 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
         >
           {editando ? "Cancelar" : "Modificar"}
         </button>
-        {!editando && ( // Oculta el botón de eliminar si se está editando
+        {!editando && ( 
         <button 
           className="eliminar-examen" 
           onClick={() => setEliminando(!eliminando)}

@@ -1,4 +1,4 @@
-USE TFG2025;
+-- Los nuevos trigger que han cambiado
 
 DELIMITER $$
 
@@ -48,5 +48,3 @@ BEGIN
 END $$
 
 DELIMITER ;
-
-
