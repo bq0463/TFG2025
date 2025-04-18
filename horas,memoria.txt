@@ -311,7 +311,7 @@ hecho, faltan retoques de css y de spans
 falta que cada tarea de proyecto tenga botones pequeños para eliminarlos o modificarlos o que se eliminen o modifiquen desde tareas 
 
 17/04
-2h
+4h
 
 Puestas las restricciones necesarias para que no se muestren ciertos campos si no se pone nada ,pues estas no se muestran.
 
@@ -319,5 +319,6 @@ Se puede crear una tarea sin valor o fecha_inicio
 
 Se puede crear un proyecto sin tener descripcion y otra restriccion es que no puede tener tareas con fecha fin > fecha de entrega del proyecto
 
- 
+Intentando tener el eliminar tareas en proyecto
 
+18/04

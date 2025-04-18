@@ -49,12 +49,13 @@ const PaginaProyectos = () => {
           });
 
           const data = await response.json();
+          console.log(data);
           setProyectos(data);
         } catch (error) {
           console.error("Error al obtener proyectos", error);
         }
       };
-
+      
       getProyectos();
     }
   }, [userId]);
@@ -71,7 +72,7 @@ const PaginaProyectos = () => {
   const agregarCategoria = () => {
     if (nuevaCategoria.trim() !== "" && !categorias.includes(nuevaCategoria)) {
       const nuevasCategorias = [...categorias, nuevaCategoria];
-      if (nuevasCategorias.length < 15) {
+      if (nuevasCategorias.length < 16) {
         setCategorias(nuevasCategorias);
         localStorage.setItem(`categorias_proyecto_${userId}`, JSON.stringify(nuevasCategorias));
         setNuevaCategoria("");
@@ -221,7 +222,7 @@ const PaginaProyectos = () => {
             />
             <button onClick={agregarCategoria} className="nav-b">Añadir Categoría</button>
             <span className="categoria-mensaje">
-              Las categorías clasifican si el título del proyecto contiene la palabra clave
+              Las categorías clasifican si el título del proyecto contiene la palabra clave, solo 15 categorías.
             </span>
           </div>
         )}

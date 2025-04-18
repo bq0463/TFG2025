@@ -72,7 +72,7 @@ const PaginaExamenes = () => {
   const agregarCategoria = () => {
     if (nuevaCategoria.trim() !== "" && !categorias.includes(nuevaCategoria)) {
       const nuevasCategorias = [...categorias, nuevaCategoria];
-      if (nuevasCategorias.length < 15) {
+      if (nuevasCategorias.length < 16) {
         setCategorias(nuevasCategorias);
         localStorage.setItem(`categorias_${userId}`, JSON.stringify(nuevasCategorias));
         setNuevaCategoria("");
@@ -203,7 +203,7 @@ const PaginaExamenes = () => {
               onChange={(e) => setNuevaCategoria(e.target.value)}
             />
             <button onClick={agregarCategoria} className="nav-b">Añadir Categoría</button>
-            <span className="categoria-mensaje">Las categorias clasifican si el examen contiene la palabra clave que se pone en este formulario</span>
+            <span className="categoria-mensaje">Las categorias clasifican si el examen contiene la palabra clave que se pone en este formulario, solo 15 categorías</span>
           </div>
         )}
 

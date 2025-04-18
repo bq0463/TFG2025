@@ -160,7 +160,6 @@
         color: rgb(68, 165, 30); 
         font-size: 1.5rem;
         font-family: "HelveticaCondensed";
-        font-weight: bold;
         text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
         margin-left: 10px;
     }

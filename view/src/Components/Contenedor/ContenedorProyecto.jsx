@@ -1,16 +1,7 @@
 import { useState } from "react";
 import "./ContenedorProyecto.css";
-import { set } from "zod";
 
 const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, tareas, userId }) => {
-  
-  const listaUsuarios = typeof usuarios === "string"
-  ? usuarios.split(",").map(u => u.trim()).filter(Boolean)
-  : [];
-
-  const listaTareas = typeof tareas === "string"
-  ? tareas.split(",").map(t => t.trim()).filter(Boolean)
-  : [];
 
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
@@ -153,6 +144,23 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
     }
   };
 
+  const handleEliminarTarea = async (idTarea) => {
+    try {
+      const response = await fetch(`http://localhost:5000/proyectos/tarea/${idTarea}`, {
+        method: "DELETE",
+        credentials: "include"
+      });
+  
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        console.error("Error al eliminar tarea");
+      }
+    } catch (error) {
+      console.error("Error al eliminar tarea", error);
+    }
+  };
+
   return (
     <div className="contenedor-proyecto">
       <h2>{titulo}</h2>
@@ -161,16 +169,35 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
 
       <div className="usuarios-asociados">
         <h3>Usuarios</h3>
-        <p>{(listaUsuarios || []).join(', ')}</p>
+        {usuarios && usuarios.length > 0 && (
+          <div className="usuarios-asociados-linea">
+            {usuarios.map((usuario, i) => (
+              <span key={i}>
+                {usuario}{i < usuarios.length - 1 ? ', ' : ''}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
-      {listaTareas.length > 0 && (
+
+      {tareas && tareas.length > 0 && (
         <div className="tareas-asociadas">
           <h3>Tareas</h3>
           <ul>
-            {listaTareas.map((tarea, i) => (
+            {tareas.map((tarea, i) => (
               <li key={i}>
-                <strong>{tarea}</strong>
+                <span>
+                  {tarea.descripcion}
+                  {parseInt(tarea.id_usuario) === parseInt(userId) && (
+                    <button
+                      className="btn-eliminar-tarea"
+                      onClick={() => handleEliminarTarea(tarea.id)}
+                    >
+                      Eliminar
+                    </button>
+                  )}
+                </span>
               </li>
             ))}
           </ul>
@@ -190,7 +217,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
               value={usuarioAsociado}
               onChange={(e) => setUsuarioAsociado(e.target.value)}
             />
-            <button onClick={handleAsociar}>Asociar</button>
+            <button onClick={handleAsociar}>Asociar usuario</button>
           </div>
         )}
 
@@ -245,14 +272,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
             setEliminando(false);
           }}
         >
-          {editando ? "Cancelar" : "Modificar"}
+          {editando ? "Cancelar" : "Modificar proyecto"}
         </button>
         {!editando && (
           <button 
             className="eliminar-proyecto" 
             onClick={() => setEliminando(!eliminando)}
           >
-            {eliminando ? "Cancelar" : "Desasociar"}
+            {eliminando ? "Cancelar" : "Desasociar proyecto"}
           </button>
         )}
       </div>
