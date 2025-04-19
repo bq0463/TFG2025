@@ -95,6 +95,7 @@ const PaginaLogueado = () => {
         </div>
       </header>
       <div className="content">
+        
       </div>
     </div>
   );  

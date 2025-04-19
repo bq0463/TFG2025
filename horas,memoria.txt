@@ -322,3 +322,6 @@ Se puede crear un proyecto sin tener descripcion y otra restriccion es que no pu
 Intentando tener el eliminar tareas en proyecto
 
 18/04
+1h y 30min
+
+Falta inicio y a lo mejor boton de modificar tarea en proyectos

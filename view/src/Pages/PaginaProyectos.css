@@ -1,252 +1,252 @@
 @font-face {
   font-family: "HelveticaCondensed";
   src: 
-      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
-      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
-      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
+    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
   }
 
   .PaginaProyectos header{
-      border-bottom: 2px solid #07c787;
-      padding: 25px;
-      background-color: #254b3e;
+    border-bottom: 2px solid #07c787;
+    padding: 25px;
+    background-color: #254b3e;
   }
 
   .PaginaProyectos nav {
-      display: flex;
-      width: 90%;
-      gap: 10px;
-      padding: 5px 5px 0 0;
-      background: transparent;
-      margin-top: 10px;
-      margin-left: 120px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+    display: flex;
+    width: 90%;
+    gap: 10px;
+    padding: 5px 5px 0 0;
+    background: transparent;
+    margin-top: 10px;
+    margin-left: 120px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .PaginaProyectos .nav-b {
-      flex: 1;
-      color: #254b3e;
-      letter-spacing: 2px;
-      font-size: 22px;
-      font-weight: bold;
-      font-family: "HelveticaCondensed", Arial, sans-serif;
-      text-decoration: none;
-      background-color: #07c787;
-      text-align: center;
-      padding: 5px;
-      border: #347e65 2px solid;
-      cursor: pointer;
+    flex: 1;
+    color: #254b3e;
+    letter-spacing: 2px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    text-decoration: none;
+    background-color: #07c787;
+    text-align: center;
+    padding: 5px;
+    border: #347e65 2px solid;
+    cursor: pointer;
   }
 
   .PaginaProyectos .nav-b:hover {
-      background-color: #254b3e;
-      color: #07c787;
-      border-color: #07c787;
+    background-color: #254b3e;
+    color: #07c787;
+    border-color: #07c787;
   }
 
   .PaginaProyectos .username {
-      font-family: "HelveticaCondensed", Arial, sans-serif;
-      font-size: 18px;
-      color: #07c787;
-      text-transform: uppercase;
-      font-weight: bold;
-      padding: 5px 10px;
-      border: #07c787 2px solid;
-      border-radius: 4px;
-      background: transparent;
-      margin-left: 20px;
-      box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.5);
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 18px;
+    color: #07c787;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: #07c787 2px solid;
+    border-radius: 4px;
+    background: transparent;
+    margin-left: 20px;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.5);
   }
 
   .PaginaProyectos .username:hover {
-      background-color: #07c787;
-      color: #254b3e;
-      border-color: #254b3e;
-      cursor: pointer;
+    background-color: #07c787;
+    color: #254b3e;
+    border-color: #254b3e;
+    cursor: pointer;
   }
 
   .proyectos{
-      width: 100%;
-      background: #254b3e;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      border-bottom: #07c787 2px solid;
-      bottom: 0;
-      align-items: center;
+    width: 100%;
+    background: #254b3e;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: #07c787 2px solid;
+    bottom: 0;
+    align-items: center;
   }
 
   .proyectos h2{
-      text-align: center;
-      font-family: "HelveticaCondensed", Arial, sans-serif;
-      color: #07c787;
-      letter-spacing: 2px;
-      font-size: 24px;
-      z-index: 0;
-      text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+    text-align: center;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    color: #07c787;
+    letter-spacing: 2px;
+    font-size: 24px;
+    z-index: 0;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
   }
 
   .proyectos h1{
-      text-align: center;
-      font-family: "HelveticaCondensed", Arial, sans-serif;
-      color: #07c787;
-      letter-spacing: 2px;
-      font-size: 34px;
-      z-index: 0;
-      text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
-      padding: 10px;
-      border: #07c787 2px solid;
-      background: #222;
-      width: 30%;
+    text-align: center;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    color: #07c787;
+    letter-spacing: 2px;
+    font-size: 34px;
+    z-index: 0;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+    padding: 10px;
+    border: #07c787 2px solid;
+    background: #222;
+    width: 30%;
   }
 
   .PaginaProyectos .proyectos .contenedor-proyectos button{
-      background: #07c787;
-      color: #254b3e;
-      border: 2px solid #000;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      margin-top: 10px;
-      text-align: left;
-      width: 20%;
-      border-radius: 6px;
-      font-family: "HelveticaCondensed";
+    background: #07c787;
+    color: #254b3e;
+    border: 2px solid #000;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: left;
+    width: 20%;
+    border-radius: 6px;
+    font-family: "HelveticaCondensed";
   }
 
   .PaginaProyectos .proyectos .contenedor-proyectos button:hover{
-      background-color: #254b3e;
-      color: #07c787;
-      border-color: #07c787;
+    background-color: #254b3e;
+    color: #07c787;
+    border-color: #07c787;
   }
 
   .PaginaProyectos .proyectos .contenedor-proyectos button:active{
-      background-color: #07c787;
-      color: #254b3e;
+    background-color: #07c787;
+    color: #254b3e;
   }
 
   .proyectos input{
-      margin: 10px auto;
-      padding: 12px;
-      border: 2px solid #07c787;
-      background: #254b3e;
-      color: #07c787;
-      font-size: 20px;
-      font-family: "HelveticaCondensed";
-      outline: none; 
-      margin-right: 10px;
+    margin: 10px auto;
+    padding: 12px;
+    border: 2px solid #07c787;
+    background: #254b3e;
+    color: #07c787;
+    font-size: 20px;
+    font-family: "HelveticaCondensed";
+    outline: none; 
+    margin-right: 10px;
   }
 
   .proyectos input:focus{
-      border-color: #07c787;
-      box-shadow: 0 0 5px #07c787;
+    border-color: #07c787;
+    box-shadow: 0 0 5px #07c787;
   }
 
   .proyectos input:hover{
-      background-color: #254b3e;
-      color: #07c787;
-      border-color: #07c787;
+    background-color: #254b3e;
+    color: #07c787;
+    border-color: #07c787;
   }
 
   .proyectos textarea{
-      margin-left: 10px;
-      padding: 12px;
-      border: 2px solid #07c787;
-      background: #254b3e;
-      color: #07c787;
-      font-size: 20px;
-      font-family: "HelveticaCondensed";
-      outline: none; 
-      margin-right: 10px;
-      vertical-align: middle;
+    margin-left: 10px;
+    padding: 12px;
+    border: 2px solid #07c787;
+    background: #254b3e;
+    color: #07c787;
+    font-size: 20px;
+    font-family: "HelveticaCondensed";
+    outline: none; 
+    margin-right: 10px;
+    vertical-align: middle;
   }
 
   .proyectos textarea:focus{
-      border-color: #07c787;
-      box-shadow: 0 0 5px #07c787;
+    border-color: #07c787;
+    box-shadow: 0 0 5px #07c787;
   }
 
   .PaginaProyectos button:hover{
-      background-color: #254b3e;
-      color: #07c787;
+    background-color: #254b3e;
+    color: #07c787;
   }
 
   .PaginaProyectos .categoria-mensaje{
-      color: rgb(68, 165, 30); 
-      font-size: 1.5rem;
-      font-family: "HelveticaCondensed";
-      text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
-      margin-left: 10px;
+    color: rgb(68, 165, 30); 
+    font-size: 1.5rem;
+    font-family: "HelveticaCondensed";
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+    margin-left: 10px;
   }
 
   .PaginaProyectos .creation-message-P{
-      color: rgb(182, 29, 29); 
-      font-size: 1.5rem;
-      font-family: "HelveticaCondensed";
-      font-weight: bold;
-      text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
-      margin-left: 10px;
+    color: rgb(182, 29, 29); 
+    font-size: 1.5rem;
+    font-family: "HelveticaCondensed";
+    font-weight: bold;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+    margin-left: 10px;
   }
 
   .PaginaProyectos .grupo-categoria {
-      margin-top: 50px;
+    margin-top: 50px;
   }
   
   .PaginaProyectos .grupo-categoria {
-      width: 100%;
-      text-align: left;
+    width: 100%;
+    text-align: left;
   }
 
   .PaginaProyectos .grupo-categoria button{
-      margin-left: 50px;
+    margin-left: 50px;
   }
   .contenedor-proyectos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      min-width: 200px;
-      margin: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    min-width: 200px;
+    margin: 8px;
   }
 
   .formulario-eliminar button {
-      margin-right: 20px;
-      padding: 12px 25px;
-      font-size: 18px; 
-      text-align: center;
-      font-family: "HelveticaCondensed", Arial, sans-serif;
-      background: #07c787;
-      color: #254b3e;
-      
-      cursor: pointer;
-      transition: background 0.3s ease;
-      min-width: 150px; 
+    margin-right: 20px;
+    padding: 12px 25px;
+    font-size: 18px; 
+    text-align: center;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    background: #07c787;
+    color: #254b3e;
+    
+    cursor: pointer;
+    transition: background 0.3s ease;
+    min-width: 150px; 
   }
 
   .formulario-modificar input {
-      margin: 10px 0; 
-      padding: 12px;
-      border: 2px solid #07c787;
-      background: #254b3e;
-      color: #07c787;
-      font-size: 18px;
-      font-family: "HelveticaCondensed", Arial, sans-serif;
-      outline: none;
-      width: 100%; 
-      box-sizing: border-box; 
+    margin: 10px 0; 
+    padding: 12px;
+    border: 2px solid #07c787;
+    background: #254b3e;
+    color: #07c787;
+    font-size: 18px;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    outline: none;
+    width: 100%; 
+    box-sizing: border-box; 
   }
 
   .formulario-modificar input:focus {
-        border-color: #07c787;
-        box-shadow: 0 0 5px #07c787;
+    border-color: #07c787;
+    box-shadow: 0 0 5px #07c787;
   }
 
   .formulario-modificar input:hover {
-        background-color: #254b3e;
-        color: #07c787;
-        border-color: #07c787;
+    background-color: #254b3e;
+    color: #07c787;
+    border-color: #07c787;
   }
 
   .formulario-proyecto{
