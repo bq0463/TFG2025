@@ -68,34 +68,55 @@
     cursor: pointer;
 }
 
-.PaginaLogueado h1 {
-    text-align: center;
-    font-family: "HelveticaCondensed", Arial, sans-serif;
+.header-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #254b3e;
     color: #07c787;
-    letter-spacing: 2px;
-    font-size: 34px;
-    z-index: 0;
-    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
-    padding: 10px;
-    border: #07c787 2px solid;
-    background: #222;
-    width: fit-content;
-    margin: 20px auto;
-    margin-bottom: 50px;
+    font-family: "HelveticaCondensed";
 }
 
+.PaginaLogueado h1 {
+  text-align: center;
+  font-family: "HelveticaCondensed", Arial, sans-serif;
+  color: #07c787;
+  letter-spacing: 2px;
+  font-size: 34px;
+  z-index: 0;
+  text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000, 2px 2px 4px #000;
+  padding: 10px;
+  border: #07c787 2px solid;
+  background: #222;
+  width: 40%;
+  margin: 0 auto 20px; 
+}
+
+.PaginaLogueado .content {
+  width: 100%;
+  background: #254b3e;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border-bottom: #07c787 2px solid;
+  bottom: 0;
+  justify-content: space-between;
+}
+
+
 .PaginaLogueado .calendar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    min-height: 80vh;
-    overflow: hidden;
-    padding: 1rem;
-    width: 70%;
-    margin-left: 20px;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 80vh;
+  overflow: hidden;
+  padding: 1rem;
+  width: 70%;
+  margin-left: 0; 
 }
 
 .PaginaLogueado .rbc-month-view {
@@ -106,7 +127,8 @@
 .PaginaLogueado .rbc-month-row {
   border-top: 2px solid #07c787;
   border-left: 2px solid #07c787;
-  border-right: 2px solid #07c787;
+  border-right: 3px solid #07c787;
+  border-bottom: 3px solid #07c787;
 }
 
 .PaginaLogueado .rbc-day-bg {
@@ -115,6 +137,7 @@
   border-left: 2px solid #07c787;
   border-top: 2px solid #07c787;
   background-color: #254b3e;
+  padding: 5px auto;
 }
 
 .PaginaLogueado .rbc-day-bg:hover {
@@ -165,14 +188,12 @@
 .PaginaLogueado .rbc-header {
   border-right: 2px solid #07c787;
   border-bottom: 2px solid #07c787;
+  border-left: #07c787 2px solid;
+  border-top: #07c787 2px solid;
   padding: 10px;
   background-color: #254b3e;
   color: #07c787;
   font-family: "HelveticaCondensed", Arial, sans-serif;
-}
-
-.PaginaLogueado .rbc-header:last-child {
-  border-right: none;
 }
 
 .PaginaLogueado .rbc-event {
@@ -183,7 +204,13 @@
     text-align: center;
     font-family: "HelveticaCondensed", Arial, sans-serif;
     font-size: 16px;
-    
+    margin: 4px;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 95%;
+    text-align: justify;
 }
 
 .PaginaLogueado .rbc-event:hover {
@@ -205,8 +232,8 @@
 }
 
 .PaginaLogueado .rbc-toolbar {
-    background-color: #254b3e;
-    color: #07c787;
+    background-color: #07c787;
+    color: #254b3e;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -215,7 +242,7 @@
 .PaginaLogueado .rbc-toolbar-label {
     font-family: "HelveticaCondensed", Arial, sans-serif;
     font-size: 20px;
-    color: #07c787;
+    color: #254b3e;
     font-weight: bold;
 }
 
@@ -289,10 +316,60 @@
     background-color: #07c787;
     color: #254b3e; 
 }
+
 .PaginaLogueado .rbc-selected:hover {
     background-color: #254b3e;
     color: #07c787;
     cursor: pointer;
 }
 
+.PaginaLogueado .eventos-proximos {
+  width: 25%; 
+  max-height: 80vh;
+  overflow-y: auto; 
+  background-color: #254b3e;
+  padding: 10px;
+  border: 2px solid #07c787;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin-left: 20px;
+  margin-top: 30px;
+  margin-right: 30px;
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #07c787 #254b3e;
+}
 
+.PaginaLogueado .eventos-proximos h3 {
+  font-family: "HelveticaCondensed";
+  font-size: 24px;
+  color: #07c787;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000, 2px 2px 4px #000;
+  border-bottom: #07c787 3px solid;
+}
+
+.PaginaLogueado .event-item {
+  background-color: #07c787;
+  color: #254b3e;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.PaginaLogueado .event-item:hover {
+  background-color: #254b3e;
+  color: #07c787;
+}
+
+.PaginaLogueado .event-item h4 {
+  margin: 0;
+  font-size: 20px;
+  font-family: "HelveticaCondensed";
+  font-weight: bold;
+}
+
+.PaginaLogueado .event-item p {
+  font-size: 18px;
+}

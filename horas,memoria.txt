@@ -327,7 +327,7 @@ Intentando tener el eliminar tareas en proyecto
 Falta inicio y a lo mejor boton de modificar tarea en proyectos
 
 19/04
-2h y 30min
+3h y 30min
 
 npm install react-big-calendar date-fns
 

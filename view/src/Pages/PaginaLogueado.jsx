@@ -200,6 +200,8 @@ const PaginaLogueado = () => {
     }
   }
 
+  const eventosNoCaducados = eventos.filter(evento => evento.end >= new Date());
+
   return (
     <div className="PaginaLogueado">
       <header className="header">
@@ -214,8 +216,10 @@ const PaginaLogueado = () => {
           </nav>
         </div>
       </header>
+      <div className="header-top">
+        <h1>Tus Eventos</h1>
+      </div>
       <div className="content">
-        <h1>Bienvenido, {username}</h1>
         <div className="calendar-container">
           <Calendar
             localizer={localizer}
@@ -250,6 +254,19 @@ const PaginaLogueado = () => {
                 localizer.format(date, "MMMM yyyy", culture),
             }}
           />
+        </div>
+        <div className="eventos-proximos">
+          <h3>Próximos eventos</h3>
+          {eventosNoCaducados.length > 0 ? (
+            eventosNoCaducados.map((evento, index) => (
+              <div key={index} className="event-item">
+                <h4>{evento.title}</h4>
+                <p>{`Fecha: ${format(evento.start, 'dd/MM/yyyy')}`}</p>
+              </div>
+            ))
+          ) : (
+            <p>No hay eventos próximos.</p>
+          )}
         </div>
       </div>
     </div>
