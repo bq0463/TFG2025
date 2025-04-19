@@ -325,3 +325,14 @@ Intentando tener el eliminar tareas en proyecto
 1h y 30min
 
 Falta inicio y a lo mejor boton de modificar tarea en proyectos
+
+19/04
+2h y 30min
+
+npm install react-big-calendar date-fns
+
+big-calendar sirve para mostrar un calendario con todos los eventos que hay por dia y date-fns es un localizador de fechas.
+
+hecho el big calendar, faltaria una tarjeta que mostrase otros atributos
+
+

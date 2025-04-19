@@ -67,3 +67,232 @@
     border-color: #254b3e;
     cursor: pointer;
 }
+
+.PaginaLogueado h1 {
+    text-align: center;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    color: #07c787;
+    letter-spacing: 2px;
+    font-size: 34px;
+    z-index: 0;
+    text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
+    padding: 10px;
+    border: #07c787 2px solid;
+    background: #222;
+    width: fit-content;
+    margin: 20px auto;
+    margin-bottom: 50px;
+}
+
+.PaginaLogueado .calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 80vh;
+    overflow: hidden;
+    padding: 1rem;
+    width: 70%;
+    margin-left: 20px;
+    
+}
+
+.PaginaLogueado .rbc-month-view {
+  border: 2px solid #07c787;
+  box-sizing: border-box;
+}
+
+.PaginaLogueado .rbc-month-row {
+  border-top: 2px solid #07c787;
+  border-left: 2px solid #07c787;
+  border-right: 2px solid #07c787;
+}
+
+.PaginaLogueado .rbc-day-bg {
+  border-right: 2px solid #07c787;
+  border-bottom: 2px solid #07c787;
+  border-left: 2px solid #07c787;
+  border-top: 2px solid #07c787;
+  background-color: #254b3e;
+}
+
+.PaginaLogueado .rbc-day-bg:hover {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+
+.PaginaLogueado .rbc-day-bg:focus {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:focus-visible {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:focus-visible:hover {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:focus-visible:active {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:focus-visible:active:hover {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:focus-visible:active:focus {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:focus-visible:active:focus-visible {
+  background-color: #07c787;
+  color: #254b3e;
+  cursor: pointer;
+}
+.PaginaLogueado .rbc-day-bg:last-child {
+  border-right: none;
+}
+
+.PaginaLogueado .rbc-header {
+  border-right: 2px solid #07c787;
+  border-bottom: 2px solid #07c787;
+  padding: 10px;
+  background-color: #254b3e;
+  color: #07c787;
+  font-family: "HelveticaCondensed", Arial, sans-serif;
+}
+
+.PaginaLogueado .rbc-header:last-child {
+  border-right: none;
+}
+
+.PaginaLogueado .rbc-event {
+    background-color: #07c787;
+    color: #254b3e;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 16px;
+    
+}
+
+.PaginaLogueado .rbc-event:hover {
+    background-color: #254b3e;
+    color: #07c787;
+    cursor: pointer;
+}
+
+.PaginaLogueado .rbc-event-label {
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 16px;
+    color: #254b3e;
+}
+
+.PaginaLogueado .rbc-event-time {
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 14px;
+    color: #254b3e;
+}
+
+.PaginaLogueado .rbc-toolbar {
+    background-color: #254b3e;
+    color: #07c787;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.PaginaLogueado .rbc-toolbar-label {
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 20px;
+    color: #07c787;
+    font-weight: bold;
+}
+
+.PaginaLogueado .rbc-toolbar button {
+    background-color: #07c787;
+    color: #254b3e;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "HelveticaCondensed", Arial, sans-serif;
+    font-size: 16px;
+}
+
+.PaginaLogueado .rbc-toolbar button:hover {
+    background-color: #254b3e;
+    color: #07c787;
+    cursor: pointer;
+}
+
+.PaginaLogueado .rbc-toolbar button:disabled {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+
+.PaginaLogueado .rbc-toolbar button:disabled:hover {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+
+.PaginaLogueado .rbc-toolbar button:disabled:active {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+.PaginaLogueado .rbc-toolbar button:disabled:focus {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+
+.PaginaLogueado .rbc-toolbar button:disabled:focus-visible {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+.PaginaLogueado .rbc-toolbar button:disabled:focus-visible:hover {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+.PaginaLogueado .rbc-toolbar button:disabled:focus-visible:active {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+.PaginaLogueado .rbc-toolbar button:disabled:focus-visible:active:hover {
+    background-color: #07c787;
+    color: #254b3e;
+    cursor: not-allowed;
+}
+
+.PaginaLogueado .rbc-today {
+    background-color: #347e65;
+    color: #254b3e; 
+}
+
+.PaginaLogueado .rbc-selected {
+    background-color: #07c787;
+    color: #254b3e; 
+}
+.PaginaLogueado .rbc-selected:hover {
+    background-color: #254b3e;
+    color: #07c787;
+    cursor: pointer;
+}
+
+
