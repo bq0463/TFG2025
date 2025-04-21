@@ -47,7 +47,6 @@ export class ProyectoModel {
           ...row,
           usuarios: row.usuarios ? row.usuarios.split(', ') : [],
           tareas,
-          fecha_entrega: row.fecha_entrega.toISOString().split('T')[0],
         };
       });    
     }

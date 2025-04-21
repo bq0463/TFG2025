@@ -257,6 +257,7 @@ const PaginaLogueado = () => {
         </div>
         <div className="eventos-proximos">
           <h3>Próximos eventos</h3>
+          <hr />
           {eventosNoCaducados.length > 0 ? (
             eventosNoCaducados.map((evento, index) => (
               <div key={index} className="event-item">

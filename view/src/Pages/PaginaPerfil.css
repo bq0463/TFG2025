@@ -1,9 +1,7 @@
 @font-face {
-  font-family: "HelveticaCondensed";
-  src: 
-    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
-    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
-    url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
+    font-family: "HelveticaCondensed";
+    src: url("/fonts/helvetica_condensed_bold_italic-webfont.woff") format("woff"),
+    url("/fonts/helvetica_condensed_bold_italic-webfont.woff") format("woff2");
 }
 
 .PaginaPerfil header{
@@ -98,8 +96,6 @@
     z-index: 0;
     text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
     padding: 10px;
-    padding-left: 700px;
-    padding-right: 700px;
     margin-bottom: 50px;
     border: #07c787 2px solid;
     background: #222;

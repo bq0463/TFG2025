@@ -20,6 +20,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
   const [mostrarFormularioTarea, setMostrarFormularioTarea] = useState(false);
   const [creationMessage, setCreationMessage] = useState("");
 
+  const ajustarFechaLocal = (fechaStr) => {
+    if (!fechaStr) return "";
+    const fecha = new Date(fechaStr);
+    const offset = fecha.getTimezoneOffset();
+    const fechaLocal = new Date(fecha.getTime() - offset * 60 * 1000);
+    return fechaLocal.toISOString().split("T")[0];
+  };
+
   const handleModificar = async () => {
     try {
       const response = await fetch(`http://localhost:5000/proyectos/${id}`, {
@@ -164,7 +172,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
   return (
     <div className="contenedor-proyecto">
       <h2>{titulo}</h2>
-      <p className="fecha">{fecha_entrega}</p>
+      <p className="fecha">{ajustarFechaLocal(fecha_entrega)}</p>
       <p className="nota">{descripcion}</p>
 
       <div className="usuarios-asociados">

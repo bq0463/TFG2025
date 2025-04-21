@@ -1,9 +1,9 @@
-/* Estilos de la pagina de inicio */
 @font-face {
-  font-family: "HelveticaCondensed";
-  src: url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
-  url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
-  url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
+  font-family: 'HelveticaCondensed';
+  src: url('/fonts/helveticacondensed_bolditalic-webfont.woff2') format('woff2'),
+       url('/fonts/helveticacondensed_bolditalic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
 }
 
 @keyframes radarBackground {

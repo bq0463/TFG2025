@@ -7,16 +7,15 @@ export class ExamenModel {
     const [rows] = await connection.execute('SELECT id,asignatura,nota,fecha FROM examen WHERE id = ?', [id]);
     return rows.map(row => ({
       ...row,
-      fecha: row.fecha.toISOString().split('T')[0],
-  }));
+    }));
   }
 
   static async getAll({ id_usuario }) {
     const [rows] = await connection.execute('SELECT id,asignatura,nota,fecha FROM examen WHERE id_usuario = ?', [id_usuario]);
     return rows.map(row => ({
       ...row,
-      fecha: row.fecha.toISOString().split('T')[0],
-  }));
+      })
+    );
   }
 
   static async create({ input }) {

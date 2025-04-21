@@ -327,7 +327,7 @@ Intentando tener el eliminar tareas en proyecto
 Falta inicio y a lo mejor boton de modificar tarea en proyectos
 
 19/04
-3h y 30min
+4h
 
 npm install react-big-calendar date-fns
 
@@ -335,4 +335,13 @@ big-calendar sirve para mostrar un calendario con todos los eventos que hay por 
 
 hecho el big calendar, faltaria una tarjeta que mostrase otros atributos
 
+21/04
+2h
 
+verificando cosas en otros navegadores, corrigiendo errores etc
+
+cambiado el formateo de fecha en el backend debido al desfase de la zona horaria
+
+tambien se debe poner el ajuste de fecha local en todos los contenedores
+
+pensando en ordenar por fecha dentro de cada categoria

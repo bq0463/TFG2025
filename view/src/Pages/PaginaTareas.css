@@ -1,10 +1,8 @@
 @font-face {
   font-family: "HelveticaCondensed";
-  src: 
-      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("truetype"),
-      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff"),
-      url("../fonts/Helvetica-Condensed-Bold-Italic.ttf") format("woff2");
-  }
+  src: url("/fonts/helvetica_condensed_bold_italic-webfont.woff") format("woff"),
+  url("/fonts/helvetica_condensed_bold_italic-webfont.woff") format("woff2");
+}
 
   .PaginaTareas header{
       border-bottom: 2px solid #07c787;

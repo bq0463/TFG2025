@@ -25,17 +25,11 @@ export class TareaModel {
   static async getAll({ id_usuario }) {
     const [rows] = await connection.execute('SELECT id,descripcion,valor,fecha_inicio,fecha_fin,estado FROM tarea WHERE id_usuario = ?', [id_usuario]);
 
-    
-      return rows.map(row => {
-          const fecha_inicio= new Date(row.fecha_inicio);
-          const fecha_fin = new Date(row.fecha_fin);
-
-          return {
-              ...row,
-              fecha_inicio: fecha_inicio.toISOString().split('T')[0],
-              fecha_fin: fecha_fin.toISOString().split('T')[0], 
-          };
-      });
+    return rows.map(row => {
+        return {
+            ...row,
+        };
+    });
   }
 
   static async delete({ id }) {

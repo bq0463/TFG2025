@@ -7,7 +7,14 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
   const [nuevaAsignatura, setNuevaAsignatura] = useState(asignatura);
   const [nuevaFecha, setNuevaFecha] = useState(fecha);
   const [nuevaNota, setNuevaNota] = useState(nota);
-  
+  const ajustarFechaLocal = (fechaStr) => {
+    if (!fechaStr) return "";
+    const fecha = new Date(fechaStr);
+    const offset = fecha.getTimezoneOffset();
+    const fechaLocal = new Date(fecha.getTime() - offset * 60 * 1000);
+    return fechaLocal.toISOString().split("T")[0];
+  };
+
   const handleModificar = async () => {
     try {
       const response = await fetch(`http://localhost:5000/examenes/${id}`, {
@@ -53,7 +60,7 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
   return (
     <div className="contenedor-examen">
       <h2>{asignatura}</h2>
-      <p className="fecha">{fecha}</p>
+      <p className="fecha">{ajustarFechaLocal(fecha)}</p>
       {nota && parseFloat(nota) !== 0 && (<p className="nota">{nota}</p>)}
       <div className="gestion-examen">
         <button 

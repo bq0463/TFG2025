@@ -2,12 +2,20 @@ import { useState } from "react";
 import "./contenedorTarea.css";
 
 const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, estado }) => {
+  const ajustarFechaLocal = (fechaStr) => {
+    if (!fechaStr) return "";
+    const fecha = new Date(fechaStr);
+    const offset = fecha.getTimezoneOffset();
+    const fechaLocal = new Date(fecha.getTime() - offset * 60 * 1000);
+    return fechaLocal.toISOString().split("T")[0];
+  };
+
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
   const [nuevaDescripcion, setNuevaDescripcion] = useState(descripcion);
   const [nuevoValor, setNuevoValor] = useState(valor);
-  const [nuevaFechaInicio, setNuevaFechaInicio] = useState(fecha_inicio);
-  const [nuevaFechaFin, setNuevaFechaFin] = useState(fecha_fin);
+  const [nuevaFechaInicio, setNuevaFechaInicio] = useState(ajustarFechaLocal(fecha_inicio));
+  const [nuevaFechaFin, setNuevaFechaFin] = useState(ajustarFechaLocal(fecha_fin));
   const [nuevoEstado, setNuevoEstado] = useState(estado);
 
   const handleModificar = async () => {
@@ -60,12 +68,12 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
       {valor && parseFloat(valor) !== 0 && (
         <p className="valor">Valor: {valor}</p>
       )}
-      {fecha_inicio && fecha_inicio !== "1970-01-01" && (
-        <p className="fecha">Inicio: {fecha_inicio}</p>
+      {nuevaFechaInicio && nuevaFechaInicio !== "1970-01-01" && (
+        <p className="fecha">Inicio: {nuevaFechaInicio}</p>
       )}
-      <p className="fecha"> Limite: {fecha_fin}</p>
-      <p className={`estado`}>{estado}</p>
-      
+      <p className="fecha">Límite: {nuevaFechaFin}</p>
+      <p className="estado">{estado}</p>
+
       <div className="gestion-tarea">
         <button 
           className="modificar-tarea" 

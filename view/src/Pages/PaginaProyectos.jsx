@@ -133,14 +133,13 @@ const PaginaProyectos = () => {
     }
 
     try {
-      const fechaFormateada = new Date(nuevoProyecto.fecha_entrega).toISOString().split('T')[0];       
       const response = await fetch(`http://localhost:5000/proyectos/${userId}`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           titulo: nuevoProyecto.titulo,
-          fecha_entrega: fechaFormateada,
+          fecha_entrega: nuevoProyecto.fecha_entrega,
           descripcion: nuevoProyecto.descripcion,
         }),
       });
