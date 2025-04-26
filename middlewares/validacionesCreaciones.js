@@ -56,10 +56,51 @@ export async function validarCredencialesUsuario(req) {
   }
 }
 
+export async function validarUpdateById(req, res, next) {
+  const { nombre_usuario, email } = req.body;
 
+  if (nombre_usuario && nombre_usuario.length < 5) {
+    return res.status(411).json({ message: "El nombre de usuario debe tener al menos 5 caracteres." });
+  }
+
+  if (email && !email.includes("@")) {
+    return res.status(411).json({ message: "El correo electrónico debe ser válido (contener @)." });
+  }
+
+  if (email && email.length > 50) {
+    return res.status(411).json({ message: "El correo electrónico no puede tener más de 50 caracteres." });
+  }
+
+  if (email) {
+    const [rowsEmail] = await connection.execute("SELECT * FROM usuario WHERE email = ?", [email]);
+
+    if (rowsEmail.length > 0) {
+      return res.status(409).json({ message: "El correo electrónico ya está registrado, usa otro." });
+    }
+  }
+
+  next();
+}
+
+export async function validarUpdatePassword(req, res, next) {
+  const { oldPassword, newPassword } = req.body;
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ message: 'Se requieren la antigua y nueva contraseña' });
+  }
+
+  if (newPassword.length < 5) {
+    return res.status(411).json({ message: "La nueva contraseña debe tener al menos 5 caracteres." });
+  }
+
+  if (newPassword.length > 15) {
+    return res.status(411).json({ message: "La nueva contraseña no puede tener más de 15 caracteres." });
+  }
+
+  next();
+}
 
 export async function validarCredencialesTarea(req) {
-  console.log("Validando credenciales de tarea...");
   const { descripcion, fecha_fin } = req.body;
 
   // Verificar que todos los campos estén presentes

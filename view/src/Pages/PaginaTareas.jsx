@@ -11,7 +11,7 @@ const PaginaTareas = () => {
   const [nuevaTarea, setNuevaTarea] = useState({
     descripcion: "",
     valor: 0,
-    fecha_inicio: null,
+    fecha_inicio: "",
     fecha_fin: "",
     estado: "Pendiente",
   });

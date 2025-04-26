@@ -99,21 +99,13 @@ export class UsuarioController {
   static async register(req, res) {
     try {
       const { nombre_usuario, email, contrasena } = req.body;
-  
-      // Validar credenciales
-      const validacion = await validarCredencialesUsuario(req);
-  
-      // Si la validación falla, envía el error al cliente
-      if (!validacion.success) {
-        return res.status(validacion.status).json({ message: validacion.message });
-      }
-  
+
       const result = await UsuarioModel.register({ nombre_usuario, email, contrasena });
-  
+
       if (result.affectedRows > 0) {
         return res.status(201).json({ message: "Usuario creado correctamente" });
       }
-  
+
       return res.status(500).json({ message: "Error desconocido al registrar el usuario" });
     } catch (error) {
       console.error("Error en el controlador de registro:", error);
@@ -121,11 +113,12 @@ export class UsuarioController {
     }
   }
 
-  static async logout(req, res) {
-    await UsuarioModel.logout(req,res);
+  static async logout(req,res) {
+    res.clearCookie("token", { httpOnly: true, secure: false, sameSite: "Strict" });
+    res.json({ message: "Sesión cerrada correctamente" });
   }
 
   static async me(req, res) {
-    await UsuarioModel.me(req, res);
+    res.json({ id: req.user.id, nombre_usuario: req.user.nombre_usuario });
   }
 }

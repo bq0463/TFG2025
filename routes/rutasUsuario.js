@@ -19,12 +19,13 @@ const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 import { Router } from "express";
 import { UsuarioController } from "../controllers/usuarioController.js";
 import { verifyToken } from '../middlewares/authMiddleware.js';
+import { validarUsuario } from "../middlewares/validarUsuario.js";
 export const usuarioRouter = Router();
 
 // Métodos relacionados con la entidad usuario
 
 // Registro de usuarios con validación previa
-usuarioRouter.post('/register', UsuarioController.register);
+usuarioRouter.post('/register', validarUsuario,UsuarioController.register);
 
 // Inicio de sesión con jwt
 usuarioRouter.post('/login', UsuarioController.loginUser);

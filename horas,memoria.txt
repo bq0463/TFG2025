@@ -345,3 +345,15 @@ cambiado el formateo de fecha en el backend debido al desfase de la zona horaria
 tambien se debe poner el ajuste de fecha local en todos los contenedores
 
 pensando en ordenar por fecha dentro de cada categoria
+
+26/04
+4h
+Intentando aplicar SOLID en los objetos
+Proyectos,tareas,examenes,usuarios:
+
+SRP
+ya tienen tanto controller como models gracias a que la validacion de cada objeto va directamente en middlewares y se ejecuta en cada PATCH y CREATE de cada objeto a traves de routes
+falta updatePassword y patch de usuarioque va con funciones aparte
+
+tambien cambiado el metodo me y logout de usuarioModel a controller
+

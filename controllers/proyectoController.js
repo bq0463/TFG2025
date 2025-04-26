@@ -34,20 +34,23 @@ export class ProyectoController {
     }
   }
 
+
   static async updateById(req, res) {
-    const { id } = req.params;
-    
-    const proyectoActualizado = await ProyectoModel.updateById({ 
-      id, 
-      input: req.body
-    });
+    try {
+      const { id } = req.params;
+      
+      const proyectoActualizado = await ProyectoModel.updateById({ 
+        id, 
+        input: req.body
+      });
 
-    if (!proyectoActualizado) {
-      return res.status(404).json({ message: 'Proyecto no encontrado' });
+      return res.json({ message: 'Proyecto actualizado correctamente', proyecto: proyectoActualizado });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }
-
-    return res.json({ message: 'Proyecto actualizado' });
   }
+
 
   static async create(req, res) {
     try {
@@ -75,30 +78,31 @@ export class ProyectoController {
 
   static async createTarea(req, res) {
     try {
-        const validacion = await validarCredencialesTarea(req);
-
-        if (!validacion.success) {
-            return res.status(validacion.status).json({ message: validacion.message });
-        }
-
-        const input = {
-          id_proyecto: req.params.id_proyecto, 
-          id_usuario: req.params.id_usuario, 
-          ...req.body
-        };
-
-        const tarea = await ProyectoModel.createTareaProyecto(input);
-
-        if (!tarea) {
-            return res.status(404).json({ message: 'Error al crear tarea en el proyecto' });
-        }
-
-        return res.status(201).json({ message: 'Tarea asociada correctamente al proyecto', id_tarea: tarea.id_tarea });
-
+      const validacion = await validarCredencialesTarea(req);
+  
+      if (!validacion.success) {
+        return res.status(validacion.status).json({ message: validacion.message });
+      }
+  
+      const input = {
+        id_proyecto: req.params.id_proyecto,
+        id_usuario: req.params.id_usuario,
+        ...req.body,
+      };
+  
+      const result = await ProyectoModel.createTareaProyecto(input);
+  
+      if (!result.success) {
+        return res.status(400).json({ message: result.message });
+      }
+  
+      return res.status(201).json({ message: result.message, id_tarea: result.id_tarea });
+  
     } catch (error) {
-        return res.status(500).json({ message: 'Error al poner la tarea en proyecto', error: error.message });
+      return res.status(500).json({ message: 'Error interno al crear la tarea', error: error.message });
     }
   }
+  
 
 
   static async associateByUsername(req,res){

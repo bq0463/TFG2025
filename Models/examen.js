@@ -33,39 +33,21 @@ export class ExamenModel {
 
   static async updateById({ id, input }) {
     const [rows] = await connection.execute('SELECT * FROM examen WHERE id = ?', [id]);
+    
     if (rows.length === 0) {
         throw new Error('Recurso no encontrado');
     }
 
-    const existingRow = rows[0]; 
-    const datosAValidar = {};
-
-    if (input.asignatura !== undefined) datosAValidar.asignatura = input.asignatura;
-    else{
-      datosAValidar.asignatura = existingRow.asignatura;
-    }
-    if (input.nota !== undefined) datosAValidar.nota = input.nota;
-    else{
-      datosAValidar.nota = existingRow.nota;
-    }
-    if (input.fecha !== undefined) datosAValidar.fecha = input.fecha;
-    else{
-      datosAValidar.fecha = existingRow.fecha;
-    }
-    // Llama al middleware para validar los datos
-    const validacion = await validarCredencialesExamen({ body: datosAValidar });
-    if (!validacion.success) {
-        return { success: false, status: validacion.status, message: validacion.message };
-    }
+    const existingRow = rows[0];
 
     const updatedRow = {
-        asignatura: input.asignatura || existingRow.asignatura,
+        asignatura: input.asignatura ?? existingRow.asignatura,
         nota: input.nota !== undefined ? input.nota : existingRow.nota,
-        fecha: input.fecha || existingRow.fecha,
+        fecha: input.fecha ?? existingRow.fecha,
         id_usuario: existingRow.id_usuario,
     };
 
-    const result = await connection.execute(`
+    await connection.execute(`
         UPDATE examen
         SET asignatura = ?, nota = ?, fecha = ?, id_usuario = ?
         WHERE id = ?`,
@@ -78,9 +60,8 @@ export class ExamenModel {
         ]
     );
 
-    return { success: true, id, ...updatedRow }; 
-}
-
+    return { success: true, id, ...updatedRow };
+  }
 
   static async delete({ id }) {
     const [result] = await connection.execute('DELETE FROM examen WHERE id = ?', [id]);

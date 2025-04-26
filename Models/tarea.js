@@ -37,76 +37,42 @@ export class TareaModel {
     return result.affectedRows > 0;
   }
 
+
   static async updateById({ id, input }) {
-        const [rows] = await connection.execute('SELECT * FROM tarea WHERE id = ?', [id]);
-        if (rows.length === 0) {
-            throw new Error('Recurso no encontrado');
-        }
-    
-        const existingRow = rows[0]; 
-        const datosAValidar = {};
-    
-        if (input.descripcion !== undefined) 
-          datosAValidar.descripcion = input.descripcion;
-        else{
-          datosAValidar.descripcion = existingRow.descripcion;
-        }
-        if (input.valor !== undefined) 
-          datosAValidar.valor = input.valor;
-        else{
-          datosAValidar.valor = existingRow.valor;
-        }
-        if (input.fecha_inicio !== undefined) 
-          datosAValidar.fecha_inicio = input.fecha_inicio;
-        else{
-          datosAValidar.fecha_inicio = existingRow.fecha_inicio;
-        }
-
-        if (input.fecha_fin !== undefined) 
-          datosAValidar.fecha_fin = input.fecha_fin;
-        else{
-          datosAValidar.fecha_fin = existingRow.fecha_fin;
-        }
-
-        if (input.estado !== undefined) 
-          datosAValidar.estado = input.estado;
-        else{
-          datosAValidar.estado = existingRow.estado;
-        }
-
-        // Llama al middleware para validar los datos
-        const validacion = await validarCredencialesTarea({ body: datosAValidar });
-
-        if (!validacion.success) {
-            return { success: false, status: validacion.status, message: validacion.message };
-        }
-    
-        const updatedRow = {
-            descripcion: input.descripcion || existingRow.descripcion,
-            valor: input.valor !== undefined ? input.valor : existingRow.valor,
-            fecha_inicio: input.fecha_inicio || existingRow.fecha_inicio,
-            fecha_fin: input.fecha_fin || existingRow.fecha_fin,
-            estado: input.estado || existingRow.estado,
-            id_usuario: existingRow.id_usuario,
-        };
-    
-        const result = await connection.execute(`
-            UPDATE tarea
-            SET descripcion = ?, valor = ?, fecha_inicio = ?, fecha_fin = ? , id_usuario = ?, estado = ?
-            WHERE id = ?`,
-            [
-                updatedRow.descripcion,
-                updatedRow.valor,
-                updatedRow.fecha_inicio,
-                updatedRow.fecha_fin,
-                updatedRow.id_usuario,
-                updatedRow.estado,
-                id,
-            ]
-        );
-    
-        return { success: true, id, ...updatedRow }; 
+    const [rows] = await connection.execute('SELECT * FROM tarea WHERE id = ?', [id]);
+    if (rows.length === 0) {
+        throw new Error('Recurso no encontrado');
     }
+
+    const existingRow = rows[0];
+
+    const updatedRow = {
+        descripcion: input.descripcion || existingRow.descripcion,
+        valor: input.valor !== undefined ? input.valor : existingRow.valor,
+        fecha_inicio: input.fecha_inicio || existingRow.fecha_inicio,
+        fecha_fin: input.fecha_fin || existingRow.fecha_fin,
+        estado: input.estado || existingRow.estado,
+        id_usuario: existingRow.id_usuario,
+    };
+
+    await connection.execute(`
+        UPDATE tarea
+        SET descripcion = ?, valor = ?, fecha_inicio = ?, fecha_fin = ?, id_usuario = ?, estado = ?
+        WHERE id = ?`,
+        [
+            updatedRow.descripcion,
+            updatedRow.valor,
+            updatedRow.fecha_inicio,
+            updatedRow.fecha_fin,
+            updatedRow.id_usuario,
+            updatedRow.estado,
+            id,
+        ]
+    );
+
+    return { success: true, id, ...updatedRow };
+  }
+
 
   static async create({ input }) {
       try {

@@ -104,7 +104,10 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         return;
       }
 
-      if(TPFechaFin > fecha_entrega) {
+      const fechaEntrega = new Date(fecha_entrega);
+      fechaEntrega.setDate(fechaEntrega.getDate() + 1);
+      
+      if(TPFechaFin > fechaEntrega) {
         setCreationMessage("La fecha fin de la tarea no puede ser mayor que la fecha de entrega del proyecto");
         return;
       }
@@ -154,7 +157,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
 
   const handleEliminarTarea = async (idTarea) => {
     try {
-      const response = await fetch(`http://localhost:5000/proyectos/tarea/${idTarea}`, {
+      const response = await fetch(`http://localhost:5000/tareas/${idTarea}`, {
         method: "DELETE",
         credentials: "include"
       });

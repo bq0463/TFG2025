@@ -52,58 +52,33 @@ export class ProyectoModel {
     }
     
     static async updateById({ id, input }) {
-        const [rows] = await connection.execute('SELECT * FROM proyecto WHERE id = ?', [id]);
-        if (rows.length === 0) {
-            throw new Error('Recurso no encontrado');
-        }
+      const [rows] = await connection.execute('SELECT * FROM proyecto WHERE id = ?', [id]);
     
-        const existingRow = rows[0]; 
-        const datosAValidar = {};
-    
-        if (input.descripcion !== undefined) 
-            datosAValidar.descripcion = input.descripcion;
-        else{
-          datosAValidar.descripcion = existingRow.descripcion;
-        }
-
-        if (input.fecha_entrega !== undefined) 
-            datosAValidar.fecha_entrega = input.fecha_entrega;
-        else{
-          datosAValidar.fecha_entrega = existingRow.fecha_entrega;
-        }
-
-        if (input.titulo !== undefined) 
-            datosAValidar.titulo = input.titulo;
-        else{
-          datosAValidar.titulo = existingRow.titulo;
-        }
-
-        // Llama al middleware para validar los datos
-        const validacion = await validarCredencialesProyecto({ body: datosAValidar });
-
-        if (!validacion.success) {
-            return { success: false, status: validacion.status, message: validacion.message };
-        }
-    
-        const updatedRow = {
-            descripcion: datosAValidar.descripcion,
-            fecha_entrega: datosAValidar.fecha_entrega,
-            titulo: datosAValidar.titulo,
-        };
-    
-        const result = await connection.execute(`
-            UPDATE proyecto
-            SET descripcion = ?, fecha_entrega = ?, titulo = ?
-            WHERE id = ?`,
-            [
-                updatedRow.descripcion,
-                updatedRow.fecha_entrega,
-                updatedRow.titulo,
-                id,
-            ]
-        );
-    
-        return { success: true, id, ...updatedRow }; 
+      if (rows.length === 0) {
+          throw new Error('Recurso no encontrado');
+      }
+  
+      const existingRow = rows[0];
+  
+      const updatedRow = {
+          descripcion: input.descripcion ?? existingRow.descripcion,
+          fecha_entrega: input.fecha_entrega ?? existingRow.fecha_entrega,
+          titulo: input.titulo ?? existingRow.titulo,
+      };
+  
+      await connection.execute(`
+          UPDATE proyecto
+          SET descripcion = ?, fecha_entrega = ?, titulo = ?
+          WHERE id = ?`,
+          [
+              updatedRow.descripcion,
+              updatedRow.fecha_entrega,
+              updatedRow.titulo,
+              id,
+          ]
+      );
+  
+      return { success: true, id, ...updatedRow };
     }
 
     static async create({input}) {
@@ -121,8 +96,8 @@ export class ProyectoModel {
         }
     }
 
-    static async createTareaProyecto(input) {    
-            
+    static async createTarea({input}) {    
+        /*    
         const tarea = await TareaModel.create({input});
         
         if (!tarea || !tarea.insertId) {
@@ -139,9 +114,39 @@ export class ProyectoModel {
         if (associate_tarea_proyecto.affectedRows === 0) {
             return {success: false,message: 'La tarea no se ha podido relacionar con el proyecto'}
         }
-
-        return {success: true,message: 'Se ha creado la tarea en el proyecto'};
+        
+        return {success: true,message: 'Se ha creado la tarea en el proyecto'}; */
+        return await TareaModel.create({input});
     }
+
+    static async associateTareaProyecto({ id_proyecto, id_tarea }) {
+
+      const [result] = await connection.execute(
+        'INSERT INTO proyecto_tiene_tarea (id_proyecto, id_tarea) VALUES (?, ?)', 
+        [id_proyecto, id_tarea]
+      );
+
+      return result;
+    }
+
+    static async createTareaProyecto(input) {
+      const tarea = await this.createTarea({ input });
+      
+      if (!tarea || !tarea.insertId) {
+        return { success: false, message: 'La tarea no se ha podido crear' };
+      }
+      
+      const id_tarea = tarea.insertId;
+      
+      const associateResult = await this.associateTareaProyecto({ id_proyecto: input.id_proyecto, id_tarea });
+
+      if (associateResult.affectedRows === 0) {
+        return { success: false, message: 'La tarea no se ha podido relacionar con el proyecto' };
+      }
+
+      return { success: true, message: 'Se ha creado la tarea en el proyecto', id_tarea };
+    }
+
     
 
     static async associateByUsername(id_usuario,id_proyecto){

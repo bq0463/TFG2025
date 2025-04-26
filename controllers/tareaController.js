@@ -64,9 +64,9 @@ export class TareaController {
     try {
       const { id } = req.params;
       const tareaActualizada = await TareaModel.updateById({ id, input: req.body });
-      if (!tareaActualizada) return res.status(404).json({ message: 'Tarea no encontrada' });
-      return res.json({ message: 'Tarea actualizada' });
+      return res.json({ message: 'Tarea actualizada correctamente', tarea: tareaActualizada });
     } catch (error) {
+      console.error(error);
       return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }
   }
