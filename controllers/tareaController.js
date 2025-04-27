@@ -1,4 +1,4 @@
-import { validarCredencialesTarea } from "../middlewares/validacionesCreaciones.js";
+import { validarCredencialesTarea } from "../middlewares/validaciones.js";
 import { TareaModel } from "../Models/tarea.js";
 export class TareaController {
   

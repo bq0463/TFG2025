@@ -1,5 +1,5 @@
 
-import { validarCredencialesExamen } from "./validacionesCreaciones.js";
+import { validarCredencialesExamen } from "./validaciones.js";
 
 export async function validarExamen(req, res, next) {
   try {

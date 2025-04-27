@@ -1,5 +1,5 @@
 import { ExamenModel } from '../Models/examen.js';
-import { validarCredencialesExamen } from '../middlewares/validacionesCreaciones.js';
+import { validarCredencialesExamen } from '../middlewares/validaciones.js';
 export class ExamenController {
 
   static async getById(req, res) {

@@ -1,9 +1,8 @@
 
-import { validarCredencialesProyecto, validarCredencialesTarea } from '../middlewares/validacionesCreaciones.js';
+import { validarCredencialesProyecto, validarCredencialesTarea } from '../middlewares/validaciones.js';
 import {ProyectoModel} from '../Models/proyecto.js';
-import { TareaModel } from '../Models/tarea.js';
 import {UsuarioModel} from '../Models/usuario.js';
-import { TareaController } from './tareaController.js';
+
 export class ProyectoController {
   
   static async getById(req, res) {

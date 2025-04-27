@@ -1,8 +1,6 @@
 
 import { TareaModel } from './tarea.js';
 import { connection } from '../config/mysqlConnection.js';
-import { validarCredencialesProyecto,validarCredencialesTarea } from '../middlewares/validacionesCreaciones.js';
-
 export class ProyectoModel {
 
     static async getAll({ id_usuario }) {

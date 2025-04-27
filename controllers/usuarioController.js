@@ -1,5 +1,5 @@
 import { UsuarioModel } from '../Models/usuario.js';
-import { validarCredencialesUsuario } from '../middlewares/validacionesCreaciones.js';
+import { validarCredencialesUsuario } from '../middlewares/validaciones.js';
 export class UsuarioController {
   static async getById(req, res) {
     try {

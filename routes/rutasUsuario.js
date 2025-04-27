@@ -19,7 +19,7 @@ const movies=JSON.parse(fs.readFileSync("./movies.json",{encoding:"utf-8"})); */
 import { Router } from "express";
 import { UsuarioController } from "../controllers/usuarioController.js";
 import { verifyToken } from '../middlewares/authMiddleware.js';
-import { validarUsuario } from "../middlewares/validarUsuario.js";
+import { validarUsuario, validarUsuarioPassword, validarUsuarioUpdateById } from "../middlewares/validarUsuario.js";
 export const usuarioRouter = Router();
 
 // Métodos relacionados con la entidad usuario
@@ -40,10 +40,10 @@ usuarioRouter.get("/usuarios/me", verifyToken, UsuarioController.me);
 usuarioRouter.get('/usuarios/:id',verifyToken ,UsuarioController.getById);
 
 // Actualizar un usuario (parcialmente)
-usuarioRouter.patch('/usuarios/:id',verifyToken ,UsuarioController.updateById);
+usuarioRouter.patch('/usuarios/:id',verifyToken,validarUsuarioUpdateById ,UsuarioController.updateById);
 
 // Actualizar contraseña de un usuario
-usuarioRouter.patch('/usuarios/:id/password', verifyToken ,UsuarioController.updatePassword);
+usuarioRouter.patch('/usuarios/:id/password', verifyToken ,validarUsuarioPassword,UsuarioController.updatePassword);
 
 // Eliminar un usuario
 usuarioRouter.delete('/usuarios/:id',verifyToken , UsuarioController.delete);

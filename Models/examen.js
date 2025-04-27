@@ -1,6 +1,4 @@
 import { connection } from '../config/mysqlConnection.js';
-import { validarCredencialesExamen } from '../middlewares/validacionesCreaciones.js';
-
 export class ExamenModel {
 
   static async getById({ id }) {

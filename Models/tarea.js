@@ -1,7 +1,5 @@
 
 import { connection } from '../config/mysqlConnection.js';
-import { validarCredencialesTarea } from '../middlewares/validacionesCreaciones.js';
-
 export class TareaModel {
   
   static async getById({ id }) {

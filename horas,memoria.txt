@@ -357,3 +357,7 @@ falta updatePassword y patch de usuarioque va con funciones aparte
 
 tambien cambiado el metodo me y logout de usuarioModel a controller
 
+27/04
+1h
+
+Arreglando validaciones y garantizando el SRP

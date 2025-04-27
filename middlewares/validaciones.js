@@ -63,6 +63,10 @@ export async function validarUpdateById(req, res, next) {
     return res.status(411).json({ message: "El nombre de usuario debe tener al menos 5 caracteres." });
   }
 
+  if (nombre_usuario && nombre_usuario.length > 50) {
+    return res.status(411).json({ message: "El nombre de usuario no puede tener más de 50 caracteres." });
+  }
+
   if (email && !email.includes("@")) {
     return res.status(411).json({ message: "El correo electrónico debe ser válido (contener @)." });
   }
@@ -79,7 +83,7 @@ export async function validarUpdateById(req, res, next) {
     }
   }
 
-  next();
+  return { success: true, message: "Usuario actualizado correctamente" };
 }
 
 export async function validarUpdatePassword(req, res, next) {
@@ -97,7 +101,7 @@ export async function validarUpdatePassword(req, res, next) {
     return res.status(411).json({ message: "La nueva contraseña no puede tener más de 15 caracteres." });
   }
 
-  next();
+  return { success: true, message: "Contraseña actualizada correctamente" };
 }
 
 export async function validarCredencialesTarea(req) {
