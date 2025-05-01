@@ -59,99 +59,64 @@ export class UsuarioModel {
 
     // Devolver el resultado completo
     return { success: true, affectedRows: result.affectedRows, id, ...updatedRow };
-}
-
-
-static async updatePassword({ id, oldPassword, newPassword }) {
-  try {
-    const [rows] = await connection.execute(
-      'SELECT contrasena FROM usuario WHERE id = ?',
-      [id]
-    );
-    
-    if (rows.length === 0) {
-      throw new Error('Usuario no encontrado');
-    }
-
-    const usuario = rows[0];
-
-    // Verificar si la contraseña antigua coincide
-    const passwordMatch = await bcrypt.compare(oldPassword, usuario.contrasena);
-
-    if (!passwordMatch) {
-      return { success: false, message: 'Contraseña antigua incorrecta' };
-    }
-
-    const saltRounds = 10;
-    const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
-
-    await connection.execute(
-      'UPDATE usuario SET contrasena = ? WHERE id = ?',
-      [hashedNewPassword, id]
-    );
-
-    return { success: true, message: 'Contraseña actualizada correctamente' };
-  } catch (error) {
-    console.error('Error al actualizar la contraseña:', error);
-    throw error;
   }
-}
 
-  
-static async login({ nombre_usuario, contrasena }) {
-  try {
-    const [rows] = await connection.execute(
-      'SELECT * FROM usuario WHERE nombre_usuario = ?',
-      [nombre_usuario]
-    );
 
-    const [rows1] = await connection.execute(
-      'SELECT * FROM usuario WHERE email = ?',
-      [nombre_usuario]
-    );
-
-    if (rows.length === 0 && rows1.length === 0) {
-      return null; // Usuario no encontrado
-    }
-
-    const usuario = rows[0] || rows1[0];
-    const contrasenaMatch = await bcrypt.compare(contrasena, usuario.contrasena);
-    if (!contrasenaMatch) {
-      return null; 
-    }
-
-    // Generar token JWT
-    const token = jwt.sign(
-      { id: usuario.id, nombre_usuario: usuario.nombre_usuario },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN } // Expira en el tiempo definido en .env
-    );
-
-    return { usuario, token };  // Devolvemos el usuario y el token
-  } catch (error) {
-    console.error('Error al iniciar sesión:', error);
-    throw error;
-  }
-}
-
-  
-
-  static async register({ nombre_usuario, email, contrasena }) {
+  static async updatePassword({ id, oldPassword, newPassword }) {
     try {
+      const [rows] = await connection.execute(
+        'SELECT contrasena FROM usuario WHERE id = ?',
+        [id]
+      );
+      
+      if (rows.length === 0) {
+        throw new Error('Usuario no encontrado');
+      }
+
+      const usuario = rows[0];
+
+      // Verificar si la contraseña antigua coincide
+      const passwordMatch = await bcrypt.compare(oldPassword, usuario.contrasena);
+
+      if (!passwordMatch) {
+        return { success: false, message: 'Contraseña antigua incorrecta' };
+      }
 
       const saltRounds = 10;
-      const hashedcontrasena = await bcrypt.hash(contrasena, saltRounds);
+      const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
 
-      const [result] = await connection.execute(
-        'INSERT INTO usuario (nombre_usuario, email, contrasena) VALUES (?, ?, ?)',
-        [nombre_usuario, email, hashedcontrasena]
+      await connection.execute(
+        'UPDATE usuario SET contrasena = ? WHERE id = ?',
+        [hashedNewPassword, id]
       );
 
-      return result;
-
+      return { success: true, message: 'Contraseña actualizada correctamente' };
     } catch (error) {
-      console.error('Error al registrar usuario:', error);
+      console.error('Error al actualizar la contraseña:', error);
       throw error;
     }
   }
-}
+
+  static async register({ nombre_usuario, email, contrasena }) {
+      try {
+
+        if (contrasena.length > 72) {
+          throw new Error("La contraseña no debe superar los 72 caracteres.");
+        }
+        
+        const saltRounds = 10;
+        const hashedcontrasena = await bcrypt.hash(contrasena, saltRounds);
+
+        const [result] = await connection.execute(
+          'INSERT INTO usuario (nombre_usuario, email, contrasena) VALUES (?, ?, ?)',
+          [nombre_usuario, email, hashedcontrasena]
+        );
+
+        return result;
+
+      } catch (error) {
+        console.error('Error al registrar usuario:', error);
+        throw error;
+      }
+    }
+  }

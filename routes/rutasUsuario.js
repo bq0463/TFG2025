@@ -27,15 +27,6 @@ export const usuarioRouter = Router();
 // Registro de usuarios con validación previa
 usuarioRouter.post('/register', validarUsuario,UsuarioController.register);
 
-// Inicio de sesión con jwt
-usuarioRouter.post('/login', UsuarioController.loginUser);
-
-// quitar informacion de cookie
-usuarioRouter.post("/logout", UsuarioController.logout);
-
-// información de usuario
-usuarioRouter.get("/usuarios/me", verifyToken, UsuarioController.me);
-
 // Obtener un usuario por ID
 usuarioRouter.get('/usuarios/:id',verifyToken ,UsuarioController.getById);
 

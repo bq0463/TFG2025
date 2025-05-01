@@ -10,19 +10,19 @@ export async function validarCredencialesUsuario(req) {
   }
 
   // Validar longitud de los campos y formato del email
-  if (nombre_usuario.length < 5 || contrasena.length < 5 || !email.includes("@")) {
+  if (nombre_usuario.length < 5 || contrasena.length < 5 || !email.includes("@") || email.length < 15) {
     return { 
       success: false, 
       status: 411, 
-      message: "Credenciales inválidas: caracteres menores a 5 o email incorrecto sin @" 
+      message: "Credenciales inválidas: caracteres de usuario y contraseña menores a 5 o email incorrecto sin @ o email < 15" 
     };
   }
 
-  if (nombre_usuario.length > 20 || contrasena.length > 15 || email.length > 50) {
+  if (nombre_usuario.length > 50 || contrasena.length > 30 || email.length > 100) {
     return { 
       success: false, 
       status: 411, 
-      message: "Credenciales inválidas: demasiados caracteres, MAX: 20 en usuario, 15 en contraseña y 50 en email" 
+      message: "Credenciales inválidas: demasiados caracteres, MAX: 50 en usuario, 30 en contraseña y 100 en email" 
     };
   }
 

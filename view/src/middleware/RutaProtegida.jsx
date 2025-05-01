@@ -7,7 +7,7 @@ const RutaProtegida = () => {
   useEffect(() => {
     const verificarSesion = async () => {
       try {
-        const response = await fetch("http://localhost:5000/usuarios/me", {
+        const response = await fetch("http://localhost:5000/me", {
           method: "GET",
           credentials: "include", // Para enviar la cookie
         });

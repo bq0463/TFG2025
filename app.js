@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import { tareaRouter } from "./routes/rutasTarea.js";
 import { examenRouter } from "./routes/rutasExamen.js";
 import {proyectoRouter} from "./routes/rutasProyecto.js";
+import { usuarioAuthRouter } from "./routes/rutasAuth.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.use("/", usuarioRouter);
 app.use("/",tareaRouter);
 app.use("/",examenRouter);
 app.use("/",proyectoRouter);
+app.use("/",usuarioAuthRouter);
 
 const PORT = process.env.PORT ?? 5000;
 app.listen(PORT, () => {

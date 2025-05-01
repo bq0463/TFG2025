@@ -361,3 +361,48 @@ tambien cambiado el metodo me y logout de usuarioModel a controller
 1h
 
 Arreglando validaciones y garantizando el SRP
+
+28/04
+2h
+Separando operaciones de autenticacion de usuario ,de CRUD de usuario
+
+29/04
+3h y 30min
+
+arreglando errores de la petcion /me despues de cambiar usuario authUsuario
+muy util hacer control + shift + F para encontrar lineas que no se hayan cambiado en el codigo de todo el proyecto
+
+01/05
+1h
+
+Pruebas de integración en FrontEnd con rutas que llaman la logica de negocio de los controladores y la comunicacion con la base de datos:
+
+*Si hay algo que sea null en la base de datos a pesar de que se considere muy importante ,se arregla con los required de los formularios.
+
+Pruebas de integración:
+
+
+RegisterForm.jsx:
+
+Llama a la funcion register de la clase UsuarioController con el endpoint 
+de rutasUsuario y con el middleware de validacion validarCredencialesUsuario,
+esta llama al modelo y finalmente comunica con la base de datos para crear el usuario con los datos del formulario.
+
+Body:
+
+nombre_usuario: no supera los 50 caracteres y el mínimo es 5 por validación.
+email: El límite de caracteres es 100 con la restriccion de @.
+contrasena: Esta es de 100 caracteres pero se limita a 30 mediante la validación porque tambien pasa por bcrypt y eso son más caracteres.
+
+Tampoco sera valido los campos email o nombre_usuario si ya existen usuarios con estos mismos datos.
+
+LoginForm.jsx:
+
+Llama a la funcion login de la clase AuthController con el endpoint 
+de rutasAuth,
+esta llama al modelo de usuarioService y finalmente comunica con la base de datos para hacer el login de usuario con los datos del formulario LoginForm.
+
+Body:
+
+nombre_usuario/email: Acepta ambos.
+contrasena: Pasa con bcrypt y compara con la almacenada.

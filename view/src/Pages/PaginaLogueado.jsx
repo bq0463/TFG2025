@@ -29,9 +29,10 @@ const PaginaLogueado = () => {
   const [fechaActual, setFechaActual] = useState(new Date());
 
   useEffect(() => {
+    console.log("Llamando a /me");
     const verificarAutenticacion = async () => {
       try {
-        const response = await fetch("http://localhost:5000/usuarios/me", {
+        const response = await fetch("http://localhost:5000/me", {
           method: "GET",
           credentials: "include",
         });
@@ -124,29 +125,6 @@ const PaginaLogueado = () => {
       allDay: true,
     })),
   ];
-
-  
-  useEffect(() => {
-    const verificarAutenticacion = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/usuarios/me", {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          throw new Error("No autenticado");
-        }
-
-        const data = await response.json();
-        setUsername(data.nombre_usuario);
-      } catch (error) {
-        navigate("/");
-      }
-    };
-
-    verificarAutenticacion();
-  }, [navigate]);
 
   const handleLogout = async () => {
     try {

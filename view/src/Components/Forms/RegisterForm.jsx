@@ -1,3 +1,4 @@
+import { set } from 'zod';
 import './forms.css';
 import { useState } from "react";
 
@@ -31,6 +32,8 @@ const RegisterForm = () => {
       const data = await response.json();
       if (response.ok) {
         setMessage(`✅ Registro exitoso: ${data.message}`);
+        alert("Registro exitoso. Por favor, inicia sesión.");
+        window.location.reload();
       } else {
         setMessage(`❌ Error: ${data.message}`);
       }
