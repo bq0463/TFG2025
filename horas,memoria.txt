@@ -373,7 +373,7 @@ arreglando errores de la petcion /me despues de cambiar usuario authUsuario
 muy util hacer control + shift + F para encontrar lineas que no se hayan cambiado en el codigo de todo el proyecto
 
 01/05
-1h
+2h
 
 Pruebas de integración en FrontEnd con rutas que llaman la logica de negocio de los controladores y la comunicacion con la base de datos:
 
@@ -381,28 +381,227 @@ Pruebas de integración en FrontEnd con rutas que llaman la logica de negocio de
 
 Pruebas de integración:
 
+1. PaginaInicio.jsx
 
-RegisterForm.jsx:
+1.1 RegisterForm.jsx
 
-Llama a la funcion register de la clase UsuarioController con el endpoint 
-de rutasUsuario y con el middleware de validacion validarCredencialesUsuario,
-esta llama al modelo y finalmente comunica con la base de datos para crear el usuario con los datos del formulario.
+Llama a la función register de la clase UsuarioController utilizando el endpoint de rutasUsuario, con el middleware de validación validarCredencialesUsuario. Esta función ejecuta una llamada al modelo correspondiente, que a su vez interactúa con la base de datos para crear un nuevo usuario con los datos del formulario.
+
+Endpoint (URL):
+http://localhost:5000/register
+
+Ruta Express:
+
+usuarioRouter.post('/register', validarUsuario, UsuarioController.register);
+
+Body (estructura esperada):
+
+    nombre_usuario:
+
+        Mínimo 5 caracteres
+
+        Máximo 50 caracteres
+
+        No se permite si ya existe otro usuario con el mismo nombre
+
+    email:
+
+        Debe contener @ y tener al menos 15 caracteres
+
+        Mínimo 5 caracteres
+
+        Máximo 100 caracteres
+
+        No se permite si ya existe el email
+
+    contrasena:
+
+        Mínimo 5 caracteres
+
+        Máximo 30 caracteres (por validación)
+
+        Aunque el campo en la base de datos puede ser más largo, el hash generado por bcrypt (alrededor de 60 caracteres) se genera tras pasar la validación.
+
+1.2 LoginForm.jsx
+
+Llama a la función login de la clase AuthController utilizando el endpoint de rutasAuth. Esta función se comunica con el usuarioService (modelo), que consulta la base de datos para autenticar al usuario con los datos del formulario.
 
 Body:
 
-nombre_usuario: no supera los 50 caracteres y el mínimo es 5 por validación.
-email: El límite de caracteres es 100 con la restriccion de @.
-contrasena: Esta es de 100 caracteres pero se limita a 30 mediante la validación porque tambien pasa por bcrypt y eso son más caracteres.
+    nombre_usuario o email:
 
-Tampoco sera valido los campos email o nombre_usuario si ya existen usuarios con estos mismos datos.
+        Se acepta cualquiera de los dos para identificar al usuario.
 
-LoginForm.jsx:
+    contrasena:
 
-Llama a la funcion login de la clase AuthController con el endpoint 
-de rutasAuth,
-esta llama al modelo de usuarioService y finalmente comunica con la base de datos para hacer el login de usuario con los datos del formulario LoginForm.
+        Se valida mediante comparación con el hash almacenado usando bcrypt.
 
-Body:
+Endpoint (URL):
+http://localhost:5000/login
 
-nombre_usuario/email: Acepta ambos.
-contrasena: Pasa con bcrypt y compara con la almacenada.
+Ruta Express:
+
+usuarioAuthRouter.post('/login', AuthController.login);
+
+2. PaginaLogueado.jsx
+
+Esta vista al igual que el resto es accesible únicamente después del login. Permite al usuario ver todos sus eventos relacionados (tareas, proyectos, exámenes) y también navegar entre diferentes secciones de la aplicación.
+
+2.1 Autenticación del usuario
+
+Endpoint (URL):
+http://localhost:5000/me
+
+Método:
+GET
+
+Ruta:
+
+usuarioAuthRouter.get("/me", verifyToken, AuthController.me);
+
+Descripción:
+Verifica que el usuario tenga una sesión activa y obtiene su información (id, nombre_usuario) a través de una cookie con credentials: "include".
+
+2.2 Obtención de tareas
+
+Endpoint (URL):
+http://localhost:5000/usuarios/:id_usuario/tareas
+
+Método:
+GET
+
+Ruta:
+
+tareaRouter.get('/usuarios/:id_usuario/tareas',verifyToken , TareaController.getAll);
+
+Descripción:
+Devuelve todas las tareas asociadas al userId autenticado.
+De cada tarea se saca la descripcion, fecha_fin, fecha_inicio, valor y estado.
+
+2.3 Obtención de proyectos
+
+Endpoint (URL):
+http://localhost:5000/usuarios/:id_usuario/proyectos
+
+Método:
+GET
+
+Ruta:
+
+proyectoRouter.get('/usuarios/:id_usuario/proyectos',verifyToken , ProyectoController.getAll);
+
+Descripción:
+Devuelve todos los proyectos del usuario autenticado, incluyendo titulo, descripcion, fecha_entrega, usuarios y tareas.
+
+2.4 Obtención de exámenes
+
+Endpoint (URL):
+http://localhost:5000/usuarios/:id_usuario/examenes
+
+Método:
+GET
+
+Ruta:
+
+examenRouter.get('/usuarios/:id_usuario/examenes',verifyToken , ExamenController.getAll);
+
+Descripción:
+Retorna todos los exámenes del usuario autenticado, con campos como asignatura, nota y fecha.
+
+2.5 Cierre de sesión
+
+Endpoint (URL):
+http://localhost:5000/logout
+
+Método:
+POST
+
+Ruta:
+
+usuarioAuthRouter.post('/logout', AuthController.logout);
+
+Descripción:
+Cierra la sesión del usuario destruyendo la cookie de sesión.
+Resumen funcional
+
+Los datos obtenidos se combinan y se muestran en un calendario visual (react-big-calendar) como eventos de tipo:
+
+    Tarea: [descripcion]
+
+    Proyecto: [titulo]
+
+    Examen: [asignatura]
+
+Cada evento se muestra con su fecha de inicio/entrega correspondiente, tanto en el calendario como en una sección lateral de los eventos futuros.
+
+3. PaginaPerfil.jsx
+
+Esta vista permite al usuario autenticado modificar sus datos personales (nombre de usuario, correo, contraseña) o eliminar su cuenta. También incluye navegación hacia otras secciones y la opción de cerrar sesión.
+
+3.1 Autenticación del usuario
+
+Explicado anteriormente.
+
+3.2 Cierre de sesión
+
+Explicado anteriormente.
+
+3.3 Cambio de contraseña
+
+Componente:
+<ProfilePasswordForm/>
+
+Endpoint (URL):
+http://localhost:5000/usuarios/:id/password
+
+Método:
+PUT
+
+Ruta:
+
+usuarioRouter.patch('/usuarios/:id/password', verifyToken ,validarUsuarioPassword,UsuarioController.updatePassword);
+
+Descripción:
+Permite al usuario cambiar su contraseña actual por una nueva.
+
+3.4 Cambio de email y nombre de usuario
+
+Componente:
+<ProfileEmailUsernameForm/>
+
+Endpoint (URL):
+http://localhost:5000/usuarios/:id
+
+Método:
+PUT
+
+Ruta:
+
+usuarioRouter.patch('/usuarios/:id',verifyToken,validarUsuarioUpdateById ,UsuarioController.updateById);
+
+Descripción:
+Permite modificar el nombre_usuario o el email del usuario autenticado.
+
+3.5 Eliminación de cuenta
+
+Componente:
+<ProfileDeleteForm/>
+
+Endpoint (URL):
+http://localhost:5000/usuarios/:id
+
+Método:
+DELETE
+
+Ruta:
+
+usuarioRouter.delete('/usuarios/:id',verifyToken , UsuarioController.delete);
+
+Descripción:
+Elimina permanentemente la cuenta del usuario actual, incluida toda su información asociada.
+
+02/05
+3h
+
+alerta personalizada para success, algo de memoria y Pruebas
+Modificando calendario para los eventos con classname

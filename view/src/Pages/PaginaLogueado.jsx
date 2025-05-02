@@ -111,21 +111,24 @@ const PaginaLogueado = () => {
       start: new Date(t.fecha_inicio || t.fecha_fin),
       end: new Date(t.fecha_fin),
       allDay: true,
+      type: 'task',
     })),
     ...proyectos.map(p => ({
       title: `Proyecto: ${p.titulo}`,
       start: new Date(p.fecha_entrega),
       end: new Date(p.fecha_entrega),
       allDay: true,
+      type: 'project',
     })),
     ...examenes.map(e => ({
       title: `Examen: ${e.asignatura}`,
       start: new Date(e.fecha),
       end: new Date(e.fecha),
       allDay: true,
+      type: 'exam',
     })),
   ];
-
+  console.log(eventos);
   const handleLogout = async () => {
     try {
       await fetch("http://localhost:5000/logout", {
@@ -205,7 +208,7 @@ const PaginaLogueado = () => {
             startAccessor="start"
             endAccessor="end"
             date={fechaActual}
-            style={{ height: '90vh', width:'180vh' }}
+            style={{  width:'200vh' }}
             views={['month']}
             culture="es"
             onNavigate={(date) => setFechaActual(date)}
@@ -230,6 +233,17 @@ const PaginaLogueado = () => {
                 localizer.format(date, 'EEEE', culture), 
               monthHeaderFormat: (date, culture, localizer) =>
                 localizer.format(date, "MMMM yyyy", culture),
+            }}
+            eventPropGetter={(event) => {
+              let className = "";
+              if (event.type === "task") {
+                className = "calendar-task-event";
+              } else if (event.type === "project") {
+                className = "calendar-project-event";
+              } else if (event.type === "exam") {
+                className = "calendar-exam-event";
+              }
+              return { className };
             }}
           />
         </div>

@@ -1,0 +1,28 @@
+.alerta {
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  width: fit-content;
+  border-radius: 10px;
+  font-weight: bold;
+  animation: fadeInOut 3s ease-in-out;
+  text-align: center;
+}
+
+.alerta.success {
+  background-color: #07c787;
+  color: #155724;
+  border: 2px solid #155724;
+}
+
+.alerta.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 2px solid #f5c6cb;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}

@@ -1,12 +1,11 @@
 import './forms.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const ProfileDeleteForm = ({ userId }) => {
+import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";const ProfileDeleteForm = ({ userId }) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const [showAlert, setShowAlert] = useState(false);
   const handleDelete = async () => {
     try {
       const response = await fetch(`http://localhost:5000/usuarios/${userId}`, {
@@ -17,7 +16,12 @@ const ProfileDeleteForm = ({ userId }) => {
       const data = await response.json();
       if (response.ok) {
         setMessage("✅ Cuenta borrada con éxito");
-        navigate("/");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          
+          navigate("/");
+        }, 1000);
       } else {
         setMessage(`❌ Error: ${data.message}`);
       }
@@ -34,8 +38,8 @@ const ProfileDeleteForm = ({ userId }) => {
         <button type="button" onClick={() => setShowConfirm(true)}>
           Borrar
         </button>
+        {message && <AlertaPersonalizada message={message} type="success" />}
       </form>
-      {message && <p className="retro-message">{message}</p>}
 
       {showConfirm && (
         <div className="retro-confirm">

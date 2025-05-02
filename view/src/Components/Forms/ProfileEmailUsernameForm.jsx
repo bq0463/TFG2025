@@ -1,12 +1,13 @@
 import './forms.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";
 
 const ProfileEmailUsernameForm = ({userId}) => {
   const [email,setEmailForm]= useState("");
   const [username,setUsernameForm]= useState("");
   const [message, setMessage] = useState("");
-
+  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
   
   const handleChange = (e) => {
@@ -33,7 +34,11 @@ const ProfileEmailUsernameForm = ({userId}) => {
       const data = await response.json();
       if (response.ok) {
         setMessage(`Cambio de email y/o usuario exitoso`);
-        navigate("/");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          navigate("/");
+        }, 1000);
       } else {
         setMessage(`Error: ${data.message}`);
       }
@@ -50,7 +55,8 @@ const ProfileEmailUsernameForm = ({userId}) => {
         <input type="text" name="username" value={username} placeholder="Nombre nuevo" onChange={handleChange}/>
         <button type="submit">Cambiar Email/Nombre</button>
       </form>
-      {message && <p>{message}</p>}
+      <h3>Tanto el email como el usuario se pueden dejar vacios pero si no funciona es porque uno de los valores ya existe</h3>
+      {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
     </div>
   );
 };

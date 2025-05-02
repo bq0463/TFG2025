@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./forms.css";
-
+import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
+  const [showAlert, setShowAlert] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -32,7 +32,11 @@ const LoginForm = () => {
 
       if (response.ok) {
         setMessage("✅ Inicio de sesión exitoso");
-        navigate("/inicio");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          navigate("/inicio");
+        }, 1000);   
       } else {
         const data = await response.json();
         setMessage(`❌ Error: ${data.message}`);
@@ -61,7 +65,7 @@ const LoginForm = () => {
           required
         />
         <p>¿No tienes cuenta? Regístrate</p>
-        {message && <p>{message}</p>}
+        {message && <AlertaPersonalizada message={message} type="success" />}
         <button type="submit">Ingresar</button>
       </form>
       

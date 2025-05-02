@@ -112,14 +112,17 @@
   align-items: center;
   margin-bottom: 20px;
   min-height: 80vh;
-  overflow: hidden;
   padding: 1rem;
   width: 70%;
   margin-left: 0; 
 }
 
 .PaginaLogueado .calendar-container .rbc-calendar {
-  min-height: 120vh;
+  height: 100%;
+}
+
+.PaginaLogueado .rbc-month-row {
+  min-height: fit-content;
 }
 
 .PaginaLogueado .rbc-month-view {
@@ -236,6 +239,35 @@
     font-size: 14px;
     color: #254b3e;
 }
+
+.calendar-task-event {
+  background-color: #facc15 !important;
+  color: #886f0d !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  max-width: 140px !important;
+}
+
+.calendar-exam-event {
+  background-color: #3b82f6 !important;
+  color: #1e3a8a !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  
+}
+
+.calendar-project-event {
+  background-color: #a855f7 !important;
+  color: #4b5563 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+
+
 
 .PaginaLogueado .rbc-toolbar {
     background-color: #07c787;

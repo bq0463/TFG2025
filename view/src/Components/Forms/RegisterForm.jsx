@@ -1,14 +1,14 @@
-import { set } from 'zod';
+
 import './forms.css';
 import { useState } from "react";
-
+import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: ""
   });
-
+  const [showAlert, setShowAlert] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -32,8 +32,11 @@ const RegisterForm = () => {
       const data = await response.json();
       if (response.ok) {
         setMessage(`✅ Registro exitoso: ${data.message}`);
-        alert("Registro exitoso. Por favor, inicia sesión.");
-        window.location.reload();
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          window.location.reload();
+        }, 1000);
       } else {
         setMessage(`❌ Error: ${data.message}`);
       }
@@ -51,7 +54,7 @@ const RegisterForm = () => {
         <input type="password" name="password" placeholder="Contraseña " onChange={handleChange} required />
         <button type="submit">Registrarse</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <AlertaPersonalizada message={message} type="success" />}
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import './forms.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";
 const ProfilePasswordForm = ({userId}) => {
+  const [showAlert, setShowAlert] = useState(false);
   const navigate= useNavigate();
   const [passwordForm, setPasswordForm] = useState({
     newPassword: "",
@@ -14,7 +15,6 @@ const ProfilePasswordForm = ({userId}) => {
   const handleChange = (e) => {
     setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
   };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -33,7 +33,12 @@ const ProfilePasswordForm = ({userId}) => {
       const data = await response.json();
       if (response.ok) {
         setMessage(`✅ Cambio de contraseña exitoso: ${data.message}`);
-        navigate("/");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          navigate("/");
+        }, 3000);
+        
       } else {
         setMessage(`❌ Error: ${data.message}`);
       }
@@ -46,6 +51,7 @@ const ProfilePasswordForm = ({userId}) => {
 
   return (
     <div className="retro-container-P">
+      {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
       <h2>Cambio de contraseña</h2>
       <form onSubmit={handleSubmit} acceptCharset="UTF-8">
         <input type="password" name="oldPassword" placeholder="Contraseña antigua " onChange={handleChange} required />
