@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./ContenedorProyecto.css";
+import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx";
 
 const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, tareas, userId }) => {
-
+  const [message, setMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
   const [nuevoTitulo, setNuevoTitulo] = useState(titulo);
@@ -44,7 +46,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Proyecto modificado con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al modificar proyecto");
       }
@@ -61,7 +70,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Proyecto desasociado con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al desasociar proyecto");
       }
@@ -82,7 +98,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Usuario asociado con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al asociar usuario o no existe");
       }
@@ -146,7 +169,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
 
       if (response.ok) {
-        window.location.reload();
+        setCreationMessage("✅ Tarea creada con éxito en el proyecto");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al crear tarea");
       }
@@ -163,7 +193,13 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
   
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Tarea eliminada del proyecto con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }, 1000);
       } else {
         console.error("Error al eliminar tarea");
       }
@@ -208,6 +244,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
                       Eliminar
                     </button>
                   )}
+                  {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
                 </span>
               </li>
             ))}
@@ -229,6 +266,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
               onChange={(e) => setUsuarioAsociado(e.target.value)}
             />
             <button onClick={handleAsociar}>Asociar usuario</button>
+            {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
           </div>
         )}
 
@@ -270,6 +308,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
               onChange={(e) => setTPValor(e.target.value)}
             />
             <button onClick={handleCrearTareaProyecto}>Crear tarea</button>
+            {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
           </div>
         )}
         {creationMessage && <span className="creation-message">{creationMessage}</span>}
@@ -320,6 +359,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
             placeholder="Descripción"
           />
           <button onClick={handleModificar}>Guardar</button>
+          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
 
@@ -328,6 +368,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
           <p>¿Estás seguro de que quieres desasociarte de este proyecto?</p>
           <button onClick={handleDesasociar}>Confirmar</button>
           <button onClick={() => setEliminando(false)}>Cancelar</button>
+          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
     </div>

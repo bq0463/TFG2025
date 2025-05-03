@@ -1,7 +1,8 @@
 
 import './forms.css';
 import { useState } from "react";
-import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";
+import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx";
+
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: "",

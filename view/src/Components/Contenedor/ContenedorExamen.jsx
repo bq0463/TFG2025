@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./contenedorExamen.css";
+import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx";
 
 const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
   const [editando, setEditando] = useState(false);
@@ -14,7 +15,8 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
     const fechaLocal = new Date(fecha.getTime() - offset * 60 * 1000);
     return fechaLocal.toISOString().split("T")[0];
   };
-
+  const [message, setMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
   const handleModificar = async () => {
     try {
       const response = await fetch(`http://localhost:5000/examenes/${id}`, {
@@ -31,7 +33,14 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Examen modificado con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al modificar examen");
       }
@@ -48,7 +57,14 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Examen eliminado con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al eliminar examen");
       }
@@ -101,6 +117,7 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
             step="0.1"
           />
           <button onClick={handleModificar}>Guardar</button>
+          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
       {eliminando && (
@@ -108,6 +125,7 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
           <p>¿Estás seguro de que quieres eliminar este examen?</p>
           <button onClick={handleEliminar}>Confirmar</button>
           <button onClick={() => setEliminando(false)}>Cancelar</button>
+          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
     </div>

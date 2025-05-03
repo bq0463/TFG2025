@@ -1,7 +1,9 @@
 import './forms.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";const ProfileDeleteForm = ({ userId }) => {
+import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx";
+
+const ProfileDeleteForm = ({ userId }) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
@@ -19,7 +21,6 @@ import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
-          
           navigate("/");
         }, 1000);
       } else {
@@ -38,7 +39,7 @@ import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx
         <button type="button" onClick={() => setShowConfirm(true)}>
           Borrar
         </button>
-        {message && <AlertaPersonalizada message={message} type="success" />}
+        {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
       </form>
 
       {showConfirm && (

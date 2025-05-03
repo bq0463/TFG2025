@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PaginaExamenes.css";
 import ContenedorExamen from "../Components/Contenedor/ContenedorExamen.jsx";
+import AlertaPersonalizada from "../Components/AlertaPersonalizada/AlertaPersonalizada.jsx";
 
 const PaginaExamenes = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,8 @@ const PaginaExamenes = () => {
   const [mostrarFormularioCategoria,setMostrarFormularioCategoria] = useState(false);
   const [categoriasDesplegadas, setCategoriasDesplegadas] = useState({});
   const [mostrarSinCategoria, setMostrarSinCategoria] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const verificarAutenticacion = async () => {
@@ -154,7 +157,14 @@ const PaginaExamenes = () => {
       const data = await response.json();
 
       if (response.ok) {
-        window.location.reload(); // O mejor: actualizar el estado sin recargar.
+        setMessage("✅ Examen creado con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         setCreationMessage(data.message || "Hubo un error al crear el examen.");
       }
@@ -189,6 +199,7 @@ const PaginaExamenes = () => {
             <input type="number" name="nota" placeholder="Max 2 dec" value={nuevoExamen.nota} onChange={handleInputChange} step="0.1"/>
             <button onClick={handleGuardarExamen} className="nav-b">Guardar Examen</button>
             {creationMessage && <span className="creation-message-E">{creationMessage}</span>}
+            {showAlert && <AlertaPersonalizada message={message} />}
           </div>
         )}
 

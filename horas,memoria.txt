@@ -605,3 +605,8 @@ Elimina permanentemente la cuenta del usuario actual, incluida toda su informaci
 
 alerta personalizada para success, algo de memoria y Pruebas
 Modificando calendario para los eventos con classname
+
+03/05
+2h y 15min
+
+Haciendo mas pruebas y editando cosas

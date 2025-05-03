@@ -1,7 +1,8 @@
 import './forms.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AlertaPersonalizada from "../alerta personalizada/AlertaPersonalizada.jsx";
+import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx";
+
 const ProfilePasswordForm = ({userId}) => {
   const [showAlert, setShowAlert] = useState(false);
   const navigate= useNavigate();

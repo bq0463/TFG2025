@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./contenedorTarea.css";
+import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx";
 
 const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, estado }) => {
   const ajustarFechaLocal = (fechaStr) => {
@@ -9,7 +10,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
     const fechaLocal = new Date(fecha.getTime() - offset * 60 * 1000);
     return fechaLocal.toISOString().split("T")[0];
   };
-
+  const [message, setMessage] = useState("");
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
   const [nuevaDescripcion, setNuevaDescripcion] = useState(descripcion);
@@ -17,6 +18,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
   const [nuevaFechaInicio, setNuevaFechaInicio] = useState(ajustarFechaLocal(fecha_inicio));
   const [nuevaFechaFin, setNuevaFechaFin] = useState(ajustarFechaLocal(fecha_fin));
   const [nuevoEstado, setNuevoEstado] = useState(estado);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleModificar = async () => {
     try {
@@ -36,7 +38,14 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Tarea modificada con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al modificar tarea");
       }
@@ -53,7 +62,14 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
       });
 
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Tarea eliminada con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         console.error("Error al eliminar tarea");
       }
@@ -128,6 +144,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
             <option value="Completada">Completada</option>
           </select>
           <button onClick={handleModificar}>Guardar</button>
+          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
 
@@ -136,6 +153,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
           <p>¿Estás seguro de que quieres eliminar esta tarea?</p>
           <button onClick={handleEliminar}>Confirmar</button>
           <button onClick={() => setEliminando(false)}>Cancelar</button>
+          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
     </div>

@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PaginaTareas.css";
 import ContenedorTarea from "../Components/Contenedor/ContenedorTarea.jsx";
+import AlertaPersonalizada from "../Components/AlertaPersonalizada/AlertaPersonalizada.jsx";
 
 const PaginaTareas = () => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
   const [tareas, setTareas] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [message, setMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
   const [nuevaTarea, setNuevaTarea] = useState({
     descripcion: "",
     valor: 0,
@@ -144,7 +147,13 @@ const PaginaTareas = () => {
       const data = await response.json();
   
       if (response.ok) {
-        window.location.reload();
+        setMessage("✅ Tarea creada con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          window.location.reload();
+        }
+        , 1000);
       } else {
         setCreationMessage(data.message || "Error al crear tarea");
       }
@@ -193,6 +202,7 @@ const PaginaTareas = () => {
             <div className="mensaje-con-boton">
               <button onClick={handleGuardarTarea} className="nav-b">Guardar Tarea</button>
               {creationMessage && <span className="creation-message">{creationMessage}</span>}
+              {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
             </div>
           </div>
         )}

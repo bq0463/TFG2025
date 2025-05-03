@@ -2,6 +2,7 @@ import {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PaginaProyectos.css";
 import ContenedorProyecto from "../Components/Contenedor/ContenedorProyecto.jsx";
+import AlertaPersonalizada from "../Components/AlertaPersonalizada/AlertaPersonalizada.jsx";
 
 const PaginaProyectos = () => {
   const [username, setUsername] = useState("");
@@ -15,7 +16,8 @@ const PaginaProyectos = () => {
   const [mostrarSinCategoria, setMostrarSinCategoria] = useState(false);
   const [creationMessage, setCreationMessage] = useState("");
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -147,7 +149,14 @@ const PaginaProyectos = () => {
       const data = await response.json();
 
       if (response.ok) {
-        window.location.reload(); 
+        setMessage("✅ Tarea creada con éxito");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+          window.location.reload();
+        }
+        , 1000);
       } else {
         setCreationMessage(data.message || "Hubo un error al crear el examen.");
       }
@@ -202,7 +211,7 @@ const PaginaProyectos = () => {
             />
 
             <button onClick={handleGuardarProyecto} className="nav-b">Guardar Proyecto</button>
-
+            {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
             {creationMessage && <span className="creation-message-P">{creationMessage}</span>}
           </div>
         )}
