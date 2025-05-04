@@ -82,6 +82,66 @@ export class UsuarioController {
       res.status(500).json({ message: "Error al registrar usuario", error });
     }
   }
-
+  
+  static async adminDeleteUserByUsername(req, res) {
+    try {
+      const adminId = req.user.id;
+      const { nombre_usuario } = req.body;
+  
+      const result = await UsuarioModel.adminDeleteUserByUsername({
+        adminId,
+        targetUsername: nombre_usuario
+      });
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: 'Usuario no encontrado o ya eliminado' });
+      }
+  
+      return res.json({ message: 'Usuario eliminado correctamente' });
+  
+    } catch (error) {
+      if (
+        error.message.includes('Acceso denegado') ||
+        error.message.includes('administrador')
+      ) {
+        return res.status(403).json({ message: error.message });
+      }
+  
+      if (error.message.includes('Usuario no encontrado')) {
+        return res.status(404).json({ message: error.message });
+      }
+  
+      return res.status(500).json({ message: 'Error al eliminar usuario', error: error.message });
+    }
+  }
+   
+  static async promoteMemberToAdmin(req, res) {
+    try {
+      const adminId = req.user.id;
+      const { nombre_usuario } = req.body;
+  
+      const result = await UsuarioModel.promoteMemberToAdmin({
+        adminId,
+        targetUsername: nombre_usuario
+      });
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: 'No se pudo promover al usuario' });
+      }
+  
+      return res.json({ message: 'Usuario promovido a administrador correctamente' });
+  
+    } catch (error) {
+      if (error.message.includes('Acceso denegado') || error.message.includes('administrador')) {
+        return res.status(403).json({ message: error.message });
+      }
+  
+      if (error.message.includes('Usuario no encontrado')) {
+        return res.status(404).json({ message: error.message });
+      }
+  
+      return res.status(500).json({ message: 'Error al promover usuario', error: error.message });
+    }
+  }
   
 }

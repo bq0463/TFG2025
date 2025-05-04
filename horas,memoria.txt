@@ -610,3 +610,8 @@ Modificando calendario para los eventos con classname
 2h y 15min
 
 Haciendo mas pruebas y editando cosas
+
+04/05
+2h
+
+Dando privilegios de admin y eliminar miembros desde un admin

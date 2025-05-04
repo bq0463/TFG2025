@@ -51,7 +51,7 @@ button{
     text-shadow: -1px -1px 1px #000,1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000,2px 2px 4px #000;
 }
 
-.PaginaInicio input, .retro-container-P input,.retro-container-EU input {
+.PaginaInicio input, .retro-container-P input,.retro-container-EU input,.retro-container-DELETE input{
     display: block;
     width: 90%;
     margin: 10px auto;

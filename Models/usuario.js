@@ -118,5 +118,72 @@ export class UsuarioModel {
         console.error('Error al registrar usuario:', error);
         throw error;
       }
-    }
   }
+
+  static async adminDeleteUserByUsername({ adminId, targetUsername }) {
+    const [adminRows] = await connection.execute(
+      'SELECT rol FROM usuario WHERE id = ?',
+      [adminId]
+    );
+  
+    if (adminRows.length === 0 || adminRows[0].rol !== 'Admin') {
+      throw new Error('Acceso denegado: No eres administrador');
+    }
+  
+    const [targetRows] = await connection.execute(
+      'SELECT id, rol FROM usuario WHERE nombre_usuario = ?',
+      [targetUsername]
+    );
+  
+    if (targetRows.length === 0) {
+      throw new Error('Usuario no encontrado');
+    }
+  
+    const target = targetRows[0];
+  
+    if (target.rol === 'Admin') {
+      throw new Error('No se puede eliminar a otro administrador');
+    }
+  
+    // Eliminar usuario
+    const [deleteResult] = await connection.execute(
+      'DELETE FROM usuario WHERE nombre_usuario = ?',
+      [targetUsername]
+    );
+  
+    return deleteResult;
+  }
+  
+  static async promoteMemberToAdmin({ adminId, targetUsername }) {
+    const [adminRows] = await connection.execute(
+      'SELECT rol FROM usuario WHERE id = ?',
+      [adminId]
+    );
+  
+    if (adminRows.length === 0 || adminRows[0].rol !== 'Admin') {
+      throw new Error('Acceso denegado: No eres administrador');
+    }
+  
+    const [targetRows] = await connection.execute(
+      'SELECT id, rol FROM usuario WHERE nombre_usuario = ?',
+      [targetUsername]
+    );
+  
+    if (targetRows.length === 0) {
+      throw new Error('Usuario no encontrado');
+    }
+  
+    if (targetRows[0].rol === 'Admin') {
+      throw new Error('El usuario ya es administrador');
+    }
+  
+    const [updateResult] = await connection.execute(
+      'UPDATE usuario SET rol = ? WHERE nombre_usuario = ?',
+      ['Admin', targetUsername]
+    );
+  
+    return updateResult;
+  }
+  
+
+}

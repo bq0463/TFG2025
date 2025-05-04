@@ -34,7 +34,7 @@ export class AuthController {
   }
 
   static async me(req, res) {
-    res.json({ id: req.user.id, nombre_usuario: req.user.nombre_usuario });
+    res.json({ id: req.user.id, nombre_usuario: req.user.nombre_usuario,rol: req.user.rol});
   }
 
 }

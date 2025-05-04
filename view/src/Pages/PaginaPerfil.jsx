@@ -4,11 +4,16 @@ import ProfilePasswordForm from "../Components/Forms/ProfilePasswordForm";
 import "./PaginaPerfil.css";
 import ProfileEmailUsernameForm from "../Components/Forms/ProfileEmailUsernameForm";
 import ProfileDeleteForm from "../Components/Forms/ProfileDeleteForm";
+import AdminPromoteForm from "../Components/Forms/AdminPromoteForm.jsx";
+import AdminDeleteForm from "../Components/Forms/AdminDeleteForm.jsx";
 
 const PaginaPerfil = () => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const [rol, setUserRol] = useState("");
 
   useEffect(() => {
     const verificarAutenticacion = async () => {
@@ -25,6 +30,7 @@ const PaginaPerfil = () => {
         const data = await response.json();
         setUsername(data.nombre_usuario);
         setUserId(data.id);
+        setUserRol(data.rol);
       } catch (error) {
         navigate("/");
       }
@@ -85,6 +91,7 @@ const PaginaPerfil = () => {
     }
   }
 
+  
   return (
     <div className="PaginaLogueado">
       <header className="header">
@@ -104,6 +111,8 @@ const PaginaPerfil = () => {
           <ProfilePasswordForm userId={userId}/>
           <ProfileEmailUsernameForm userId={userId}/>
           <ProfileDeleteForm userId={userId}></ProfileDeleteForm>
+          {rol === "Admin" && <AdminDeleteForm/>}
+          {rol === "Admin" && <AdminPromoteForm/>}
       </div>
     </div>
   );  

@@ -39,3 +39,6 @@ usuarioRouter.patch('/usuarios/:id/password', verifyToken ,validarUsuarioPasswor
 // Eliminar un usuario
 usuarioRouter.delete('/usuarios/:id',verifyToken , UsuarioController.delete);
 
+usuarioRouter.delete('/adminDeleteMember',verifyToken , UsuarioController.adminDeleteUserByUsername);
+
+usuarioRouter.patch('/adminUpdateMember',verifyToken , UsuarioController.promoteMemberToAdmin);

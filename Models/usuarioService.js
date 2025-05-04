@@ -27,7 +27,7 @@ export class UsuarioService{
 
       // Generar token JWT
       const token = jwt.sign(
-        { id: usuario.id, nombre_usuario: usuario.nombre_usuario },
+        { id: usuario.id, nombre_usuario: usuario.nombre_usuario, rol: usuario.rol },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRES_IN } // Expira en el tiempo definido en .env
       );
