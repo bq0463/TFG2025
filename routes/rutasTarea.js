@@ -9,3 +9,4 @@ tareaRouter.get('/usuarios/:id_usuario/tareas',verifyToken , TareaController.get
 tareaRouter.delete('/tareas/:id',verifyToken , TareaController.delete);
 tareaRouter.patch('/tareas/:id',verifyToken ,validarTarea, TareaController.updateById);
 tareaRouter.post('/tareas/:id_usuario',verifyToken,validarTarea,TareaController.create);
+tareaRouter.get('/usuarios/:id_usuario/metas',verifyToken , TareaController.getAllMetas);

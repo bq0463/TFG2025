@@ -615,3 +615,10 @@ Haciendo mas pruebas y editando cosas
 2h
 
 Dando privilegios de admin y eliminar miembros desde un admin
+
+05/05
+4h y 30min
+
+Diferenciando entre tareas y metas pero son la misma entidad con un enum llamado tipo, en proyectos solo va a haber metas
+
+

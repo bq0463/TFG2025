@@ -181,7 +181,7 @@ const PaginaExamenes = () => {
       <header className="header">
         <nav>
           <button onClick={() => navigate("/inicio")} className="nav-b">Inicio</button>
-          <button onClick={() => navigate("/tareas")} className="nav-b">Tareas</button>
+          <button onClick={() => navigate("/tareas")} className="nav-b">Tareas/Metas</button>
           <button onClick={() => navigate("/proyectos")} className="nav-b">Proyectos</button>
           <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
           <button onClick={() => navigate("/perfil")} className="username">{username}</button>

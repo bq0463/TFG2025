@@ -3,7 +3,7 @@ import { connection } from '../config/mysqlConnection.js';
 export class TareaModel {
   
   static async getById({ id }) {
-    const [rows] = await connection.execute('SELECT id,descripcion, valor, fecha_inicio, fecha_fin, estado FROM tarea WHERE id = ?', [id]);
+    const [rows] = await connection.execute('SELECT id,descripcion, valor, fecha_inicio, fecha_fin, estado,tipo FROM tarea WHERE id = ?', [id]);
 
     if (rows.length > 0) {
         const row = rows[0]; 
@@ -21,7 +21,7 @@ export class TareaModel {
   }
 
   static async getAll({ id_usuario }) {
-    const [rows] = await connection.execute('SELECT id,descripcion,valor,fecha_inicio,fecha_fin,estado FROM tarea WHERE id_usuario = ?', [id_usuario]);
+    const [rows] = await connection.execute('SELECT id,descripcion,valor,fecha_inicio,fecha_fin,estado FROM tarea WHERE id_usuario = ? AND tipo = ?', [id_usuario,'tarea']);
 
     return rows.map(row => {
         return {
@@ -29,6 +29,17 @@ export class TareaModel {
         };
     });
   }
+
+  static async getAllMetas({ id_usuario }) {
+    const [rows] = await connection.execute('SELECT id,descripcion,valor,fecha_inicio,fecha_fin,estado FROM tarea WHERE id_usuario = ? AND tipo = ?', [id_usuario,'meta']);
+
+    return rows.map(row => {
+        return {
+            ...row,
+        };
+    });
+  }
+
 
   static async delete({ id }) {
     const [result] = await connection.execute('DELETE FROM tarea WHERE id = ?', [id]);
@@ -51,11 +62,12 @@ export class TareaModel {
         fecha_fin: input.fecha_fin || existingRow.fecha_fin,
         estado: input.estado || existingRow.estado,
         id_usuario: existingRow.id_usuario,
+        tipo: input.tipo || existingRow.tipo,
     };
 
     await connection.execute(`
         UPDATE tarea
-        SET descripcion = ?, valor = ?, fecha_inicio = ?, fecha_fin = ?, id_usuario = ?, estado = ?
+        SET descripcion = ?, valor = ?, fecha_inicio = ?, fecha_fin = ?, id_usuario = ?, estado = ?, tipo = ?
         WHERE id = ?`,
         [
             updatedRow.descripcion,
@@ -64,6 +76,7 @@ export class TareaModel {
             updatedRow.fecha_fin,
             updatedRow.id_usuario,
             updatedRow.estado,
+            updatedRow.tipo,
             id,
         ]
     );
@@ -75,8 +88,8 @@ export class TareaModel {
   static async create({ input }) {
       try {
         const [result] = await connection.execute(
-              'INSERT INTO tarea (id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor) VALUES (?,?,?,?,?,?)',
-              [input.id_usuario, input.descripcion, input.fecha_inicio || null, input.fecha_fin, input.estado, input.valor]
+              'INSERT INTO tarea (id_usuario, descripcion, fecha_inicio, fecha_fin, estado, valor, tipo) VALUES (?,?,?,?,?,?,?)',
+              [input.id_usuario, input.descripcion, input.fecha_inicio || null, input.fecha_fin, input.estado, input.valor,input.tipo || 'tarea']
         );
         
         return result;

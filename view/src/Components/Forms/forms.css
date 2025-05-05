@@ -43,7 +43,7 @@ button{
     margin-top: 0.5em;
 }
 
-.retro-container-L h2, .retro-container-R h2,.retro-container-P h2 ,.retro-container-DELETE h2{
+.PaginaPerfil .retro-container-L h2, .retro-container-R h2,.retro-container-P h2 ,.retro-container-DELETE h2{
     font-family: "HelveticaCondensed";
     font-size: 30px;
     margin-bottom: 20px;

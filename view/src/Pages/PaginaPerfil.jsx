@@ -98,7 +98,7 @@ const PaginaPerfil = () => {
         <div className="header-bottom">
           <nav>
             <button onClick={handleIntro} className="nav-b">Inicio</button>
-            <button onClick={handleTasks} className="nav-b">Tareas</button>
+            <button onClick={handleTasks} className="nav-b">Tareas/Metas</button>
             <button onClick={handleProjects} className="nav-b">Proyectos</button>
             <button onClick={handleExams} className="nav-b">Examenes</button>
             <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>

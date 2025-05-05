@@ -11,12 +11,14 @@ const PaginaTareas = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [message, setMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [metas, setMetas] = useState([]);
   const [nuevaTarea, setNuevaTarea] = useState({
     descripcion: "",
     valor: 0,
     fecha_inicio: "",
     fecha_fin: "",
     estado: "Pendiente",
+    tipo: "tarea",
   });
   const navigate = useNavigate();
   const [creationMessage, setCreationMessage] = useState("");
@@ -75,6 +77,23 @@ const PaginaTareas = () => {
       };
 
       getTareas();
+
+      const getMetas = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/usuarios/${userId}/metas`, {
+            method: "GET",
+            credentials: "include",
+          });
+      
+          const data = await response.json();
+          setMetas(data);
+        } catch (error) {
+          console.error("Error al obtener metas", error);
+        }
+      };
+      
+      getMetas();
+      
     }
   }, [userId]);
 
@@ -102,7 +121,7 @@ const PaginaTareas = () => {
   const handleGuardarTarea = async () => {
     try {
       if (!nuevaTarea.descripcion || !nuevaTarea.fecha_fin) {
-        setCreationMessage("Faltan campos obligatorios como fechas o descripción");
+        setCreationMessage("Faltan campos obligatorios como fecha fin o descripción");
         return;
       }
   
@@ -141,13 +160,14 @@ const PaginaTareas = () => {
           fecha_fin: fechaFormateadaFin,
           estado: nuevaTarea.estado,
           descripcion: nuevaTarea.descripcion,
+          tipo: nuevaTarea.tipo,
         }),
       });
   
       const data = await response.json();
   
       if (response.ok) {
-        setMessage("✅ Tarea creada con éxito");
+        setMessage("✅ Tarea/Meta creada con éxito");
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
@@ -155,7 +175,7 @@ const PaginaTareas = () => {
         }
         , 1000);
       } else {
-        setCreationMessage(data.message || "Error al crear tarea");
+        setCreationMessage(data.message || "Error al crear tarea/meta");
       }
     } catch (error) {
       console.error("Error al crear tarea", error);
@@ -166,11 +186,39 @@ const PaginaTareas = () => {
   const toggleSeccion = (estado) => {
     setSeccionesExpandidas({
       ...seccionesExpandidas,
-      [estado]: !seccionesExpandidas[estado], // Solo cambia el estado de la sección seleccionada
+      [estado]: !seccionesExpandidas[estado],
     });
   };
 
-  const tareasPorEstado = agruparPorEstado(tareas);
+  const renderSeccionPorTipo = (lista, tipo) => {
+    const agrupadas = agruparPorEstado(lista);
+    return Object.keys(agrupadas).map((estado) => (
+      <div key={`${tipo}-${estado}`} className="seccion-tareas">
+        <button onClick={() => toggleSeccion(`${tipo}-${estado}`)} id="seccion-titulo">
+          <span className={`icono ${seccionesExpandidas[`${tipo}-${estado}`] ? 'expandido' : ''}`}>
+            {seccionesExpandidas[`${tipo}-${estado}`] ? "▼" : "►"}
+          </span>
+          {estado} ({agrupadas[estado].length})
+        </button>
+        {seccionesExpandidas[`${tipo}-${estado}`] && (
+          <div className="contenedor-tareas">
+            {agrupadas[estado].map((tarea) => (
+              <ContenedorTarea
+                key={tarea.id}
+                id={tarea.id}
+                descripcion={tarea.descripcion}
+                valor={tarea.valor}
+                fecha_inicio={tarea.fecha_inicio}
+                fecha_fin={tarea.fecha_fin}
+                estado={tarea.estado}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    ));
+  };
+  
 
   return (
     <div className="PaginaTareas">
@@ -185,8 +233,8 @@ const PaginaTareas = () => {
       </header>
 
       <div className="tareas">
-        <h1>Tus Tareas</h1>
-        <button onClick={toggleFormulario} className="nav-b">{mostrarFormulario ? "Cerrar Formulario" : "Crear Tarea"}</button>
+        <h1>Tus Objetivos</h1>
+        <button onClick={toggleFormulario} className="nav-b">{mostrarFormulario ? "Cerrar Formulario" : "Crear Tarea/Meta"}</button>
         
         {mostrarFormulario && (
           <div className="formulario-tarea">
@@ -199,39 +247,23 @@ const PaginaTareas = () => {
               <option value="En progreso">En progreso</option>
               <option value="Completada">Completada</option>
             </select>
+            <select className="tipo" name="tipo" value={nuevaTarea.tipo} onChange={handleInputChange}>
+              <option value="tarea">Tarea</option>
+              <option value="meta">Meta</option>
+            </select>
             <div className="mensaje-con-boton">
-              <button onClick={handleGuardarTarea} className="nav-b">Guardar Tarea</button>
+              <button onClick={handleGuardarTarea} className="nav-b">Guardar Tarea/Meta</button>
               {creationMessage && <span className="creation-message">{creationMessage}</span>}
               {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
             </div>
           </div>
         )}
         
-        {Object.keys(tareasPorEstado).map((estado) => (
-          <div key={estado} className="seccion-tareas">
-            <button onClick={() => toggleSeccion(estado)} id="seccion-titulo">
-              <span className={`icono ${seccionesExpandidas[estado] ? 'expandido' : ''}`}>
-                {seccionesExpandidas[estado] ? "▼" : "►"}
-              </span>
-              {estado} ({tareasPorEstado[estado].length})
-            </button>
-            {seccionesExpandidas[estado] && (
-              <div className="contenedor-tareas">
-                {tareasPorEstado[estado].map((tarea) => (
-                  <ContenedorTarea
-                    key={tarea.id}
-                    id={tarea.id}
-                    descripcion={tarea.descripcion}
-                    valor={tarea.valor}
-                    fecha_inicio={tarea.fecha_inicio}
-                    fecha_fin={tarea.fecha_fin}
-                    estado={tarea.estado}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+        <h1>Tareas</h1>
+        {renderSeccionPorTipo(tareas, "tarea")}
+
+        <h1>Metas</h1>
+        {renderSeccionPorTipo(metas, "meta")}
       </div>
     </div>
   );

@@ -149,7 +149,7 @@ const PaginaProyectos = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("✅ Tarea creada con éxito");
+        setMessage("✅ Proyecto creado con éxito");
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
@@ -158,10 +158,10 @@ const PaginaProyectos = () => {
         }
         , 1000);
       } else {
-        setCreationMessage(data.message || "Hubo un error al crear el examen.");
+        setCreationMessage(data.message || "Hubo un error al crear el proyecto.");
       }
     } catch (error) {
-      console.error("Error al crear examen", error);
+      console.error("Error al crear proyecto", error);
       setCreationMessage("Error inesperado: " + error.message);
     }
 };
@@ -170,7 +170,7 @@ const PaginaProyectos = () => {
       <header className="header">
         <nav>
           <button onClick={() => navigate("/inicio")} className="nav-b">Inicio</button>
-          <button onClick={() => navigate("/tareas")} className="nav-b">Tareas</button>
+          <button onClick={() => navigate("/tareas")} className="nav-b">Tareas/Metas</button>
           <button onClick={() => navigate("/examenes")} className="nav-b">Examenes</button>
           <button onClick={handleLogout} className="nav-b">Cerrar sesión</button>
           <button onClick={() => navigate("/perfil")} className="username">{username}</button>

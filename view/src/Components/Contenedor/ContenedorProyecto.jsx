@@ -131,7 +131,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       fechaEntrega.setDate(fechaEntrega.getDate() + 1);
       
       if(TPFechaFin > fechaEntrega) {
-        setCreationMessage("La fecha fin de la tarea no puede ser mayor que la fecha de entrega del proyecto");
+        setCreationMessage("La fecha fin de la meta no puede ser mayor que la fecha de entrega del proyecto");
         return;
       }
 
@@ -165,6 +165,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
           fecha_fin: fechaFormateadaFin,
           estado: TPEstado,
           valor: valorNumerico,
+          tipo: 'meta',
         }),
       });
 
@@ -193,7 +194,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
   
       if (response.ok) {
-        setMessage("✅ Tarea eliminada del proyecto con éxito");
+        setMessage("✅ Meta eliminada del proyecto con éxito");
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
@@ -201,7 +202,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
           window.location.reload();
         }, 1000);
       } else {
-        console.error("Error al eliminar tarea");
+        console.error("Error al eliminar Meta del proyecto");
       }
     } catch (error) {
       console.error("Error al eliminar tarea", error);
