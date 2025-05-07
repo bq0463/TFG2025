@@ -170,7 +170,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
       });
 
       if (response.ok) {
-        setCreationMessage("✅ Tarea creada con éxito en el proyecto");
+        setCreationMessage("✅ Meta creada con éxito en el proyecto");
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
@@ -231,7 +231,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
 
       {tareas && tareas.length > 0 && (
         <div className="tareas-asociadas">
-          <h3>Tareas</h3>
+          <h3>Metas</h3>
           <ul>
             {tareas.map((tarea, i) => (
               <li key={i}>
@@ -272,7 +272,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         )}
 
         <button onClick={() => setMostrarFormularioTarea(!mostrarFormularioTarea)}>
-          {mostrarFormularioTarea ? "Cancelar tarea" : "Agregar tarea"}
+          {mostrarFormularioTarea ? "Cancelar meta" : "Agregar meta"}
         </button>
         {mostrarFormularioTarea && (
           <div className="formulario-tarea">
@@ -308,7 +308,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
               value={TPValor}
               onChange={(e) => setTPValor(e.target.value)}
             />
-            <button onClick={handleCrearTareaProyecto}>Crear tarea</button>
+            <button onClick={handleCrearTareaProyecto}>Crear Meta</button>
             {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
           </div>
         )}

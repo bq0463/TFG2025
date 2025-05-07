@@ -18,7 +18,6 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
   const [nuevaFechaInicio, setNuevaFechaInicio] = useState(ajustarFechaLocal(fecha_inicio));
   const [nuevaFechaFin, setNuevaFechaFin] = useState(ajustarFechaLocal(fecha_fin));
   const [nuevoEstado, setNuevoEstado] = useState(estado);
-  const [nuevoTipo, setNuevoTipo] = useState("tarea");
   const [showAlert, setShowAlert] = useState(false);
 
   const handleModificar = async () => {
@@ -35,7 +34,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
           fecha_inicio: nuevaFechaInicio,
           fecha_fin: nuevaFechaFin,
           estado: nuevoEstado,
-          tipo: nuevoTipo,
+          tipo: tipo,
         }),
       });
 
@@ -144,13 +143,6 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
             <option value="Pendiente">Pendiente</option>
             <option value="En progreso">En progreso</option>
             <option value="Completada">Completada</option>
-          </select>
-          <select 
-            value={nuevoTipo} 
-            onChange={(e) => setNuevoTipo(e.target.value)}
-          >
-            <option value="tarea">Tarea</option>
-            <option value="meta">Meta</option>
           </select>
           <button onClick={handleModificar}>Guardar</button>
           {message && showAlert && <AlertaPersonalizada message={message} type="success" />}

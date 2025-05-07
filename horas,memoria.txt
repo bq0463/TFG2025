@@ -621,4 +621,8 @@ Dando privilegios de admin y eliminar miembros desde un admin
 
 Diferenciando entre tareas y metas pero son la misma entidad con un enum llamado tipo, en proyectos solo va a haber metas
 
+07/05
+2h
+
+Arreglando varias cosas
 

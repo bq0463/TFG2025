@@ -12,7 +12,6 @@ import MetaCard from "../Components/Cards/MetaCard";
 import TareaCard from "../Components/Cards/TareaCard";
 import ProyectoCard from "../Components/Cards/ProyectoCard";
 import ExamenCard from "../Components/Cards/ExamenCard";
-import { set } from "date-fns";
 
 const PaginaLogueado = () => {
   const [username, setUsername] = useState("");
@@ -84,7 +83,7 @@ const PaginaLogueado = () => {
       
           const data = await response.json();
           setMetas(data);
-          const puntos = data.reduce((total, meta) => total + parseFloat(meta.valor || 0), 0);
+          const puntos = data.reduce((total, meta) => meta.estado === "Completada" ? total + parseFloat(meta.valor || 0) : total,0);
           setTotalPuntos(puntos);
         } catch (error) {
           console.error("Error al obtener metas", error);
@@ -235,8 +234,8 @@ const PaginaLogueado = () => {
       </header>
       <div className="header-top">
         <h1>Tus Eventos</h1>
-        <h2 className="totalPuntos">Puntos de Metas: {totalPuntos.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-
+        <h2 className="totalPuntos">Puntos de Metas: {totalPuntos.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </h2>
       </div>
       <div className="content">
         <div className="calendar-container">

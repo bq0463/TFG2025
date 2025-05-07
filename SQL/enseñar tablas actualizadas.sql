@@ -4,5 +4,7 @@ USE TFG2025;
 -- SHOW CREATE TABLE tarea;
 -- SHOW CREATE TABLE usuario;
 -- SHOW CREATE TABLE examen;
- SHOW triggers;
+-- SHOW TRIGGERS;
 -- SHOW CREATE TABLE usuario;
+SHOW CREATE TRIGGER before_delete_proyecto;
+

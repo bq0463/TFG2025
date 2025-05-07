@@ -1,3 +1,3 @@
 USE TFG2025;
 
-select * from usuario;
+select * from tarea;
