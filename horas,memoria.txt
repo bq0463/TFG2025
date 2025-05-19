@@ -626,3 +626,37 @@ Diferenciando entre tareas y metas pero son la misma entidad con un enum llamado
 
 Arreglando varias cosas
 
+08/05
+2h
+
+Empezando la memoria con overleaf laTEX
+
+10/05
+3h
+
+hecha la configuracion con wsl y vscode para ejecutar laTEX con unix y cambiada la fuente que daba error acorde con la upm
+
+12/05
+2h y 30min
+
+Haciendo el resumen de la memoria
+
+15/05
+2h
+
+Hecha la intro y la motivacion
+
+16/05
+3h y 30min
+
+leyendo y entendiendo cosas
+
+18/05
+4h
+
+arreglando cosas y creada la seccion de bases de datos local.
+
+19/05
+1h
+
+terminando la seccion de bd
