@@ -657,6 +657,12 @@ leyendo y entendiendo cosas
 arreglando cosas y creada la seccion de bases de datos local.
 
 19/05
-1h
+3h y 30min
 
-terminando la seccion de bd
+terminando la seccion de bd y empezada la de backend
+
+22/05
+2h
+
+mas memoria
+
