@@ -29,14 +29,13 @@ export class ExamenController {
     try {
       const { asignatura, fecha, nota } = req.body;
       const {id_usuario} = req.params;
-      const validacion = await validarCredencialesExamen(req);
-      if (!validacion.success) {
-        return res.status(validacion.status).json({ message: validacion.message });
-      }
+      
       const examen = await ExamenModel.create({ input: { asignatura, fecha, nota,id_usuario } });
+
       if (examen.affectedRows > 0) {
         return res.status(201).json({ message: "Examen creado correctamente" });
       }
+      
       return res.status(500).json({ message: "Error desconocido al crear el examen" });
     } catch (error) {
       return res.status(400).json({ message: 'Datos incorrectos', error: error.message });

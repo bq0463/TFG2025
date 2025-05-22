@@ -9,7 +9,7 @@ const ProfileEmailUsernameForm = ({userId}) => {
   const [message, setMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
-  
+  const [messageType,setMessageType]= useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") setEmailForm(value);
@@ -40,7 +40,13 @@ const ProfileEmailUsernameForm = ({userId}) => {
           navigate("/");
         }, 1000);
       } else {
-        setMessage(`Error: ${data.message}`);
+        setMessage(data.message || "Error al modificar usuario");
+        setMessageType("error"); 
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }, 3000);
       }
     } catch (error) {
       setMessage("Error en la conexión con el servidor");
@@ -56,7 +62,7 @@ const ProfileEmailUsernameForm = ({userId}) => {
         <button type="submit">Cambiar Email/Nombre</button>
       </form>
       <h3>Tanto el email como el usuario se pueden dejar vacios pero si no funciona es porque uno de los valores ya existe</h3>
-      {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
+      {message && showAlert && <AlertaPersonalizada message={message} type={messageType} />}
     </div>
   );
 };

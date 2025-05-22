@@ -19,6 +19,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
   const [nuevaFechaFin, setNuevaFechaFin] = useState(ajustarFechaLocal(fecha_fin));
   const [nuevoEstado, setNuevoEstado] = useState(estado);
   const [showAlert, setShowAlert] = useState(false);
+  const [messageType, setMessageType] = useState("");
 
   const handleModificar = async () => {
     try {
@@ -38,18 +39,27 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setMessage("✅ Tarea/Meta modificada con éxito");
+        setMessageType("success");
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
           setMessage("");
           window.location.reload();
-        }
-        , 1000);
+        }, 1000);
       } else {
-        console.error("Error al modificar tarea");
+        setMessage(data.message || "Error al modificar tarea");
+        setMessageType("error"); 
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }, 3000);
       }
+
     } catch (error) {
       console.error("Error al modificar tarea", error);
     }
@@ -145,7 +155,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
             <option value="Completada">Completada</option>
           </select>
           <button onClick={handleModificar}>Guardar</button>
-          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
+          {message && showAlert && <AlertaPersonalizada message={message} type={messageType}/>}
         </div>
       )}
 
@@ -154,7 +164,7 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
           <p>¿Estás seguro de que quieres eliminar esta tarea?</p>
           <button onClick={handleEliminar}>Confirmar</button>
           <button onClick={() => setEliminando(false)}>Cancelar</button>
-          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
+          {message && showAlert && <AlertaPersonalizada message={message}  type="success" />}
         </div>
       )}
     </div>

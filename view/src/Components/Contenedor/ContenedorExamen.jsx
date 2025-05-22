@@ -32,6 +32,8 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
         }),
       });
 
+      const data = response.json();
+
       if (response.ok) {
         setMessage("✅ Examen modificado con éxito");
         setShowAlert(true);
@@ -42,7 +44,13 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
         }
         , 1000);
       } else {
-        console.error("Error al modificar examen");
+        setMessage(data.message);
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }
+        , 1000);
       }
     } catch (error) {
       console.error("Error al modificar examen", error);

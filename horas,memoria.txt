@@ -662,7 +662,8 @@ arreglando cosas y creada la seccion de bases de datos local.
 terminando la seccion de bd y empezada la de backend
 
 22/05
-2h
+5h
 
-mas memoria
+mas memoria y quitado el validar de controllers
+arreglado el tema de los mensajes de error
 

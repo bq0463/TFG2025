@@ -55,11 +55,6 @@ export class ProyectoController {
     try {
       const { titulo, descripcion, fecha_entrega } = req.body;
       const {id_usuario} =req.params;
-      const validacion = await validarCredencialesProyecto(req);
-
-      if (!validacion.success) {
-        return res.status(validacion.status).json({ message: validacion.message });
-      }
       
       const proyecto = await ProyectoModel.create({  
         input: { titulo, descripcion, fecha_entrega,id_usuario } 
@@ -77,12 +72,6 @@ export class ProyectoController {
 
   static async createTarea(req, res) {
     try {
-      const validacion = await validarCredencialesTarea(req);
-  
-      if (!validacion.success) {
-        return res.status(validacion.status).json({ message: validacion.message });
-      }
-  
       const input = {
         id_proyecto: req.params.id_proyecto,
         id_usuario: req.params.id_usuario,

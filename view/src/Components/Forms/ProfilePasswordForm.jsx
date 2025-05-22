@@ -5,6 +5,7 @@ import AlertaPersonalizada from "../AlertaPersonalizada/AlertaPersonalizada.jsx"
 
 const ProfilePasswordForm = ({userId}) => {
   const [showAlert, setShowAlert] = useState(false);
+  const [messageType, setMessageType] = useState("");
   const navigate= useNavigate();
   const [passwordForm, setPasswordForm] = useState({
     newPassword: "",
@@ -38,10 +39,16 @@ const ProfilePasswordForm = ({userId}) => {
         setTimeout(() => {
           setShowAlert(false);
           navigate("/");
-        }, 3000);
+        }, 1000);
         
       } else {
-        setMessage(`❌ Error: ${data.message}`);
+        setMessage(data.message || "Error al modificar contraseña");
+        setMessageType("error"); 
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }, 3000);
       }
     } catch (error) {
       setMessage("❌ Error en la conexión con el servidor");
@@ -52,7 +59,7 @@ const ProfilePasswordForm = ({userId}) => {
 
   return (
     <div className="retro-container-P">
-      {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
+
       <h2>Cambio de contraseña</h2>
       <form onSubmit={handleSubmit} acceptCharset="UTF-8">
         <input type="password" name="oldPassword" placeholder="Contraseña antigua " onChange={handleChange} required />
@@ -61,7 +68,7 @@ const ProfilePasswordForm = ({userId}) => {
           {isSubmitting ? "⏳ Procesando..." : "Cambiar contraseña"}
         </button>
       </form>
-      {message && <p>{message}</p>}
+      {message && showAlert && <AlertaPersonalizada message={message} type={messageType} />}
     </div>
   );
 };

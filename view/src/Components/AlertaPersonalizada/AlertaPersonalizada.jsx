@@ -1,6 +1,6 @@
 import "./alertaPersonalizada.css";
 
-const AlertaPersonalizada = ({ message, type = "success" }) => {
+const AlertaPersonalizada = ({ message, type}) => {
   return (
     <div className={`alerta ${type}`}>
       {message}

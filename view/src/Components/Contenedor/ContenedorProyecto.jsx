@@ -21,7 +21,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
   const [TPValor, setTPValor] = useState("");
   const [mostrarFormularioTarea, setMostrarFormularioTarea] = useState(false);
   const [creationMessage, setCreationMessage] = useState("");
-
+  const [messageType, setMessageType] = useState("");
   const ajustarFechaLocal = (fechaStr) => {
     if (!fechaStr) return "";
     const fecha = new Date(fechaStr);
@@ -45,6 +45,8 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setMessage("✅ Proyecto modificado con éxito");
         setShowAlert(true);
@@ -55,7 +57,13 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         }
         , 1000);
       } else {
-        console.error("Error al modificar proyecto");
+        setMessage(data.message || "Error al modificar");
+        setMessageType("error"); 
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }, 3000);
       }
     } catch (error) {
       console.error("Error al modificar proyecto", error);
@@ -97,6 +105,8 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         body: JSON.stringify({ nombre_usuario: usuarioAsociado }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setMessage("✅ Usuario asociado con éxito");
         setShowAlert(true);
@@ -107,7 +117,13 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         }
         , 1000);
       } else {
-        console.error("Error al asociar usuario o no existe");
+        setMessage(data.message || "Error al asociar");
+        setMessageType("error"); 
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }, 3000);
       }
     } catch (error) {
       console.error("Error al asociar usuario", error);
@@ -169,6 +185,7 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         }),
       });
 
+      const data = await response.json();
       if (response.ok) {
         setCreationMessage("✅ Meta creada con éxito en el proyecto");
         setShowAlert(true);
@@ -179,7 +196,13 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
         }
         , 1000);
       } else {
-        console.error("Error al crear tarea");
+        setMessage(data.message || "Error al crear la meta");
+        setMessageType("error"); 
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+          setMessage("");
+        }, 3000);
       }
     } catch (error) {
       console.error("Error al crear tarea", error);
@@ -245,15 +268,14 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
                       Eliminar
                     </button>
                   )}
-                  {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
                 </span>
               </li>
             ))}
           </ul>
         </div>
       )}
-
-
+      
+      {message && showAlert && <AlertaPersonalizada message={message} type={messageType} />}
       <div className="botones-acciones">
         <button onClick={() => setMostrarFormularioAsociar(!mostrarFormularioAsociar)}>
           {mostrarFormularioAsociar ? "Cancelar" : "Asociar usuario"}
@@ -267,10 +289,8 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
               onChange={(e) => setUsuarioAsociado(e.target.value)}
             />
             <button onClick={handleAsociar}>Asociar usuario</button>
-            {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
           </div>
         )}
-
         <button onClick={() => setMostrarFormularioTarea(!mostrarFormularioTarea)}>
           {mostrarFormularioTarea ? "Cancelar meta" : "Agregar meta"}
         </button>
@@ -309,10 +329,9 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
               onChange={(e) => setTPValor(e.target.value)}
             />
             <button onClick={handleCrearTareaProyecto}>Crear Meta</button>
-            {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
+            {creationMessage && (<span className="mensaje-error">{creationMessage}</span>)}
           </div>
         )}
-        {creationMessage && <span className="creation-message">{creationMessage}</span>}
       </div>
 
       <div className="gestion-proyecto">
@@ -360,7 +379,6 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
             placeholder="Descripción"
           />
           <button onClick={handleModificar}>Guardar</button>
-          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
       )}
 
@@ -369,10 +387,10 @@ const ContenedorProyecto = ({ id, titulo, fecha_entrega, descripcion, usuarios, 
           <p>¿Estás seguro de que quieres desasociarte de este proyecto?</p>
           <button onClick={handleDesasociar}>Confirmar</button>
           <button onClick={() => setEliminando(false)}>Cancelar</button>
-          {message && showAlert && <AlertaPersonalizada message={message} type="success" />}
         </div>
-      )}
+      )}      
     </div>
+
   );
 };
 
