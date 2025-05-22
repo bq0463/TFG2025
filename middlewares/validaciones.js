@@ -13,7 +13,7 @@ export async function validarCredencialesUsuario(req) {
   if (nombre_usuario.length < 5 || contrasena.length < 5 || !email.includes("@") || email.length < 15) {
     return { 
       success: false, 
-      status: 411, 
+      status: 400, 
       message: "Credenciales inválidas: caracteres de usuario y contraseña menores a 5 o email incorrecto sin @ o email < 15" 
     };
   }
@@ -21,7 +21,7 @@ export async function validarCredencialesUsuario(req) {
   if (nombre_usuario.length > 50 || contrasena.length > 30 || email.length > 100) {
     return { 
       success: false, 
-      status: 411, 
+      status: 400, 
       message: "Credenciales inválidas: demasiados caracteres, MAX: 50 en usuario, 30 en contraseña y 100 en email" 
     };
   }
@@ -60,19 +60,19 @@ export async function validarUpdateById(req, res, next) {
   const { nombre_usuario, email } = req.body;
 
   if (nombre_usuario && nombre_usuario.length < 5) {
-    return res.status(411).json({ message: "El nombre de usuario debe tener al menos 5 caracteres." });
+    return res.status(400).json({ message: "El nombre de usuario debe tener al menos 5 caracteres." });
   }
 
   if (nombre_usuario && nombre_usuario.length > 50) {
-    return res.status(411).json({ message: "El nombre de usuario no puede tener más de 50 caracteres." });
+    return res.status(400).json({ message: "El nombre de usuario no puede tener más de 50 caracteres." });
   }
 
   if (email && !email.includes("@")) {
-    return res.status(411).json({ message: "El correo electrónico debe ser válido (contener @)." });
+    return res.status(400).json({ message: "El correo electrónico debe ser válido (contener @)." });
   }
 
   if (email && email.length > 50) {
-    return res.status(411).json({ message: "El correo electrónico no puede tener más de 50 caracteres." });
+    return res.status(400).json({ message: "El correo electrónico no puede tener más de 50 caracteres." });
   }
 
   if (email) {
@@ -94,11 +94,11 @@ export async function validarUpdatePassword(req, res, next) {
   }
 
   if (newPassword.length < 5) {
-    return res.status(411).json({ message: "La nueva contraseña debe tener al menos 5 caracteres." });
+    return res.status(400).json({ message: "La nueva contraseña debe tener al menos 5 caracteres." });
   }
 
   if (newPassword.length > 15) {
-    return res.status(411).json({ message: "La nueva contraseña no puede tener más de 15 caracteres." });
+    return res.status(400).json({ message: "La nueva contraseña no puede tener más de 15 caracteres." });
   }
 
   return { success: true, message: "Contraseña actualizada correctamente" };
@@ -114,16 +114,16 @@ export async function validarCredencialesTarea(req) {
 
   // Validar longitud de la descripcion
   if (descripcion.length < 5) {
-    return { success: false, status: 411, message: "Credenciales inválidas: descripcion demasiado corta (mínimo 5 caracteres)" };
+    return { success: false, status: 400, message: "Credenciales inválidas: descripcion demasiado corta (mínimo 5 caracteres)" };
   }
 
   if (descripcion.length > 255) {
-    return { success: false, status: 411, message: "Credenciales inválidas: demasiados caracteres, MAX: 255 caracteres en descripcion" };
+    return { success: false, status: 400, message: "Credenciales inválidas: demasiados caracteres, MAX: 255 caracteres en descripcion" };
   }
 
   // Validar la fecha de fin
   if (!fecha_fin || isNaN(new Date(fecha_fin))) {
-    return { success: false, status: 411, message: "Credenciales inválidas: fecha de fin incorrecta o vacía" };
+    return { success: false, status: 400, message: "Credenciales inválidas: fecha de fin incorrecta o vacía" };
   }
 
   // Si todo está correcto
@@ -139,11 +139,11 @@ export async function validarCredencialesTarea(req) {
     }
 
     if (titulo.length > 100 || descripcion.length > 255 ) {
-      return { success: false, status: 411, message: "Credenciales inválidas: titulo demasiado largo (100 caracteres máx) o descripcion demasiado larga (255 caracteres máx)" };
+      return { success: false, status: 400, message: "Credenciales inválidas: titulo demasiado largo (100 caracteres máx) o descripcion demasiado larga (255 caracteres máx)" };
     }
 
     if ( isNaN(new Date(fecha_entrega))) {
-      return { success: false, status: 411, message: "Credenciales inválidas: fecha de entrega incorrecta o vacía" };
+      return { success: false, status: 400, message: "Credenciales inválidas: fecha de entrega incorrecta o vacía" };
     }
 
     return { success: true , message: "Proyecto creado correctamente" };
