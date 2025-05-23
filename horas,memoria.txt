@@ -667,3 +667,7 @@ terminando la seccion de bd y empezada la de backend
 mas memoria y quitado el validar de controllers
 arreglado el tema de los mensajes de error
 
+23/05
+1h y 30min
+
+mas memoria

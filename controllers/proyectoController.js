@@ -1,5 +1,3 @@
-
-import { validarCredencialesProyecto, validarCredencialesTarea } from '../middlewares/validaciones.js';
 import {ProyectoModel} from '../Models/proyecto.js';
 import {UsuarioModel} from '../Models/usuario.js';
 
