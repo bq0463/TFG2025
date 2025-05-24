@@ -117,8 +117,8 @@ export async function validarCredencialesTarea(req) {
     return { success: false, status: 400, message: "Credenciales inválidas: descripcion demasiado corta (mínimo 5 caracteres)" };
   }
 
-  if (descripcion.length > 255) {
-    return { success: false, status: 400, message: "Credenciales inválidas: demasiados caracteres, MAX: 255 caracteres en descripcion" };
+  if (descripcion.length > 50) {
+    return { success: false, status: 400, message: "Credenciales inválidas: demasiados caracteres, MAX: 50 caracteres en descripcion" };
   }
 
   // Validar la fecha de fin
