@@ -14,7 +14,7 @@ export async function validarCredencialesUsuario(req) {
     return { 
       success: false, 
       status: 400, 
-      message: "Credenciales inválidas: caracteres de usuario y contraseña menores a 5 o email incorrecto sin @ o email < 15" 
+      message: "Credenciales inválidas: caracteres de usuario y contraseña menores a 5 o email incorrecto sin @ o email < 15 caracteres" 
     };
   }
 
@@ -79,7 +79,7 @@ export async function validarUpdateById(req, res, next) {
     const [rowsEmail] = await connection.execute("SELECT * FROM usuario WHERE email = ?", [email]);
 
     if (rowsEmail.length > 0) {
-      return res.status(409).json({ message: "El correo electrónico ya está registrado, usa otro." });
+      return res.status(400).json({ message: "El correo electrónico ya está registrado, usa otro." });
     }
   }
 
@@ -97,8 +97,8 @@ export async function validarUpdatePassword(req, res, next) {
     return res.status(400).json({ message: "La nueva contraseña debe tener al menos 5 caracteres." });
   }
 
-  if (newPassword.length > 15) {
-    return res.status(400).json({ message: "La nueva contraseña no puede tener más de 15 caracteres." });
+  if (newPassword.length > 30) {
+    return res.status(400).json({ message: "La nueva contraseña no puede tener más de 30 caracteres." });
   }
 
   return { success: true, message: "Contraseña actualizada correctamente" };
