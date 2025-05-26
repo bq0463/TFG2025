@@ -673,6 +673,18 @@ arreglado el tema de los mensajes de error
 mas memoria
 
 24/05
-2h y 30min
+5h y 30min
 
 mas memoria
+
+25/05
+5h
+
+mas memoria
+
+26/05
+7h
+
+mas memoria
+
+poner la logica de negocio como subsection en frontend 
