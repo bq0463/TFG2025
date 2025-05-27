@@ -6,7 +6,7 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
   const [editando, setEditando] = useState(false);
   const [eliminando, setEliminando] = useState(false);
   const [nuevaAsignatura, setNuevaAsignatura] = useState(asignatura);
-  const [nuevaFecha, setNuevaFecha] = useState(fecha);
+  
   const [nuevaNota, setNuevaNota] = useState(nota);
   const ajustarFechaLocal = (fechaStr) => {
     if (!fechaStr) return "";
@@ -15,8 +15,10 @@ const ContenedorExamen = ({ id, asignatura, fecha, nota }) => {
     const fechaLocal = new Date(fecha.getTime() - offset * 60 * 1000);
     return fechaLocal.toISOString().split("T")[0];
   };
+  const [nuevaFecha, setNuevaFecha] = useState(ajustarFechaLocal(fecha));
   const [message, setMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+
   const handleModificar = async () => {
     try {
       const response = await fetch(`http://localhost:5000/examenes/${id}`, {

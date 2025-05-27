@@ -688,3 +688,8 @@ mas memoria
 mas memoria
 
 poner la logica de negocio como subsection en frontend 
+
+27/05
+4h
+
+mas memoria

@@ -21,7 +21,20 @@ const ContenedorTarea = ({ id, descripcion, valor, fecha_inicio, fecha_fin, esta
   const [showAlert, setShowAlert] = useState(false);
   const [messageType, setMessageType] = useState("");
 
+
   const handleModificar = async () => {
+
+    if(nuevaFechaFin < nuevaFechaInicio) {
+      setMessage("❌ La fecha de fin no puede ser anterior a la fecha de inicio");
+      setMessageType("error");
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        setMessage("");
+      }, 3000);
+      return;
+    }
+    
     try {
       const response = await fetch(`http://localhost:5000/tareas/${id}`, {
         method: "PATCH",
