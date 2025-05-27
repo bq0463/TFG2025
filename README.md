@@ -5,14 +5,7 @@ Este repositorio contiene el desarrollo de mi Trabajo de Fin de Grado, que se co
 - **Frontend** desarrollado con **React.js**
 - **Backend** implementado en **Node.js**
 - Gestión de versiones con **Fast Node Manager (FNM)**
-- Base de datos local utilizando **MySQL**
-
-## Estructura del Proyecto
-
-- `/frontend`: Código del cliente web basado en React.js
-- `/backend`: Servidor y lógica de negocio con Node.js
-- `/db`: Scripts y estructura de la base de datos en MySQL
-- `/memoria`: Documentación del proyecto usando plantilla LaTeX
+- Base de datos local utilizando **MySQL Workbench**
 
 ## Plantilla utilizada
 
