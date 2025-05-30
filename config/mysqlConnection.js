@@ -1,10 +1,12 @@
 import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+dotenv.config();
 
 //myqsl workbench
 export const connection = await mysql.createConnection({
-    host: '127.0.0.1',  
-    port: 3306,         
-    user: 'root',    
-    password: '', 
-    database: 'TFG2025' 
+    host: process.env.MYSQL_host,  
+    port: process.env.MYSQL_port,         
+    user: process.env.MYSQL_user,    
+    password: process.env.MYSQL_password, 
+    database: process.env.MYSQL_database,
 });
