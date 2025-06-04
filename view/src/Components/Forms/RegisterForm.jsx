@@ -36,7 +36,6 @@ const RegisterForm = () => {
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
-          window.location.reload();
         }, 1000);
       } else {
         setMessage(`❌ Error: ${data.message}`);
